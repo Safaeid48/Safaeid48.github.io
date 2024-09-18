@@ -6,7 +6,7 @@ subtitle: #
 
 profile:
   align: right
-  image: safaeid.png
+  image: 
   image_circular: False # crops the image to make it circular
   #more_info: >
   #  <p>555 your office number</p>

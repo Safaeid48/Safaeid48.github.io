@@ -2,8 +2,9 @@
 layout: post
 title:  "LEGACY UNLOCKED"
 image: images\Dhaka-city.png
-categories: office-projects
+categories: office-project
 
 ---
 
-tb
+Designed and implemented an agentic workflow to extract and validate data from binary COBOL files into structured formats (CSV/TSV), ensuring consistency with copybook definitions. Successfully delivered demos to major consultancy firms like Oliver Wyman, showcasing how AI and agentic workflows can modernize legacy systems by unlocking data, enabling migration, generating insights, and supporting natural language interaction with enterprise data.
+Tools: python, pandas, numpy, crewai

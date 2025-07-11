@@ -6,6 +6,5 @@ categories: office-project
 
 ---
 
-Built a business process automation system that analyzes historical social media data for content creators, generating monthly insight-driven reports with personalized recommendations and visualizations based on statistical analysis. This agentic workflow significantly boosted client viewership, streamlined reporting, eliminated manual effort, and enhanced decision-making.
-
+Built a business process automation system that analyzes historical social media data for content creators, generating monthly insight-driven reports with personalized recommendations and visualizations based on statistical analysis. This agentic workflow significantly boosted client viewership, streamlined reporting, eliminated manual effort, and enhanced decision-making.<br>
 Tools Used: pytorch, supermetrics, airtable, crewai

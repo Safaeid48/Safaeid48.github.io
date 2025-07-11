@@ -6,6 +6,5 @@ categories: office-project
 
 ---
 
-Designed and implemented an agentic workflow to extract and validate data from binary COBOL files into structured formats (CSV/TSV), ensuring consistency with copybook definitions. Successfully delivered demos to major consultancy firms like <a href="https://www.oliverwyman.com/index.html">Oliver Wyman</a>, showcasing how AI and agentic workflows can modernize legacy systems by unlocking data, enabling migration, generating insights, and supporting natural language interaction with enterprise data.
-
+Designed and implemented an agentic workflow to extract and validate data from binary COBOL files into structured formats (CSV/TSV), ensuring consistency with copybook definitions. Successfully delivered demos to major consultancy firms like <a href="https://www.oliverwyman.com/index.html">Oliver Wyman</a>, showcasing how AI and agentic workflows can modernize legacy systems by unlocking data, enabling migration, generating insights, and supporting natural language interaction with enterprise data.<br>
 Tools Used: python, pandas, numpy, crewai

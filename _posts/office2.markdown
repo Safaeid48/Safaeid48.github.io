@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Project HeatAlert: Predicting Heatwaves in Dhaka"
+title:  "LEGACY UNLOCKED"
 image: images\Dhaka-city.png
 categories: office-project
 

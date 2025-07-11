@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Look UP MED ocr"
+title:  "LookupMed"
 image: images\Dhaka-city.png
 categories: office-project
 

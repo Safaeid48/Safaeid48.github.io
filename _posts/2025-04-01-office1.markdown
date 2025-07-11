@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "LookupMed"
-image: images\Dhaka-city.png
+image: images\lookupmed.PNG
 categories: office-project
 
 ---
 
-tb
+Developed a tool enabling patients to scan prescriptions, schedule medication dosages, and find alternative medicines. Leveraged an OCR and post‑processing pipeline to extract and validate drug names from prescription scans—ensuring alignment with reference data and achieving high accuracy. Collaborated with <a href="https://ischool.utoronto.ca/faculty-profile/javed-mostafa/">Dr. Javed Mostafa</a>, Dean of the Faculty of Information at the University of Toronto, to pilot the system and validate its clinical and technical workflows.

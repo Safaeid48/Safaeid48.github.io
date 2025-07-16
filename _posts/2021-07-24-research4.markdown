@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Emotion-Aware Interactive Communication with Contextual Action Inference and Trust Evaluation for Human-Robot Interaction using LLMs"
-image: images\pepper.png
-categories: research-
-author: "Rabeya Akter"
-authors: Tahsin Tariq Banna, Rabeya Akter, Sejuti Rahman, Mohammad Tareq
+title:  "TriFormer: A Tri-Modal Multi-Head Cross-Attentive Framework for Enhanced Time Series Forecasting"
+image: images\time.JPG
+categories: research-ongoing
+author: "Safaeid Hossain Arib"
+authors: Abdul Monaf Chowdhury, Rabeya Akter, Safaeid Hossain Arib
 ---
+We propose a novel three-stage framework that leverages Tri-Modal Encoding, Adaptive Multi-Head Cross-Modal Alignment, and Channel-Wise Residual Connections to enhance time series forecasting. By integrating frequency, temporal, and language-model-based representations, our method achieves richer feature fusion and state-of-the art performance in several time series forecasting datasets. 

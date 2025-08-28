@@ -3,6 +3,7 @@ layout: post
 title:  "TriFormer: A Tri-Modal Multi-Head Cross-Attentive Framework for Enhanced Time Series Forecasting"
 image: images\time.JPG
 categories: research-completed
+venue: Submitted in AAAI 2026
 author: "Safaeid Hossain Arib"
 authors: Abdul Monaf Chowdhury, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>
 arxiv: https://github.com/monaf-chowdhury/T3Time

@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Language Guided Embodied Agents"
+image: images\embodied-1400.webp
+categories: research-ongoing
+author: "Safaeid Hossain Arib"
+authors: <strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Abdul Monaf Chowdhury
+---
+A Qwen-2.5VL-3B–driven episodic reflection module was designed to generate natural-language self-assessments of each trial, enabling human-like introspection. These reflections were fused with CLIP-style vision–language feedback from task descriptions and goal images to construct a dense, semantically grounded reward model. Integrated into a reward-aligned Soft Actor–Critic pipeline, this enriched feedback loop accelerated exploration, reduced training time, and improved policy convergence across Meta-World manipulation tasks.

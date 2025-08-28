@@ -4,8 +4,8 @@ title:  "SignFormer-GCN : Continuous Sign Language Translation Using Spatio-Temp
 date:   2025-02-14
 image: images\sign_language.PNG
 categories: research-completed
-author: "Rabeya Akter"
-authors: "Safaeid Hossain Arib, <strong>Rabeya Akter</strong>, Sejuti Rahman, Shafin Rahman"
+author: "Safaeid Hossaib Arib"
+authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Sejuti Rahman, Shafin Rahman"
 venue: "PLOS One"
 paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0316298&?utm_id=plos111&utm_source=internal&utm_medium=email&utm_campaign=author
 code: https://github.com/rabeya-akter/SignLanguageTranslation

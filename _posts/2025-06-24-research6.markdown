@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Language Guided Embodied Agents"
-image: images\embodied-1400.webp
-categories: research-ongoing
+title:  "LAGEA: LANGUAGE GUIDED EMBODIED AGENTS FOR ROBOTIC MANIPULATION"
+image: images\LAGEA.JPG
+categories: research-completed
 author: "Safaeid Hossain Arib"
-authors: Abdul Monaf Chowdhury, <strong>Safaeid Hossain Arib</strong>, Rabeya Akter
+authors: Abdul Monaf Chowdhury, Akm Moshiur Rahman Mazumder, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>
 ---
-Developing a Qwen-2.5VL-3B–driven episodic reflection module that generates natural-language self-assessments of each trial to enable human-like introspection, while fusing these reflections with CLIP-style vision–language feedback from task descriptions and goal images to build a dense, semantically grounded reward model. This model is being integrated into a reward-aligned Soft Actor–Critic pipeline to accelerate exploration, reduce training time, and enhance policy convergence across Meta-World manipulation tasks.
+Robotic manipulation benefits from foundation models that describe goals, but today's agents still lack a principled way to learn from their own mistakes. We ask whether natural language can serve as feedback, an error-reasoning signal that helps embodied agents diagnose what went wrong and correct course. We introduce LAGEA (Language Guided Embodied Agents), a framework that turns episodic, schema-constrained reflections from a vision language model (VLM) into temporally grounded guidance for reinforcement learning. LAGEA summarizes each attempt in concise language, localizes the decisive moments in the trajectory, aligns feedback with visual state in a shared representation, and converts goal progress and feedback agreement into bounded, step-wise shaping rewards whose influence is modulated by an adaptive, failure-aware coefficient. This design yields dense signals early when exploration needs direction and gracefully recedes as competence grows. On the Meta-World MT10 embodied manipulation benchmark, LAGEA improves average success over the state-of-the-art (SOTA) methods by 9.0% on random goals and 5.3% on fixed goals, while converging faster. These results support our hypothesis: language, when structured and grounded in time, is an effective mechanism for teaching robots to self-reflect on mistakes and make better choices. Code will be released soon.

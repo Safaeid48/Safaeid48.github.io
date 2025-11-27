@@ -3,7 +3,7 @@ layout: post
 title:  "Counting Through Occlusion: Framework for Open World Amodal Counting"
 image: images\Capture.png
 categories: research-completed
-venue: Submitted in CVPR2026
+venue: 
 author: "Safaeid Hossain Arib"
 authors: <strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Abdul Monaf Chowdhury, Jubair Ahmed Sourov, Md Mehedi Hasan
 ---

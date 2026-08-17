@@ -37,7 +37,7 @@
     /* Style for the navigation bar */
     .navbar {
       overflow: hidden;
-      background-color: #333;
+      background-color: #111827;
       /* font-family: Arial, sans-serif; */
       position: fixed;
       top: 0;
@@ -46,6 +46,7 @@
       left: 0;
       right: 0;
       display: flex;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.16);
     }
 
     .navbar-container {
@@ -61,11 +62,12 @@
       float: left;
       display: block;
       color: #f2f2f2;
-      background-color: #333;
+      background-color: transparent;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
       border: none;
+      border-bottom: 3px solid transparent;
       cursor: pointer;
       margin: none;
       white-space: nowrap;
@@ -73,8 +75,14 @@
     }
 
     .navbar button:hover {
-      background-color: #ddd;
-      color: black;
+      background-color: #1f2937;
+      border-bottom-color: #60a5fa;
+      color: white;
+    }
+
+    .navbar button:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: -3px;
     }
 
     body {
@@ -119,8 +127,8 @@
       <button data-target="projects">Projects</button>
       <button data-target="cv">CV</button>
       <button data-target="education">Education</button>
-      <button data-target="work">Work Experience</button>
-      <button data-target="awards">Awards and Scholarships</button>
+      <button data-target="work">Experience</button>
+      <button data-target="awards">Awards</button>
       <button data-target="leadership">Leadership</button>
     </div>
   </div>
@@ -139,10 +147,10 @@
             <h1>
               Safaeid Hossain Arib
             </h1>
-            <p style="text-align: center;">Learner, Researcher, Problem Solver</p>
+            <p class="profile-tagline">Machine Learning Engineer &amp; Researcher</p>
           </tr>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:60%;vertical-align:middle">
+          <tr class="about-content" style="padding:0px">
+            <td class="about-copy" style="padding:2.5%;width:62%;vertical-align:middle">
               <p>Hello, I am Safaeid Hossain Arib, a Machine Learning Engineer at <a
                   href="https://www.aci-bd.com/">ACI Limited</a>. My work focuses on translating advances in machine
                 learning into dependable systems for real-world applications. Previously, I worked as an AI Engineer
@@ -151,9 +159,7 @@
               <p>My current research explores how language models can learn where to attend through privileged-query
                 attention distillation. I conduct this work under the guidance of <a
                   href="https://mmiakashs.github.io/">Dr. Md. Mofijul Islam</a> and <a
-                  href="https://www.hbku.edu.qa/en/staff/tasnim-mohiuddin">Dr. Tasnim Mohiuddin</a>. My broader work
-                spans multimodal learning, embodied intelligence, time-series forecasting, and robust visual
-                understanding under occlusion.</p>
+                  href="https://www.hbku.edu.qa/en/staff/tasnim-mohiuddin">Dr. Tasnim Mohiuddin</a>.</p>
               <p>I hold a B.Sc. in Robotics and Mechatronics Engineering from the <a
                   href="https://rme.du.ac.bd/">University of Dhaka</a>. During my undergraduate studies, I worked as a
                 research assistant with <a href="https://scholar.google.com/citations?user=Pe8C-SUAAAAJ&hl=en">Dr.
@@ -164,39 +170,48 @@
                 at the gym, or off exploring new places. I love connecting with curious minds—feel free to reach out!
               </p>
               <p class="phd-note"><strong>I am actively seeking PhD opportunities for Fall 2027.</strong></p>
-              <p class="research-interest"><strong>Research interests:</strong> reinforcement learning, multimodal and
-                representation learning, and post-training for vision-language and embodied models, with an emphasis
-                on grounding, reasoning, and reliable adaptation.</p>
+              <div class="research-interest">
+                <strong>Research interests</strong>
+                <div class="interest-tags" aria-label="Research interests">
+                  <span>Reinforcement Learning</span>
+                  <span>Multimodal Learning</span>
+                  <span>RL-based Post-Training</span>
+                  <span>Vision-Language Models</span>
+                  <span>Embodied AI</span>
+                </div>
+              </div>
 
               <!-- Option 3: Using PNG/JPG images (if you have logo files) -->
 
-              <p style="text-align:center">Connect with me!</p><br>
-              <p style="text-align:center">
-
-                <a href="mailto:safaeid48@gmail.com" title="Email" style="margin: 0 10px;">
-                  <img src="images\gmail.webp" alt="Email" style="width: 30px; height: 30px;">
+              <p class="connect-label">Connect with me</p>
+              <div class="social-links">
+                <a href="mailto:safaeid48@gmail.com" title="Email" aria-label="Email Safaeid Hossain Arib"
+                  class="social-link">
+                  <img src="images\gmail.webp" alt="">
                 </a>
-                <a href="https://github.com/Safaeid48" title="GitHub" style="margin: 0 10px;">
-                  <img src="images\github.jpg" alt="GitHub" style="width: 30px; height: 30px;">
+                <a href="https://github.com/Safaeid48" title="GitHub" aria-label="GitHub profile" class="social-link"
+                  target="_blank" rel="noopener">
+                  <img src="images\github.jpg" alt="">
                 </a>
                 <a href="https://scholar.google.com/citations?user=ETeF6sUAAAAJ&hl=en&oi=ao" title="Google Scholar"
-                  style="margin: 0 10px;">
-                  <img src="images\google-scholar.jpeg" alt="Google Scholar" style="width: 30px; height: 30px;">
+                  aria-label="Google Scholar profile" class="social-link" target="_blank" rel="noopener">
+                  <img src="images\google-scholar.jpeg" alt="">
                 </a>
                 <a href="https://www.linkedin.com/in/safaeid-hossain-arib-2a859a1b5/" title="LinkedIn"
-                  style="margin: 0 10px;">
-                  <img src="images\linkedin.webp" alt="LinkedIn" style="width: 30px; height: 30px;">
+                  aria-label="LinkedIn profile" class="social-link" target="_blank" rel="noopener">
+                  <img src="images\linkedin.webp" alt="">
                 </a>
                 <a href="{{ site.baseurl }}/cv/Safaeid_Hossain_Arib_CV.pdf" title="Curriculum Vitae" target="_blank"
-                  rel="noopener" aria-label="View Safaeid Hossain Arib's curriculum vitae" class="cv-icon-link">CV</a>
-              </p>
+                  rel="noopener" aria-label="View Safaeid Hossain Arib's curriculum vitae"
+                  class="social-link cv-icon-link">CV</a>
+              </div>
 
 
 
 
             </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <img style="width:80%;max-width:80%" alt="profile photo" src="images\safaeid.jpeg">
+            <td class="about-photo" style="padding:2.5%;width:38%;max-width:38%">
+              <img class="profile-photo" alt="Safaeid Hossain Arib" src="images\safaeid.jpeg">
             </td>
           </tr>
 
@@ -211,59 +226,53 @@
                 <div style="max-height:300px; overflow-y:auto; padding:10px;">
                   <!-- new updates here -->
                   <div style="margin-bottom: 10px;">
-                    <p><strong>2026:</strong><br> Our paper <em>"LAGEA: Language Guided Embodied Agents for Robotic
-                        Manipulation"</em> has been accepted at <a target="_blank" href="https://icml.cc/Conferences/2026">ICML
+                    <p><strong>April 30, 2026:</strong><br> Our paper <em>"LAGEA: Language Guided Embodied Agents for Robotic
+                        Manipulation"</em> has been accepted at <a target="_blank" href="https://icml.cc/Conferences/2026/Dates">ICML
                         2026</a>.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>September 22, 2025:</strong><br> Our work <em>"T3Time"</em> has been accepted at the <a
                         target="_blank" style="text-decoration: none"
-                        href="https://aaai.org/conference/aaai/aaai-26/">AAAI 2026 Main Technical Track.</a>!!! 🚀</p>
+                        href="https://aaai.org/conference/aaai/aaai-26/">AAAI 2026 Main Technical Track</a>.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>September 22, 2025:</strong><br> Thrilled to share that our work
                       <em>"SignFormer-GCN"</em> has been
-                      accepted at the prestigious <a target="_blank" style="text-decoration: none"
-                        href="https://wimlworkshop.org/">WiML Workshop @ NeurIPS 2025</a>! 🚀
+                      accepted at the <a target="_blank" style="text-decoration: none"
+                        href="https://wimlworkshop.org/">WiML Workshop at NeurIPS 2025</a>.
                     </p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>September 01, 2025:</strong><br> Excited to begin my journey as a Machine Learning
                       Engineer at <a target="_blank" style="text-decoration: none" href="https://www.aci-bd.com/">ACI
-                        Limited</a>! 💻🤖</p>
+                        Limited</a>.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>February 14, 2025:</strong><br> Our paper <em>"SignFormer-GCN"</em> is officially
                       published in <a target="_blank" style="text-decoration: none"
-                        href="https://journals.plos.org/plosone/">PLOS ONE</a>! 🎉</p>
+                        href="https://journals.plos.org/plosone/">PLOS ONE</a>.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>March 14, 2024:</strong><br> Officially graduated from the Department of <a
                         target="_blank" style="text-decoration: none" href="https://rme.du.ac.bd/">Robotics and
-                        Mechatronics Engineering</a>,
-                      University of Dhaka. Grateful for an amazing 4-year journey! 🥳</p>
+                      Mechatronics Engineering</a>,
+                      University of Dhaka.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>January 24, 2024:</strong><br> Successfully defended my Undergraduate Thesis — a huge
-                      milestone in
-                      my academic journey! 🎓</p>
-                  </div>
-                  <div style="margin-bottom: 10px;">
-                    <p><strong>February 01, 2024:</strong><br> Proud to announce that I passed <a target="_blank"
-                        style="text-decoration: none" href="https://www.cfainstitute.org/">CFA Level 1</a> on my very
-                      first attempt! 📈✅</p>
+                      milestone in my academic journey.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>January 28, 2024:</strong><br> Kicked off my career in the tech industry by joining <a
                         target="_blank" style="text-decoration: none" href="https://www.ontiktechnology.com/">Ontik
-                        Technology</a> as an AI Engineer! 🤝</p>
+                        Technology</a> as an AI Engineer.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>September 25, 2021:</strong><br> Honored to virtually present my poster <em>"Classical
                         machine
                         learning approach for human activity recognition using location data"</em> at <a target="_blank"
                         style="text-decoration: none" href="https://ubicomp.org/ubicomp2021/">Proc. UbiComp/ISWC
-                        2021</a> 🌍✨</p>
+                        2021</a>.</p>
                   </div>
                 </div>
               </td>
@@ -279,10 +288,8 @@
               <td style="padding:2.5%;width:100%;vertical-align:middle">
                 <h1 style="text-align: center;">Research</h1>
                 <p style="text-align: center;">
-                  My research lies at the intersection of reinforcement learning, multimodal and representation
-                  learning, and post-training. I am particularly interested in grounding and reasoning in
-                  vision-language and embodied models, as well as methods that make these systems more reliable and
-                  adaptable in real-world settings.
+                  I develop reinforcement-learning methods for post-training multimodal, vision-language, and embodied
+                  models, with a focus on improving grounded reasoning and adaptation.
                 </p>
               </td>
             </tr>
@@ -507,19 +514,6 @@
           <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
             <tr>
               <td style="padding:2.5%; width:100%; vertical-align:middle; font-size:16px;">
-
-                <p>
-                  <strong><span style="color:blue;">■ CFA Level 1</span></strong> <span
-                    style="color:green;">[2024]</span><br>
-                  </a href="https://www.cfainstitute.org/">CFA Institute</a><br>
-                  - <strong>Status:</strong> Passed<br>
-                  <br>
-                  - <strong>Notable Courses:</strong> Economics, Corporate Finance, Portfolio Management, Financial
-                  Reporting Analysis, Quantitative Analysis, Fixed income Analysis, Professional Ethics, Equity
-                  Investment, Derivatives
-                </p>
-
-                <br>
 
                 <p>
                   <strong><span style="color:blue;">■ Bachelor of Science in Robotics & Mechatronics

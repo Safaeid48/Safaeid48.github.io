@@ -5,7 +5,7 @@ image: images\LAGEA.JPG
 categories: research-completed
 venue: Accepted at ICML 2026
 author: "Safaeid Hossain Arib"
-authors: Abdul Monaf Chowdhury, Akm Moshiur Rahman Mazumder, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>
+authors: Abdul Monaf Chowdhury, Akm Moshiur Rahman Mazumder, <strong>Safaeid Hossain Arib</strong>, Rabeya Akter
 arxiv: https://arxiv.org/abs/2509.23155
 code: https://github.com/Safaeid48/LaGEA
 ---

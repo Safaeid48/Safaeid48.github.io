@@ -108,7 +108,7 @@ h1 {
 }
 
 .connect-label {
-  margin: 22px 0 10px;
+  margin: 14px 0 8px;
   color: #475569;
   font-weight: 700;
   text-align: center;
@@ -138,6 +138,7 @@ h1 {
   width: 26px;
   height: 26px;
   object-fit: contain;
+  image-rendering: auto;
 }
 
 .social-link:hover,

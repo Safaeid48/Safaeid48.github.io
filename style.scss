@@ -74,6 +74,68 @@ h1 {
 
 }
 
+.phd-note {
+  color: #b42318;
+}
+
+.research-interest {
+  color: #563d7c;
+  line-height: 1.55;
+}
+
+.cv-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  border-radius: 4px;
+  background: #1772d0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: top;
+}
+
+.cv-icon-link:hover,
+.cv-icon-link:focus {
+  background: #f09228;
+  color: #fff;
+}
+
+.cv-section {
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  margin: auto;
+  text-align: center;
+}
+
+.cv-section td {
+  padding: 2.5%;
+}
+
+.cv-section p {
+  max-width: 620px;
+  margin: 0 auto 18px;
+}
+
+.cv-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 5px;
+  background: #1772d0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.cv-button:hover,
+.cv-button:focus {
+  background: #f09228;
+  color: #fff;
+}
+
 .one {
   width: 160px;
   height: 160px;

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "T3Time: Tri-Modal Time Series Forecasting via Adaptive Multi-Head Alignment and Residual Fusion"
-image: images\time.JPG
+image: images/time.JPG
 categories: research-completed
 venue: Accepted at AAAI 2026
 author: "Safaeid Hossain Arib"

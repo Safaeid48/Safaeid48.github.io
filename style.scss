@@ -204,6 +204,59 @@ h1 {
   color: #fff;
 }
 
+.experience-section {
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  margin: 0 auto;
+}
+
+.experience-section > tbody > tr > td {
+  padding: 2.5%;
+  vertical-align: top;
+  font-size: 16px;
+}
+
+.experience-section h2 {
+  display: block;
+  margin-bottom: 18px;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.experience-entry {
+  margin-bottom: 26px;
+}
+
+.experience-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 3px;
+}
+
+.experience-heading strong {
+  color: #1d4ed8;
+  font-size: 16px;
+}
+
+.experience-heading span {
+  flex: 0 0 auto;
+  color: #15803d;
+}
+
+.experience-entry ul,
+.compact-list {
+  margin: 7px 0 0;
+  padding-left: 22px;
+}
+
+.experience-entry li,
+.compact-list li {
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+
 @media (max-width: 700px) {
   .about-content,
   .about-copy,
@@ -220,6 +273,19 @@ h1 {
   .profile-photo {
     max-width: 240px;
     transform: none;
+  }
+
+  .experience-heading {
+    display: block;
+  }
+
+  .experience-heading span {
+    display: block;
+    margin-top: 2px;
+  }
+
+  .experience-section > tbody > tr > td {
+    padding: 5%;
   }
 }
 

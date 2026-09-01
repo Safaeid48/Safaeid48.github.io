@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Bornil : An open-source sign language data crowdsourcing platform for AI enabled dialect-agnostic communication"
-image: images\bornil.PNG
+image: images/bornil.PNG
 categories: research-completed
 author: "Safaeid Hossain Arib"
 authors: "Shahriar Elahi Dhruvo, Mohammad Akhlaqur Rahman, Manash Kumar Mandal, Md Istiak Hossain Shihab, A. A. Ansary, Kaneez Fatema Shithi, Sanjida Khanom, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>, M.N. Ansary, Sazia Mehnaz, Rezwana Sultana, Sejuti Rahman, Sayma Sultana Chowdhury, Sabbir Ahmed Chowdhury, Farig Sadeque, Asif Sushmit"

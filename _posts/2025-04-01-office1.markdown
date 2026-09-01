@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LookupMed"
-image: images\lookupmed.PNG
+image: images/lookupmed.PNG
 categories: office-project
 
 ---

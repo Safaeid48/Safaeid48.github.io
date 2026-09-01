@@ -1,0 +1,9 @@
+---
+layout: post
+title: "Teaching Language Models Where to Look with Privileged-Query Attention Distillation"
+categories: research-ongoing
+venue: "Manuscript in preparation"
+author: "Safaeid Hossain Arib"
+authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Ishmam Nur Swapnil, Md Faiyaz Abdullah Sayeedi, Tasnim Mohiuddin, Md Mofijul Islam"
+---
+This work studies how privileged queries can transfer attention supervision to language models, helping them identify the most relevant evidence during post-training without requiring privileged information at inference time.

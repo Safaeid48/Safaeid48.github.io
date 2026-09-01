@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CountOCC: Counting Through Occlusion for Open-World Amodal Counting"
-image: images\Capture.png
+image: images/Capture.png
 categories: research-completed
 venue: Submitted to WACV 2027
 author: "Safaeid Hossain Arib"

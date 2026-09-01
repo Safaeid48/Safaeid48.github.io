@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Pivotal Conversations"
-image: images\pivotal conversations.png
+image: images/pivotal conversations.png
 categories: office-project
 
 ---

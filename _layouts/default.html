@@ -60,8 +60,7 @@
       overflow-x: auto;
     }
 
-    .navbar button {
-      float: left;
+    .navbar a {
       display: block;
       color: #f2f2f2;
       background-color: transparent;
@@ -71,18 +70,19 @@
       border: none;
       border-bottom: 3px solid transparent;
       cursor: pointer;
-      margin: none;
+      margin: 0;
       white-space: nowrap;
 
     }
 
-    .navbar button:hover {
+    .navbar a:hover {
       background-color: #1f2937;
       border-bottom-color: #60a5fa;
       color: white;
+      text-decoration: none;
     }
 
-    .navbar button:focus-visible {
+    .navbar a:focus-visible {
       outline: 2px solid #93c5fd;
       outline-offset: -3px;
     }
@@ -95,11 +95,11 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const buttons = document.querySelectorAll(".navbar button");
-      buttons.forEach(button => {
-        button.addEventListener("click", function (e) {
+      const links = document.querySelectorAll(".navbar a[href^='#']");
+      links.forEach(link => {
+        link.addEventListener("click", function (e) {
           e.preventDefault();
-          const targetId = this.getAttribute("data-target");
+          const targetId = this.getAttribute("href").slice(1);
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
             window.scrollTo({
@@ -124,14 +124,14 @@
 
   <div class="navbar">
     <div class="navbar-container">
-      <button data-target="about">About</button>
-      <button data-target="research">Research</button>
-      <button data-target="projects">Projects</button>
-      <button data-target="cv">CV</button>
-      <button data-target="education">Education</button>
-      <button data-target="work">Experience</button>
-      <button data-target="awards">Awards</button>
-      <button data-target="leadership">Leadership</button>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#cv">CV</a>
+      <a href="#education">Education</a>
+      <a href="#work">Experience</a>
+      <a href="#awards">Awards</a>
+      <a href="#leadership">Leadership</a>
     </div>
   </div>
 
@@ -145,23 +145,24 @@
       <td style="padding:0px">
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr style="padding:0px">
-            <h1>
-              Safaeid Hossain Arib
-            </h1>
-            <p class="profile-tagline">Machine Learning Engineer &amp; Researcher</p>
+          <tr>
+            <td colspan="2" style="padding:0px">
+              <h1>Safaeid Hossain Arib</h1>
+              <p class="profile-tagline">Machine Learning Engineer &amp; Researcher</p>
+            </td>
           </tr>
           <tr class="about-content" style="padding:0px">
             <td class="about-copy" style="padding:2.5%;width:62%;vertical-align:middle">
               <p>Hello, I am Safaeid Hossain Arib, a Machine Learning Engineer at <a
-                  href="https://www.aci-bd.com/">ACI Limited</a>. My work focuses on translating advances in machine
+                  href="https://www.aci-bd.com/">ACI PLC</a>. My work focuses on translating advances in machine
                 learning into dependable systems for real-world applications. Previously, I worked as an AI Engineer
                 at <a href="https://www.ontiktechnology.com/">Ontik Technology</a>, developing agentic AI and applied
                 machine learning solutions.</p>
-              <p>My current research explores how language models can learn where to attend through privileged-query
-                attention distillation. I conduct this work under the guidance of <a
-                  href="https://mmiakashs.github.io/">Dr. Md. Mofijul Islam</a> and <a
-                  href="https://www.hbku.edu.qa/en/staff/tasnim-mohiuddin">Dr. Tasnim Mohiuddin</a>.</p>
+              <p>My current research investigates privileged-query attention distillation for teaching language models
+                where to attend. I conduct this work with guidance from <a
+                  href="https://mmiakashs.github.io/">Dr. Md. Mofijul Islam</a> (AWS GenAI) and <a
+                  href="https://www.hbku.edu.qa/en/staff/tasnim-mohiuddin">Dr. Tasnim Mohiuddin</a> (Qatar Computing
+                Research Institute).</p>
               <p>I hold a B.Sc. in Robotics and Mechatronics Engineering from the <a
                   href="https://rme.du.ac.bd/">University of Dhaka</a>. After completing my degree, I worked with <a
                   href="https://scholar.google.com/citations?user=jGC1OfgAAAAJ&hl=en">Dr. Md Mehedi Hasan</a> at the <a
@@ -179,9 +180,10 @@
                 <div class="interest-tags" aria-label="Research interests">
                   <span>Reinforcement Learning</span>
                   <span>Multimodal Learning</span>
-                  <span>RL-based Post-Training</span>
                   <span>Vision-Language Models</span>
                   <span>Embodied AI</span>
+                  <span>Language Model Post-Training</span>
+                  <span>Computer Vision</span>
                 </div>
               </div>
 
@@ -191,19 +193,19 @@
               <div class="social-links">
                 <a href="mailto:safaeid48@gmail.com" title="Email" aria-label="Email Safaeid Hossain Arib"
                   class="social-link">
-                  <img src="images\gmail.svg" alt="">
+                  <img src="images/gmail.svg" alt="">
                 </a>
                 <a href="https://github.com/Safaeid48" title="GitHub" aria-label="GitHub profile" class="social-link"
                   target="_blank" rel="noopener">
-                  <img src="images\github.svg" alt="">
+                  <img src="images/github.svg" alt="">
                 </a>
                 <a href="https://scholar.google.com/citations?user=ETeF6sUAAAAJ&hl=en&oi=ao" title="Google Scholar"
                   aria-label="Google Scholar profile" class="social-link" target="_blank" rel="noopener">
-                  <img src="images\google-scholar.svg" alt="">
+                  <img src="images/google-scholar.svg" alt="">
                 </a>
                 <a href="https://www.linkedin.com/in/safaeid-hossain-arib-2a859a1b5/" title="LinkedIn"
                   aria-label="LinkedIn profile" class="social-link" target="_blank" rel="noopener">
-                  <img src="images\linkedin.svg" alt="">
+                  <img src="images/linkedin.svg" alt="">
                 </a>
                 <a href="{{ site.baseurl }}/cv/Safaeid_Hossain_Arib_CV.pdf" title="Curriculum Vitae" target="_blank"
                   rel="noopener" aria-label="View Safaeid Hossain Arib's curriculum vitae"
@@ -215,9 +217,11 @@
 
             </td>
             <td class="about-photo" style="padding:2.5%;width:38%;max-width:38%">
-              <img class="profile-photo" alt="Safaeid Hossain Arib" src="images\safaeid.jpeg">
+              <img class="profile-photo" alt="Safaeid Hossain Arib" src="images/safaeid.jpeg">
             </td>
           </tr>
+
+        </table>
 
 
 
@@ -248,8 +252,8 @@
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>September 01, 2025:</strong><br> Excited to begin my journey as a Machine Learning
-                      Engineer at <a target="_blank" style="text-decoration: none" href="https://www.aci-bd.com/">ACI
-                        Limited</a>.</p>
+                        Engineer at <a target="_blank" style="text-decoration: none" href="https://www.aci-bd.com/">ACI
+                        PLC</a>.</p>
                   </div>
                   <div style="margin-bottom: 10px;">
                     <p><strong>February 14, 2025:</strong><br> Our paper <em>"SignFormer-GCN"</em> is officially
@@ -292,8 +296,8 @@
               <td style="padding:2.5%;width:100%;vertical-align:middle">
                 <h1 style="text-align: center;">Research</h1>
                 <p style="text-align: center;">
-                  I develop reinforcement-learning methods for post-training multimodal, vision-language, and embodied
-                  models, with a focus on improving grounded reasoning and adaptation.
+                  My research spans reinforcement learning, multimodal learning, and post-training for vision-language
+                  and embodied models, with a focus on grounded reasoning and adaptation.
                 </p>
               </td>
             </tr>
@@ -314,7 +318,8 @@
             {% if post.categories contains 'research-completed' %}
             <tr>
               <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
+                  style="width:auto; height:auto; max-width:100%;" />
               </td>
               <td style="padding:2.5%;width:75%;vertical-align:middle">
                 <h3 style="color:blue;">{{post.title}}</h3>
@@ -343,7 +348,7 @@
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
             <tr>
               <td style="padding:2.5%;width:100%;vertical-align:middle">
-                <!-- <h2>Ongoing</h2> -->
+                <h2>Ongoing Research</h2>
 
               </td>
             </tr>
@@ -353,14 +358,17 @@
             {% for post in site.posts %}
             {% if post.categories contains 'research-ongoing' %}
             <tr>
+              {% if post.image %}
               <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
+                  style="width:auto; height:auto; max-width:100%;" />
               </td>
-              <td style="padding:2.5%;width:75%;vertical-align:middle">
+              {% endif %}
+              <td style="padding:2.5%;width:{% if post.image %}75{% else %}100{% endif %}%;vertical-align:middle">
                 <h3 style="color:blue;">{{post.title}}</h3>
                 <br>
                 {{post.authors}}<br>
-
+                {% if post.venue %}<em style="color:green;">{{post.venue}}</em><br>{% endif %}
 
                 {% if post.arxiv %}<a href="{{post.arxiv}}">[arxiv]</a> {% endif %}
                 {% if post.video %}<a href="{{post.video}}">[video]</a> {% endif %}
@@ -412,7 +420,8 @@
             {% if post.categories contains 'office-project' %}
             <tr>
               <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
+                  style="width:auto; height:auto; max-width:100%;" />
               </td>
               <td style="padding:2.5%;width:75%;vertical-align:middle">
                 <h3 style="color:blue;">{{post.title}}</h3>
@@ -455,7 +464,8 @@
             {% if post.categories contains 'course-project' %}
             <tr>
               <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
+                  style="width:auto; height:auto; max-width:100%;" />
               </td>
               <td style="padding:2.5%;width:75%;vertical-align:middle">
                 <h3 style="color:blue;">{{post.title}}</h3>
@@ -532,16 +542,9 @@
                     href="https://docs.google.com/presentation/d/1Qq-LXbnIHoO0C8htiiMZmyBWDhDUo4NN/edit?slide=id.p1#slide=id.p1"
                     target="_blank" style="color:blue;">[Presentation]</a><br>
                   <br>
-                  - <strong>Notable Courses:</strong> Artificial Intelligence, Introduction to Machine Learning, Digital
-                  Image Processing and Robot Vision, Digital Signal Processing,
-                  Introduction to Robotics, Advanced Robotics, Intelligent Systems and Robotics, Human Robot
-                  Interaction,
-                  Object Oriented Programming, Fundamentals of Programming, Fundamentals of Computing, Microcontroller
-                  and Programmable Logic Controller, Digital Logic Circuit and Microprocessor, Control System Design,
-                  Linear Algebra, Differential and Integral Calculus, Multivariate and Vector Calculus, Differential
-                  Equations and Coordinate Geometry, Mathematical Analysis for Engineers, Statistics for Engineers,
-                  Fundamentals of Electrical and Electronics Engineering, Fundamentals of Mechanical Engineering,
-                  Fundamentals of Mechatronics Engineering, Advanced Mechatronics Engineering, Industrial Management
+                  - <strong>Selected Courses:</strong> Artificial Intelligence, Machine Learning, Digital Image
+                  Processing and Robot Vision, Intelligent Systems and Robotics, Human-Robot Interaction, Linear
+                  Algebra, Multivariate and Vector Calculus, and Statistics for Engineers
                 </p>
 
                 <br>
@@ -587,92 +590,135 @@
           <table id="work" style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
             <tr>
               <td style="padding:2.5%; width:100%; vertical-align:middle">
-                <h1 style="text-align: center;">Work Experience</h1>
+                <h1 style="text-align: center;">Experience</h1>
                 <p style="text-align: center;">
-                  I am committed to pursuing a research-driven career, whether in academia or industry. Below are some
-                  highlights of my professional experiences so far.
+                  Selected research, industry, and teaching experience.
                 </p>
               </td>
             </tr>
           </table>
 
-          <!-- Experience Content -->
+          <!-- Research Experience -->
+          <table class="experience-section">
+            <tr>
+              <td>
+                <h2>Research Experience</h2>
+
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Research Assistant</strong>
+                    <span>Jun 2025 – Present</span>
+                  </div>
+                  <div>Department of Robotics and Mechatronics Engineering, University of Dhaka</div>
+                  <div><strong>Supervisors:</strong> Dr. Md Mehedi Hasan and Md. Jubair Ahmed Sourov</div>
+                  <ul>
+                    <li>Designed and implemented CountOCC, an open-world amodal counting framework, and developed
+                      occlusion-augmented evaluation datasets for structured and unstructured scenes.</li>
+                    <li>Co-authored the resulting manuscript, submitted to WACV 2027.</li>
+                  </ul>
+                </article>
+
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Undergraduate Research Assistant</strong>
+                    <span>Jan 2023 – Dec 2023</span>
+                  </div>
+                  <div>Department of Robotics and Mechatronics Engineering, University of Dhaka</div>
+                  <div><strong>Supervisors:</strong> Dr. Shafin Rahman and Dr. Sejuti Rahman</div>
+                  <ul>
+                    <li>Designed and implemented a novel architecture for continuous sign language translation across
+                      Bangla, American, and German benchmarks.</li>
+                    <li>Co-authored the resulting work, published in PLOS ONE.</li>
+                  </ul>
+                </article>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Industry Experience -->
+          <table class="experience-section">
+            <tr>
+              <td>
+                <h2>Industry Experience</h2>
+
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Machine Learning Engineer</strong>
+                    <span>Sep 2025 – Present</span>
+                  </div>
+                  <div><a href="https://www.aci-bd.com/">ACI PLC</a>, Dhaka, Bangladesh</div>
+                  <ul>
+                    <li>Developed a few-shot classification pipeline for fine-grained recognition of visually similar
+                      products.</li>
+                    <li>Building a lightweight text-to-speech model for few-shot voice cloning and low-resource language
+                      adaptation.</li>
+                    <li>Improving a video-based truck identification pipeline by enhancing low-resolution license plate
+                      imagery for more reliable detection and OCR.</li>
+                    <li>Developing an agentic assistant for meeting scheduling, document summarization, and conversational
+                      search across company files through Drive and Calendar integration.</li>
+                  </ul>
+                </article>
+
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>AI Engineer</strong>
+                    <span>Feb 2024 – Aug 2025</span>
+                  </div>
+                  <div><a href="https://www.ontiktechnology.com/">Ontik Technology</a>, Dhaka, Bangladesh</div>
+                  <ul>
+                    <li>Developed agentic B2B automation systems that generated social-media insights and automated
+                      client-ready reporting, substantially reducing manual workflows.</li>
+                    <li>Built agentic ETL pipelines for COBOL copybook parsing and legacy modernization, enabling
+                      AI-driven analytics and supporting demonstrations to consulting firms including Oliver Wyman.</li>
+                    <li>Developed a patient-facing OCR tool for prescription scanning, medication scheduling, and
+                      alternative-medicine lookup under Dr. Javed Mostafa.</li>
+                  </ul>
+                </article>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Teaching Experience -->
+          <table class="experience-section">
+            <tr>
+              <td>
+                <h2>Teaching Experience</h2>
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Instructor</strong>
+                    <span>Jun 2024 – Aug 2024</span>
+                  </div>
+                  <div>National Camp, Bangladesh Artificial Intelligence Olympiad</div>
+                  <ul>
+                    <li>Designed and delivered lessons on classification algorithms and evaluation metrics for high
+                      school students and created quizzes to assess their understanding.</li>
+                  </ul>
+                </article>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+
+
+
+
+          <br>
+          <br>
+
+          <!-- Academic Service -->
           <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
             <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle; font-size:16px;">
-                <p>
-                  <strong><span style="color:blue;">■ Research Assistant</span></strong> <span
-                    style="color:green;">[Jun 2025 – Present]</span><br>
-                  Department of Robotics and Mechatronics Engineering, University of Dhaka<br>
-                  <strong>Supervisors:</strong> Dr. Md Mehedi Hasan and Md. Jubair Ahmed Sourov<br>
-                  ◦ Designed and implemented CountOCC, an open-world amodal counting framework, and developed
-                  occlusion-augmented evaluation datasets for structured and unstructured scenes.<br>
-                  ◦ Co-authored the resulting manuscript, submitted to WACV 2027.
-                </p>
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ ML Engineer</span></strong> <span style="color:green;">[Sep 2025 –
-                    Present]</span><br>
-                  ACI Limited<br>
-                  <strong>Team:</strong> Machine Learning<br>
-                  ◦ Developing an automated call center bot using an agentic approach to handle customer interactions,
-                  with integrated Bangla Automatic Speech Recognition and Text-to-Speech for enhanced user experience.
-                  ◦ Designing a video-based truck identification system through license plate recognition, addressing
-                  challenges of low-resolution imagery to improve detection and OCR accuracy.
-                </p>
-
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ AI Engineer</span></strong> <span style="color:green;">[Feb 2024 –
-                    Aug 2025]</span><br>
-                  Ontik Technology<br>
-                  <strong>Team:</strong> Machine Learning<br>
-                  ◦ Built a business process automation system that analyzes historical social media data for content
-                  creators to generate monthly insight-driven reports (PDF/PowerPoint) with personalized recommendations
-                  and visualizations based on statistical analysis using agentic workflow. This solution significantly
-                  boosted client viewership and streamlined reporting, eliminating manual effort and enhancing
-                  decision-making.<br>
-                  ◦ Designed and implemented an agentic workflow to extract and validate data from binary COBOL files
-                  into structured formats (CSV/TSV), ensuring consistency with copybook definitions. Successfully
-                  delivered demos to major consultancy firms like Oliver Wyman in modernizing legacy systems by enabling
-                  AI-powered data insights and accelerating their digital transformation.<br>
-                  ◦ Created Power BI dashboard to enable the Business and Finance teams to track organizational progress
-                  and help in making data driven decisions.<br>
-                  ◦ Designed prototype for Retrieval Augmented Generation Chatbot for automating customer support.<br>
-                  ◦ Led the development of Project Ongaurd-M, serving both as a machine learning engineer and the point
-                  of contact (PoC), creating a tool to help patients scan prescriptions, schedule medication dosages,
-                  and find alternative medicines.<br>
-                  ◦ Conducted financial planning and analysis for LazyChat, spanning competitor analysis, go-to-market
-                  strategy, value proposition, market positioning, and pricing strategy development.<br>
-                </p>
-
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ Undergraduate Research Assistant</span></strong> <span
-                    style="color:green;">[Jan 2023 – Dec 2023]</span><br>
-                  Department of Robotics and Mechatronics Engineering, University of Dhaka<br>
-                  <strong>Supervisors:</strong> Dr. Shafin Rahman and Dr. Sejuti Rahman<br>
-                  ◦ Designed and implemented a novel architecture for BdSL translation, establishing the first benchmark
-                  in this low-resource language domain.<br>
-                  ◦ Authored a manuscript detailing innovative methodology and findings, published in PLOS One (Q1
-                  Journal).
-                </p>
+              <td style="padding:2.5%; width:100%; vertical-align:middle">
+                <h1 style="text-align:center;">Academic Service</h1>
+                <ul class="compact-list">
+                  <li><strong>Reviewer</strong>, AAAI 2026</li>
+                </ul>
               </td>
             </tr>
           </table>
-
-
-
-
-
-
-
 
           <br>
           <br>
@@ -748,36 +794,31 @@
           </table>
 
           <!-- Leadership/Volunteer Content -->
-          <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
+          <table class="experience-section">
             <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle; font-size:16px;">
-                <p>
-                  <strong><span style="color:blue;">■ Student Activity Secretary</span></strong> <em><span
-                      style="color:green;">[Jan 2023 – Dec 2023]</span></em><br>
-                  IEEE Robotics and Automation Society Student Branch, University of Dhaka<br>
-                  ◦ Organized several workshops, interactive sessions, and industry expert experience-sharing sessions.
-                </p>
+              <td>
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Student Activity Secretary</strong>
+                    <span>Jan 2023 – Dec 2023</span>
+                  </div>
+                  <div>IEEE Robotics and Automation Society Student Branch, University of Dhaka</div>
+                  <ul>
+                    <li>Organized workshops, interactive sessions, and experience-sharing sessions with industry
+                      experts.</li>
+                  </ul>
+                </article>
 
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■Mentor</span></strong> <em><span style="color:green;">[Jul 2019 –
-                      Dec 2020]</span></em><br>
-                  Bangladesh Robot Olympiad (BdRO)<br>
-                  ◦ Conducted robotics workshops in multiple high schools and developed engaging quizzes for BdRO.
-                </p>
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ Mentor</span></strong> <em><span style="color:green;">[Jun 2024 –
-                      Sep 2024]</span></em><br>
-                  Bangladesh Artificial Intelligence Olympiad (BdAIO)<br>
-                  ◦ Designed and delivered lessons on classification algorithms and evaluation metrics for a group of 10
-                  high school students, and created quizzes to assess their understanding.
-                </p>
-
-
+                <article class="experience-entry">
+                  <div class="experience-heading">
+                    <strong>Mentor</strong>
+                    <span>Jul 2019 – Dec 2020</span>
+                  </div>
+                  <div>Bangladesh Robot Olympiad (BdRO)</div>
+                  <ul>
+                    <li>Conducted robotics workshops in multiple high schools and developed educational quizzes.</li>
+                  </ul>
+                </article>
               </td>
             </tr>
           </table>

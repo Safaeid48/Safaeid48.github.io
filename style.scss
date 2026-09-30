@@ -12,14 +12,29 @@
 /**************/
 /* BASE RULES */
 /**************/
+:root {
+  --blue-950: #0a2e63;
+  --blue-800: #124b99;
+  --blue-700: #075fc4;
+  --blue-600: #086de0;
+  --blue-200: #b9d9ff;
+  --blue-100: #e8f3ff;
+  --blue-50: #f4f9ff;
+}
+
+body {
+  background: #fff;
+  color: var(--blue-950);
+}
+
 a {
-  color: #1772d0;
+  color: var(--blue-700);
   text-decoration: none;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: var(--blue-600);
   text-decoration: none;
 }
 
@@ -92,7 +107,7 @@ h1 {
 .section-subheading {
   display: block;
   margin: 24px 2.5% 8px;
-  color: #252525;
+  color: var(--blue-950);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -103,12 +118,12 @@ h1 {
   display: grid;
   gap: 18px;
   padding: 12px 2.5%;
-  background: #f8f6f2;
+  background: var(--blue-50);
 }
 
 .info-card {
   padding: 21px 23px;
-  border: 1px solid #e9e5df;
+  border: 1px solid var(--blue-200);
   border-radius: 18px;
   background: #fff;
 }
@@ -123,7 +138,7 @@ h1 {
 .info-card h2 {
   display: block;
   margin: 0 0 10px;
-  color: #171717;
+  color: var(--blue-950);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -136,14 +151,14 @@ h1 {
 
 .info-card__heading span {
   flex: 0 0 auto;
-  color: #697384;
+  color: var(--blue-800);
   font-size: 13px;
   white-space: nowrap;
 }
 
 .info-card p {
   margin: 0 0 8px;
-  color: #333;
+  color: var(--blue-950);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -153,7 +168,7 @@ h1 {
 }
 
 .info-card__meta {
-  color: #656b75 !important;
+  color: var(--blue-800) !important;
 }
 
 .publication-card {
@@ -162,7 +177,7 @@ h1 {
   gap: 24px;
   align-items: start;
   padding: 18px;
-  border: 1px solid #e9e5df;
+  border: 1px solid var(--blue-200);
   border-radius: 18px;
   background: #fff;
 }
@@ -190,8 +205,8 @@ h1 {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 999px;
-  background: #edf2f7;
-  color: #476b9b;
+  background: var(--blue-100);
+  color: var(--blue-700);
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 11px;
   font-weight: 700;
@@ -203,7 +218,7 @@ h1 {
 .publication-card h3 {
   display: block;
   margin: 10px 0 6px;
-  color: #171717;
+  color: var(--blue-950);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   line-height: 1.25;
@@ -217,18 +232,18 @@ h1 {
 
 .publication-card h3 a:hover,
 .publication-card h3 a:focus {
-  color: #426b9d;
+  color: var(--blue-600);
 }
 
 .publication-card__authors {
   margin: 0 0 10px;
-  color: #5d5a55;
+  color: var(--blue-800);
   line-height: 1.45;
 }
 
 .publication-card__summary p {
   margin: 0 0 15px;
-  color: #333;
+  color: var(--blue-950);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -245,9 +260,9 @@ h1 {
   justify-content: center;
   min-height: 30px;
   padding: 5px 11px;
-  border: 1px solid #e7e3dd;
+  border: 1px solid var(--blue-200);
   border-radius: 999px;
-  color: #242424;
+  color: var(--blue-800);
   font-size: 13px;
   line-height: 1.1;
   text-decoration: none;
@@ -255,24 +270,24 @@ h1 {
 
 .publication-card__links a:hover,
 .publication-card__links a:focus {
-  border-color: #426b9d;
-  color: #426b9d;
+  border-color: var(--blue-600);
+  color: var(--blue-700);
 }
 
 .publication-card__links .publication-card__primary {
-  border-color: #426b9d;
-  background: #426b9d;
+  border-color: var(--blue-700);
+  background: var(--blue-700);
   color: #fff;
 }
 
 .publication-card__links .publication-card__primary:hover,
 .publication-card__links .publication-card__primary:focus {
-  background: #31557f;
+  background: var(--blue-600);
   color: #fff;
 }
 
 .publication-page {
-  background: #f8f6f2;
+  background: var(--blue-50);
 }
 
 .publication-page__main {
@@ -289,7 +304,7 @@ h1 {
 
 .publication-page__article {
   padding: 32px;
-  border: 1px solid #e9e5df;
+  border: 1px solid var(--blue-200);
   border-radius: 18px;
   background: #fff;
 }
@@ -304,7 +319,7 @@ h1 {
 }
 
 .publication-page__authors {
-  color: #5d5a55;
+  color: var(--blue-800);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -323,18 +338,18 @@ h1 {
 }
 
 .phd-note {
-  color: #b42318;
+  color: var(--blue-700);
 }
 
 .profile-tagline {
-  color: #475569;
+  color: var(--blue-800);
   font-size: 15px;
   letter-spacing: 0.02em;
   text-align: center;
 }
 
 .research-interest {
-  color: #334155;
+  color: var(--blue-950);
   line-height: 1.55;
 }
 
@@ -347,17 +362,17 @@ h1 {
 
 .interest-tags span {
   padding: 4px 9px;
-  border: 1px solid #dbe4f0;
+  border: 1px solid var(--blue-200);
   border-radius: 999px;
-  background: #f8fafc;
-  color: #334155;
+  background: var(--blue-100);
+  color: var(--blue-800);
   font-size: 12px;
   font-weight: 700;
 }
 
 .connect-label {
   margin: 14px 0 8px;
-  color: #475569;
+  color: var(--blue-800);
   font-weight: 700;
   text-align: center;
 }
@@ -375,10 +390,10 @@ h1 {
   justify-content: center;
   width: 42px;
   height: 42px;
-  border: 1px solid #dbe4f0;
+  border: 1px solid var(--blue-200);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 6px rgba(8, 121, 249, 0.1);
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -391,13 +406,13 @@ h1 {
 
 .social-link:hover,
 .social-link:focus-visible {
-  border-color: #1772d0;
-  box-shadow: 0 5px 14px rgba(23, 114, 208, 0.18);
+  border-color: var(--blue-600);
+  box-shadow: 0 5px 14px rgba(8, 121, 249, 0.2);
   transform: translateY(-2px);
 }
 
 .cv-icon-link {
-  background: #1772d0;
+  background: var(--blue-700);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
@@ -405,7 +420,7 @@ h1 {
 
 .cv-icon-link:hover,
 .cv-icon-link:focus {
-  background: #f09228;
+  background: var(--blue-600);
   color: #fff;
 }
 
@@ -416,43 +431,8 @@ h1 {
   height: auto;
   margin: 0 auto;
   border-radius: 10px;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 10px 28px rgba(8, 121, 249, 0.18);
   transform: translateY(-40px);
-}
-
-.cv-section {
-  width: 95%;
-  border: 0;
-  border-spacing: 0;
-  margin: 42px auto;
-  text-align: center;
-}
-
-.cv-section td {
-  padding: 26px;
-  border: 1px solid #e9e5df;
-  border-radius: 18px;
-  background: #f8f6f2;
-}
-
-.cv-section p {
-  max-width: 620px;
-  margin: 0 auto 18px;
-}
-
-.cv-button {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 5px;
-  background: #1772d0;
-  color: #fff;
-  font-weight: 700;
-}
-
-.cv-button:hover,
-.cv-button:focus {
-  background: #f09228;
-  color: #fff;
 }
 
 .experience-section {
@@ -465,14 +445,14 @@ h1 {
 .experience-section > tbody > tr > td {
   padding: 2.5%;
   vertical-align: top;
-  background: #f8f6f2;
+  background: var(--blue-50);
   font-size: 15px;
 }
 
 .experience-section h2 {
   display: block;
   margin-bottom: 14px;
-  color: #252525;
+  color: var(--blue-950);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -481,7 +461,7 @@ h1 {
 .experience-entry {
   margin-bottom: 16px;
   padding: 21px 23px;
-  border: 1px solid #e9e5df;
+  border: 1px solid var(--blue-200);
   border-radius: 18px;
   background: #fff;
   line-height: 1.5;
@@ -499,14 +479,14 @@ h1 {
 }
 
 .experience-heading strong {
-  color: #171717;
+  color: var(--blue-950);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 19px;
 }
 
 .experience-heading span {
   flex: 0 0 auto;
-  color: #697384;
+  color: var(--blue-800);
   font-size: 13px;
 }
 
@@ -607,7 +587,7 @@ h1 {
 }
 
 span.highlight {
-  background-color: #ffffd0;
+  background-color: var(--blue-100);
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

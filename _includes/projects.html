@@ -18,12 +18,4 @@
     {% endfor %}
   </div>
 
-  <h2 class="section-subheading">Personal Projects</h2>
-  <div class="publication-list">
-    {% for post in site.posts %}
-      {% if post.categories contains 'course-personal' %}
-        {% include project-card.html project=post label='Personal project' %}
-      {% endif %}
-    {% endfor %}
-  </div>
 </section>

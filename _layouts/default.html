@@ -23,7 +23,7 @@
 
   <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2" type="image/jpeg">
   <link rel="apple-touch-icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2">
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930-2" />
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930-3" />
 
   <meta property="og:image" content="https://safaeid48.github.io/images/safaeid.jpeg">
 
@@ -39,7 +39,7 @@
     /* Style for the navigation bar */
     .navbar {
       overflow: hidden;
-      background-color: #111827;
+      background-color: #075fc4;
       /* font-family: Arial, sans-serif; */
       position: fixed;
       top: 0;
@@ -48,7 +48,7 @@
       left: 0;
       right: 0;
       display: flex;
-      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.16);
+      box-shadow: 0 2px 10px rgba(8, 121, 249, 0.22);
     }
 
     .navbar-container {
@@ -62,7 +62,7 @@
 
     .navbar a {
       display: block;
-      color: #f2f2f2;
+      color: #fff;
       background-color: transparent;
       text-align: center;
       padding: 14px 16px;
@@ -76,8 +76,8 @@
     }
 
     .navbar a:hover {
-      background-color: #1f2937;
-      border-bottom-color: #60a5fa;
+      background-color: #086de0;
+      border-bottom-color: #b9d9ff;
       color: white;
       text-decoration: none;
     }
@@ -93,14 +93,14 @@
     }
 
     .news-section {
-      background: #faf9f6;
+      background: #f4f9ff;
       padding: 18px 20px 6px;
     }
 
     .news-section h1 {
       margin: 0;
       padding: 0 0 16px;
-      border-bottom: 1px solid #e7e4de;
+      border-bottom: 1px solid #b9d9ff;
       font-family: 'Lato', Verdana, Helvetica, sans-serif;
       font-size: 32px;
       font-weight: normal;
@@ -111,7 +111,7 @@
       height: 240px;
       overflow-y: scroll;
       padding-right: 12px;
-      scrollbar-color: #a8a5a0 transparent;
+      scrollbar-color: #0879f9 #e8f3ff;
       scrollbar-width: thin;
     }
 
@@ -120,12 +120,12 @@
     }
 
     .news-list::-webkit-scrollbar-thumb {
-      background: #a8a5a0;
+      background: #0879f9;
       border-radius: 8px;
     }
 
     .news-list:focus-visible {
-      outline: 2px solid #1772d0;
+      outline: 2px solid #0879f9;
       outline-offset: 2px;
     }
 
@@ -134,7 +134,7 @@
       grid-template-columns: 104px minmax(0, 1fr);
       gap: 16px;
       padding: 16px 0;
-      border-bottom: 1px solid #e7e4de;
+      border-bottom: 1px solid #b9d9ff;
     }
 
     .news-entry:last-child {
@@ -143,7 +143,7 @@
 
     .news-entry time {
       padding-top: 3px;
-      color: #77736e;
+      color: #124b99;
       font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
       font-size: 12px;
       white-space: nowrap;
@@ -151,15 +151,15 @@
 
     .news-entry p {
       margin: 0;
-      color: #292929;
+      color: #0a2e63;
       font-size: 15px;
       line-height: 1.5;
     }
 
     .news-entry a {
-      color: #42669f;
+      color: #075fc4;
       text-decoration: underline;
-      text-decoration-color: #aabbd4;
+      text-decoration-color: #b9d9ff;
       text-underline-offset: 2px;
     }
 
@@ -213,7 +213,6 @@
       <a href="#about">About</a>
       <a href="#research">Research</a>
       <a href="#projects">Projects</a>
-      <a href="#cv">CV</a>
       <a href="#education">Education</a>
       <a href="#work">Experience</a>
       <a href="#awards">Awards</a>
@@ -344,16 +343,6 @@
 
           {% include projects.html %}
 
-
-          <table id="cv" class="cv-section">
-            <tr>
-              <td>
-                <h1>Curriculum Vitae</h1>
-                <a class="cv-button" href="{{ site.baseurl }}/cv/Safaeid_Hossain_Arib_CV.pdf" target="_blank"
-                  rel="noopener">View CV (PDF)</a>
-              </td>
-            </tr>
-          </table>
 
           {% include education.html %}
 

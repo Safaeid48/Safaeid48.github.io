@@ -38,6 +38,19 @@ a:hover {
   text-decoration: none;
 }
 
+.about-copy a {
+  color: #1772d0;
+  text-decoration: underline;
+  text-decoration-color: #a8c8e9;
+  text-underline-offset: 2px;
+}
+
+.about-copy a:hover,
+.about-copy a:focus-visible {
+  color: #0b4fa8;
+  text-decoration-color: currentColor;
+}
+
 body,
 td,
 th,

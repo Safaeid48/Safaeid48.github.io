@@ -1,9 +1,10 @@
 ---
-layout: post
+layout: publication
 title: "Teach Yourself Where to Look: On-Policy Attention Self-Distillation for Reasoning"
 image: images/Fig2_OASD_Method_Overview_Update.png
 categories: research-completed
 venue: "arXiv preprint, 2026"
+venue_short: "arXiv 2026"
 author: "Safaeid Hossain Arib"
 authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Ismam Nur Swapnil, Md. Faiyaz Abdullah Sayeedi, Tasnim Mohiuddin, Md Mofijul Islam"
 arxiv: https://arxiv.org/abs/2609.33200

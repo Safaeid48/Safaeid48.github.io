@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title:  "SignFormer-GCN : Continuous Sign Language Translation Using Spatio-Temporal Graph Convolutional Networks"
 date:   2025-02-14
 image: images/sign_language.PNG
@@ -7,7 +7,7 @@ categories: research-completed
 author: "Safaeid Hossain Arib"
 authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Sejuti Rahman, Shafin Rahman"
 venue: "PLOS ONE"
-paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0316298&?utm_id=plos111&utm_source=internal&utm_medium=email&utm_campaign=author
+paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0316298
 code: https://github.com/rabeya-akter/SignLanguageTranslation
 ---
 SignFormer-GCN combines RGB video features with skeletal keypoints through a transformer and a spatio-temporal graph convolutional network. The joint representation captures complementary appearance and motion cues and achieves competitive translation performance across Bangla, American, and German sign language benchmarks.

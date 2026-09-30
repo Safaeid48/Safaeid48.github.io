@@ -1,10 +1,12 @@
 ---
-layout: post
+layout: publication
 title:  "Bornil : An open-source sign language data crowdsourcing platform for AI enabled dialect-agnostic communication"
 image: images/bornil.PNG
 categories: research-completed
 author: "Safaeid Hossain Arib"
 authors: "Shahriar Elahi Dhruvo, Mohammad Akhlaqur Rahman, Manash Kumar Mandal, Md Istiak Hossain Shihab, A. A. Ansary, Kaneez Fatema Shithi, Sanjida Khanom, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>, M.N. Ansary, Sazia Mehnaz, Rezwana Sultana, Sejuti Rahman, Sayma Sultana Chowdhury, Sabbir Ahmed Chowdhury, Farig Sadeque, Asif Sushmit"
-arxiv: https://arxiv.org/pdf/2308.15402
+venue: "arXiv preprint, 2023"
+venue_short: "arXiv 2023"
+arxiv: https://arxiv.org/abs/2308.15402
 ---
 Bornil is an open-source platform for crowdsourcing, annotating, and validating multilingual sign language data. The platform supported the creation of BornilDB v1.0, a large Bangladeshi Sign Language dataset, and established recognition benchmarks for this low-resource setting.

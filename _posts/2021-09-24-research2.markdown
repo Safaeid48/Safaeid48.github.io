@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title:  "Classical machine learning approach for human activity recognition using location data"
 date:   2021-09-24
 image: images/SHL.png
@@ -7,6 +7,7 @@ categories: research-completed
 author: "Safaeid Hossain Arib"
 authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Omar Shahid, Md Atiqur Rahman Ahad"
 venue: "UbiComp/ISWC '21 Adjunct: Adjunct Proceedings of the 2021 ACM International Joint Conference on Pervasive and Ubiquitous Computing and Proceedings of the 2021 ACM International Symposium on Wearable Computers"
+venue_short: "UbiComp/ISWC 2021"
 paper: https://dl.acm.org/doi/10.1145/3460418.3479376
 code: https://github.com/rabeya-akter/Sussex-Huawei-Locomotion-Challenge-2021
 ---

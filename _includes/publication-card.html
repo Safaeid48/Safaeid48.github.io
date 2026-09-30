@@ -1,0 +1,27 @@
+{% assign publication = include.publication %}
+{% assign paper_url = publication.paper %}
+{% unless paper_url %}
+  {% if publication.arxiv %}
+    {% assign paper_url = publication.arxiv | replace: '/abs/', '/pdf/' %}
+  {% endif %}
+{% endunless %}
+<article class="publication-card">
+  <a class="publication-card__image" href="{{ publication.url | prepend: site.baseurl }}" aria-label="Project page for {{ publication.title | escape }}">
+    <img src="{{ site.baseurl }}/{{ publication.image }}" alt="Figure for {{ publication.title | escape }}" loading="lazy">
+  </a>
+  <div class="publication-card__content">
+    {% if publication.venue %}<span class="publication-card__venue">{{ publication.venue_short | default: publication.venue }}</span>{% endif %}
+    <h3><a href="{{ publication.url | prepend: site.baseurl }}">{{ publication.title }}</a></h3>
+    <p class="publication-card__authors">{{ publication.authors }}</p>
+    <div class="publication-card__summary">{{ publication.excerpt }}</div>
+    <div class="publication-card__links">
+      <a class="publication-card__primary" href="{{ publication.url | prepend: site.baseurl }}">Project page <span aria-hidden="true">→</span></a>
+      {% if paper_url %}<a href="{{ paper_url }}">Paper</a>{% endif %}
+      {% if publication.arxiv %}<a href="{{ publication.arxiv | replace: '/pdf/', '/abs/' }}">arXiv</a>{% endif %}
+      {% if publication.code %}<a href="{{ publication.code }}">Code</a>{% endif %}
+      {% if publication.video %}<a href="{{ publication.video }}">Video</a>{% endif %}
+      {% if publication.poster %}<a href="{{ publication.poster }}">Poster</a>{% endif %}
+      {% if publication.slides %}<a href="{{ publication.slides }}">Slides</a>{% endif %}
+    </div>
+  </div>
+</article>

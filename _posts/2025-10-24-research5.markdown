@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title:  "CountOCC: Counting Through Occlusion for Open-World Amodal Counting"
 image: images/Capture.png
 categories: research-completed

@@ -1,0 +1,29 @@
+<section id="projects" class="site-section" aria-labelledby="projects-heading">
+  <h1 id="projects-heading">Projects</h1>
+  <h2 class="section-subheading">Office Projects</h2>
+  <div class="publication-list">
+    {% for post in site.posts %}
+      {% if post.categories contains 'office-project' %}
+        {% include project-card.html project=post label='Office project' %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2 class="section-subheading">Course Projects</h2>
+  <div class="publication-list">
+    {% for post in site.posts %}
+      {% if post.categories contains 'course-project' %}
+        {% include project-card.html project=post label='Course project' %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2 class="section-subheading">Personal Projects</h2>
+  <div class="publication-list">
+    {% for post in site.posts %}
+      {% if post.categories contains 'course-personal' %}
+        {% include project-card.html project=post label='Personal project' %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

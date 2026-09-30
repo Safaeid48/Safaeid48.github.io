@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: project
 title:  "LookupMed"
 image: images/lookupmed.PNG
 categories: office-project

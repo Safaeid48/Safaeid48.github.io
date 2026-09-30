@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: project
 title:  "LEGACY UNLOCKED"
 image: images/symhainy.png
 categories: office-project

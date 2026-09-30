@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: project
 title:  "Automated Stock Trading Using Approximate Q Learning"
 image: images/stock.png
 categories: course-project

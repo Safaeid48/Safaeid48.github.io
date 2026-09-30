@@ -23,7 +23,7 @@
 
   <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2" type="image/jpeg">
   <link rel="apple-touch-icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2">
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930" />
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930-2" />
 
   <meta property="og:image" content="https://safaeid48.github.io/images/safaeid.jpeg">
 
@@ -101,10 +101,10 @@
       margin: 0;
       padding: 0 0 16px;
       border-bottom: 1px solid #e7e4de;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 28px;
-      font-weight: 700;
-      text-align: left;
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 32px;
+      font-weight: normal;
+      text-align: center;
     }
 
     .news-list {
@@ -320,10 +320,6 @@
             <tr>
               <td style="padding:2.5%;width:100%;vertical-align:middle">
                 <h1 style="text-align: center;">Research</h1>
-                <p style="text-align: center;">
-                  My research spans reinforcement learning, multimodal learning, and post-training for vision-language
-                  and embodied models, with a focus on grounded reasoning and adaptation.
-                </p>
               </td>
             </tr>
           </table>
@@ -346,211 +342,27 @@
             {% endfor %}
           </div>
 
-          <br>
-          <br>
-          <br>
+          {% include projects.html %}
 
-          <!-- Projects Header -->
-          <table id="projects" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
-            <tr>
-              <td style="padding:2.5%;width:100%;vertical-align:middle">
-                <h1 style="text-align: center;">Projects</h1>
-                <p style="text-align: center;">
-                  Selected projects completed through professional work and academic coursework.
-                </p>
-              </td>
-            </tr>
-          </table>
-
-
-          <!-- Office Projects Section -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
-            <tr>
-              <td style="padding:2.5%;width:100%;vertical-align:middle">
-                <h2>Office Projects</h2>
-              </td>
-            </tr>
-          </table>
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
-            {% for post in site.posts %}
-            {% if post.categories contains 'office-project' %}
-            <tr>
-              <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
-                  style="width:auto; height:auto; max-width:100%;" />
-              </td>
-              <td style="padding:2.5%;width:75%;vertical-align:middle">
-                <h3 style="color:blue;">{{post.title}}</h3>
-                <br>
-                <em> {{post.course}}</em><br>
-
-
-                {% if post.website %}<a href="{{post.website}}">[website]</a> {% endif %}
-                {% if post.paper %}<a href="{{post.paper}}">[paper]</a> {% endif %}
-                {% if post.patent %}<a href="{{post.patent}}">[patent]</a> {% endif %}
-                {% if post.patent2 %}<a href="{{post.patent2}}">[patent] #2</a> {% endif %}
-                {% if post.patent3 %}<a href="{{post.patent3}}">[patent] #3</a> {% endif %}
-                {% if post.video %}<a href="{{post.video}}">[video]</a> {% endif %}
-                {% if post.video2 %}<a href="{{post.video2}}">[video] #2</a> {% endif %}
-                {% if post.code %}<a href="{{post.code}}">[code]</a> {% endif %}
-                {% if post.poster %}<a href="{{post.poster}}">[poster]</a> {% endif %}
-                {% if post.slides %}<a href="{{post.slides}}">[slides]</a> {% endif %}
-
-
-                <p></p>
-                {{ post.excerpt }}
-              </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-          </table>
-
-
-          <!-- Course Projects Section -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
-            <tr>
-              <td style="padding:2.5%;width:100%;vertical-align:middle">
-                <h2>Course Projects</h2>
-              </td>
-            </tr>
-          </table>
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin:auto;">
-            {% for post in site.posts %}
-            {% if post.categories contains 'course-project' %}
-            <tr>
-              <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-                <img src="/{{post.image}}" alt="Illustration for {{ post.title | escape }}"
-                  style="width:auto; height:auto; max-width:100%;" />
-              </td>
-              <td style="padding:2.5%;width:75%;vertical-align:middle">
-                <h3 style="color:blue;">{{post.title}}</h3>
-                <br>
-                <em> {{post.course}}</em><br>
-
-
-                {% if post.website %}<a href="{{post.website}}">[website]</a> {% endif %}
-                {% if post.paper %}<a href="{{post.paper}}">[paper]</a> {% endif %}
-                {% if post.patent %}<a href="{{post.patent}}">[patent]</a> {% endif %}
-                {% if post.patent2 %}<a href="{{post.patent2}}">[patent] #2</a> {% endif %}
-                {% if post.patent3 %}<a href="{{post.patent3}}">[patent] #3</a> {% endif %}
-                {% if post.video %}<a href="{{post.video}}">[video]</a> {% endif %}
-                {% if post.video2 %}<a href="{{post.video2}}">[video] #2</a> {% endif %}
-                {% if post.code %}<a href="{{post.code}}">[code]</a> {% endif %}
-                {% if post.poster %}<a href="{{post.poster}}">[poster]</a> {% endif %}
-                {% if post.slides %}<a href="{{post.slides}}">[slides]</a> {% endif %}
-
-
-                <p></p>
-                {{ post.excerpt }}
-              </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-          </table>
-
-          <br>
-          <br>
 
           <table id="cv" class="cv-section">
             <tr>
               <td>
                 <h1>Curriculum Vitae</h1>
-                <p>For a detailed overview of my research, publications, experience, and service, please view my
-                  current CV.</p>
                 <a class="cv-button" href="{{ site.baseurl }}/cv/Safaeid_Hossain_Arib_CV.pdf" target="_blank"
                   rel="noopener">View CV (PDF)</a>
               </td>
             </tr>
           </table>
 
-          <br>
-          <br>
+          {% include education.html %}
 
-          <!-- Education Header -->
-          <table id="education"
-            style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle">
-                <h1 style="text-align: center;">Education</h1>
-                <p style="text-align: center;">
-                  Below is a concise summary of my academic background to date.
-                </p>
-              </td>
-            </tr>
-          </table>
-
-          <!-- Education Content -->
-          <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle; font-size:16px;">
-
-                <p>
-                  <strong><span style="color:blue;">■ Bachelor of Science in Robotics & Mechatronics
-                      Engineering</span></strong> <span style="color:green;">[2019–2024]</span><br>
-                  Department of Robotics & Mechatronics Engineering,<br>
-                  University of Dhaka,<br>
-                  Dhaka, Bangladesh<br>
-                  - <strong>CGPA:</strong> 3.66/4.00 <em>(Final Year: 3.77/4.00)</em><br>
-                  <br>
-                  -<strong>Final Year Project:</strong> Continuous Bangla Sign Language Translation: Mitigating the
-                  Expense of Gloss Annotation with the Assistance of Graph <a
-                    href="https://docs.google.com/presentation/d/1Qq-LXbnIHoO0C8htiiMZmyBWDhDUo4NN/edit?slide=id.p1#slide=id.p1"
-                    target="_blank" style="color:blue;">[Presentation]</a><br>
-                  <br>
-                  - <strong>Selected Courses:</strong> Artificial Intelligence, Machine Learning, Digital Image
-                  Processing and Robot Vision, Intelligent Systems and Robotics, Human-Robot Interaction, Linear
-                  Algebra, Multivariate and Vector Calculus, and Statistics for Engineers
-                </p>
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ Higher Secondary School Certificate (HSC)</span></strong> <span
-                    style="color:green;">[2016–2018]</span><br>
-                  Notre Dame College,<br>
-                  Dhaka, Bangladesh<br>
-                  - <strong>GPA:</strong> 5.00/5.00
-                </p>
-
-                <br>
-
-                <p>
-                  <strong><span style="color:blue;">■ Secondary School Certificate (SSC)</span></strong> <span
-                    style="color:green;">[2008–2016]</span><br>
-                  Dhaka Residential Model College,<br>
-                  Dhaka, Bangladesh<br>
-                  - <strong>GPA:</strong> 5.00/5.00
-                </p>
-              </td>
-            </tr>
-          </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <br>
-          <br>
 
           <!-- Experience Header -->
           <table id="work" style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
             <tr>
               <td style="padding:2.5%; width:100%; vertical-align:middle">
                 <h1 style="text-align: center;">Experience</h1>
-                <p style="text-align: center;">
-                  Selected research, industry, and teaching experience.
-                </p>
               </td>
             </tr>
           </table>
@@ -662,133 +474,13 @@
 
 
 
-          <br>
-          <br>
-
-          <!-- Academic Service -->
-          <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle">
-                <h1 style="text-align:center;">Academic Service</h1>
-                <ul class="compact-list">
-                  <li><strong>Reviewer</strong>, AAAI 2026</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-
-          <br>
-          <br>
-
-          <!-- Awards and Scholarships Header -->
-          <table id="awards" style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle">
-                <h1 style="text-align: center;">Awards and Scholarships</h1>
-                <p style="text-align: center;">
-                  Over the years, I’ve been honored with a few recognitions—made possible by the invaluable support of
-                  mentors and peers who have greatly influenced my growth.
-                </p>
-              </td>
-            </tr>
-          </table>
-
-          <!-- Awards and Scholarships Content -->
-          <table style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle; font-size:16px;">
-
-                <!-- Research Grant -->
-                <h2><span style="color:blue;">■ Research Grant</span></h2>
-                <ul>
-                  <li><strong>Special Innovation Fund</strong>, Bangladesh Ministry of Science and Technology (MoST),
-                    Fiscal Year 2023–2024<br>
-                    <em>Project ID: SRG-232431</em>
-                  </li>
-                </ul>
-
-                <br>
+          {% include academic-service.html %}
 
 
-                <!-- Hackathons -->
-                <h2><span style="color:blue;">■ Hackathons</span></h2>
-                <ul>
-                  <li><strong>Honourable Mention</strong>, NASA Earth Observatory (EO) Dashboard Hackathon 2021<br>
-                    <em>Organized by NASA, ESA, and JAXA</em>
-                  </li>
-                  <li><strong>11th Place</strong>, Sussex-Huawei Locomotion Challenge 2021<br>
-                    <em>Organized by University of Sussex and Huawei</em>
-                  </li>
-                </ul>
+          {% include awards.html %}
 
 
-              </td>
-            </tr>
-          </table>
-
-
-
-
-
-
-
-
-
-          <br>
-          <br>
-
-          <!-- Leadership/Volunteer Activities Header -->
-          <table id="leadership"
-            style="width:100%; border:0px; border-spacing:0px; border-collapse:separate; margin:auto;">
-            <tr>
-              <td style="padding:2.5%; width:100%; vertical-align:middle">
-                <h1 style="text-align: center;">Leadership</h1>
-                <p style="text-align: center;">I dedicate part of my time to serving communities. Here are a few
-                  selected contributions.
-                </p>
-              </td>
-            </tr>
-          </table>
-
-          <!-- Leadership/Volunteer Content -->
-          <table class="experience-section">
-            <tr>
-              <td>
-                <article class="experience-entry">
-                  <div class="experience-heading">
-                    <strong>Student Activity Secretary</strong>
-                    <span>Jan 2023 – Dec 2023</span>
-                  </div>
-                  <div>IEEE Robotics and Automation Society Student Branch, University of Dhaka</div>
-                  <ul>
-                    <li>Organized workshops, interactive sessions, and experience-sharing sessions with industry
-                      experts.</li>
-                  </ul>
-                </article>
-
-                <article class="experience-entry">
-                  <div class="experience-heading">
-                    <strong>Mentor</strong>
-                    <span>Jul 2019 – Dec 2020</span>
-                  </div>
-                  <div>Bangladesh Robot Olympiad (BdRO)</div>
-                  <ul>
-                    <li>Conducted robotics workshops in multiple high schools and developed educational quizzes.</li>
-                  </ul>
-                </article>
-              </td>
-            </tr>
-          </table>
-
-
-
-
-
-
-
-
-
-
+          {% include leadership.html %}
 
 
           <table

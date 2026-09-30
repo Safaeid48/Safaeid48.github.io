@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: project
 title:  "A Comprehensive Comparative Analysis of Emotional Support Delivery by NAO Robots and Humans Across Varied Emotional States"
 image: images/nao.png
 categories: course-project

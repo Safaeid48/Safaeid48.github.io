@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | escape }}">
+  <title>{{ page.title | escape }} | {{ site.name }}</title>
+  <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+  <link rel="stylesheet" href="{{ site.baseurl }}/style.css?v=20260930-2">
+</head>
+<body class="publication-page">
+  <main class="publication-page__main">
+    <a class="publication-page__back" href="{{ site.baseurl }}/#projects">← Back to projects</a>
+    <article class="publication-page__article">
+      {% if page.categories contains 'office-project' %}<span class="publication-card__venue">Office project</span>{% endif %}
+      {% if page.categories contains 'course-project' %}<span class="publication-card__venue">Course project</span>{% endif %}
+      {% if page.categories contains 'course-personal' %}<span class="publication-card__venue">Personal project</span>{% endif %}
+      <h1>{{ page.title }}</h1>
+      {% if page.course %}<p class="publication-page__authors">{{ page.course }}</p>{% endif %}
+      <img class="publication-page__image" src="{{ site.baseurl }}/{{ page.image }}" alt="Illustration for {{ page.title | escape }}">
+      <div class="publication-page__overview">{{ content }}</div>
+      <div class="publication-card__links">
+        {% if page.website %}<a class="publication-card__primary" href="{{ page.website }}">Website</a>{% endif %}
+        {% if page.code %}<a class="publication-card__primary" href="{{ page.code }}">Code</a>{% endif %}
+        {% if page.paper %}<a href="{{ page.paper }}">Paper</a>{% endif %}
+        {% if page.video %}<a href="{{ page.video }}">Video</a>{% endif %}
+        {% if page.demo1 %}<a href="{{ page.demo1 }}">Demo 1</a>{% endif %}
+        {% if page.demo2 %}<a href="{{ page.demo2 }}">Demo 2</a>{% endif %}
+        {% if page.demo3 %}<a href="{{ page.demo3 }}">Demo 3</a>{% endif %}
+        {% if page.patent %}<a href="{{ page.patent }}">Patent</a>{% endif %}
+        {% if page.poster %}<a href="{{ page.poster }}">Poster</a>{% endif %}
+        {% if page.slides %}<a href="{{ page.slides }}">Slides</a>{% endif %}
+      </div>
+    </article>
+  </main>
+</body>
+</html>

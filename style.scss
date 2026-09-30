@@ -13,28 +13,28 @@
 /* BASE RULES */
 /**************/
 :root {
-  --blue-950: #0a2e63;
-  --blue-800: #124b99;
-  --blue-700: #075fc4;
-  --blue-600: #086de0;
-  --blue-200: #b9d9ff;
-  --blue-100: #e8f3ff;
-  --blue-50: #f4f9ff;
+  --ink: #171717;
+  --text-muted: #5d5a55;
+  --accent: #414141;
+  --accent-hover: #222;
+  --border: #e9e5df;
+  --tint: #efede9;
+  --surface: #f8f6f2;
 }
 
 body {
   background: #fff;
-  color: var(--blue-950);
+  color: var(--ink);
 }
 
 a {
-  color: var(--blue-700);
+  color: var(--accent);
   text-decoration: none;
 }
 
 a:focus,
 a:hover {
-  color: var(--blue-600);
+  color: var(--accent-hover);
   text-decoration: none;
 }
 
@@ -107,7 +107,7 @@ h1 {
 .section-subheading {
   display: block;
   margin: 24px 2.5% 8px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -118,12 +118,12 @@ h1 {
   display: grid;
   gap: 18px;
   padding: 12px 2.5%;
-  background: var(--blue-50);
+  background: var(--surface);
 }
 
 .info-card {
   padding: 21px 23px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 18px;
   background: #fff;
 }
@@ -138,7 +138,7 @@ h1 {
 .info-card h2 {
   display: block;
   margin: 0 0 10px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -151,14 +151,14 @@ h1 {
 
 .info-card__heading span {
   flex: 0 0 auto;
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-size: 13px;
   white-space: nowrap;
 }
 
 .info-card p {
   margin: 0 0 8px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -168,7 +168,7 @@ h1 {
 }
 
 .info-card__meta {
-  color: var(--blue-800) !important;
+  color: var(--text-muted) !important;
 }
 
 .publication-card {
@@ -177,7 +177,7 @@ h1 {
   gap: 24px;
   align-items: start;
   padding: 18px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 18px;
   background: #fff;
 }
@@ -205,8 +205,8 @@ h1 {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 999px;
-  background: var(--blue-100);
-  color: var(--blue-700);
+  background: var(--tint);
+  color: var(--accent);
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 11px;
   font-weight: 700;
@@ -218,7 +218,7 @@ h1 {
 .publication-card h3 {
   display: block;
   margin: 10px 0 6px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   line-height: 1.25;
@@ -232,18 +232,18 @@ h1 {
 
 .publication-card h3 a:hover,
 .publication-card h3 a:focus {
-  color: var(--blue-600);
+  color: var(--accent-hover);
 }
 
 .publication-card__authors {
   margin: 0 0 10px;
-  color: var(--blue-800);
+  color: var(--text-muted);
   line-height: 1.45;
 }
 
 .publication-card__summary p {
   margin: 0 0 15px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -260,9 +260,9 @@ h1 {
   justify-content: center;
   min-height: 30px;
   padding: 5px 11px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-size: 13px;
   line-height: 1.1;
   text-decoration: none;
@@ -270,19 +270,19 @@ h1 {
 
 .publication-card__links a:hover,
 .publication-card__links a:focus {
-  border-color: var(--blue-600);
-  color: var(--blue-700);
+  border-color: var(--accent-hover);
+  color: var(--accent);
 }
 
 .publication-card__links .publication-card__primary {
-  border-color: var(--blue-700);
-  background: var(--blue-700);
+  border-color: var(--accent);
+  background: var(--accent);
   color: #fff;
 }
 
 .publication-card__links .publication-card__primary:hover,
 .publication-card__links .publication-card__primary:focus {
-  background: var(--blue-600);
+  background: var(--accent-hover);
   color: #fff;
 }
 
@@ -290,7 +290,7 @@ h1 {
   gap: 22px;
   padding-top: 18px;
   padding-bottom: 18px;
-  background: #fff;
+  background: var(--surface);
 }
 
 .research-publication-list .publication-card {
@@ -298,15 +298,15 @@ h1 {
   gap: 28px;
   align-items: center;
   padding: 25px;
-  border-color: #c9e0ff;
-  box-shadow: 0 8px 26px rgba(7, 95, 196, 0.08);
+  border-color: var(--border);
+  box-shadow: 0 8px 26px rgba(30, 30, 30, 0.07);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .research-publication-list .publication-card:hover,
 .research-publication-list .publication-card:focus-within {
-  border-color: var(--blue-600);
-  box-shadow: 0 12px 32px rgba(7, 95, 196, 0.15);
+  border-color: var(--accent-hover);
+  box-shadow: 0 12px 32px rgba(30, 30, 30, 0.12);
   transform: translateY(-2px);
 }
 
@@ -348,7 +348,7 @@ h1 {
 }
 
 .publication-page {
-  background: var(--blue-50);
+  background: var(--surface);
 }
 
 .publication-page__main {
@@ -365,7 +365,7 @@ h1 {
 
 .publication-page__article {
   padding: 32px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 18px;
   background: #fff;
 }
@@ -380,7 +380,7 @@ h1 {
 }
 
 .publication-page__authors {
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -400,8 +400,8 @@ h1 {
 
 .paper-page .publication-page__article {
   padding: 40px;
-  border-color: #c9e0ff;
-  box-shadow: 0 14px 40px rgba(7, 95, 196, 0.1);
+  border-color: var(--border);
+  box-shadow: 0 14px 40px rgba(30, 30, 30, 0.09);
 }
 
 .paper-page .publication-page__article h1 {
@@ -419,18 +419,18 @@ h1 {
 }
 
 .phd-note {
-  color: var(--blue-700);
+  color: var(--accent);
 }
 
 .profile-tagline {
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-size: 15px;
   letter-spacing: 0.02em;
   text-align: center;
 }
 
 .research-interest {
-  color: var(--blue-950);
+  color: var(--ink);
   line-height: 1.55;
 }
 
@@ -443,17 +443,17 @@ h1 {
 
 .interest-tags span {
   padding: 4px 9px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--blue-100);
-  color: var(--blue-800);
+  background: var(--tint);
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 700;
 }
 
 .connect-label {
   margin: 14px 0 8px;
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-weight: 700;
   text-align: center;
 }
@@ -471,10 +471,10 @@ h1 {
   justify-content: center;
   width: 42px;
   height: 42px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(8, 121, 249, 0.1);
+  box-shadow: 0 2px 6px rgba(30, 30, 30, 0.08);
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -487,13 +487,13 @@ h1 {
 
 .social-link:hover,
 .social-link:focus-visible {
-  border-color: var(--blue-600);
-  box-shadow: 0 5px 14px rgba(8, 121, 249, 0.2);
+  border-color: var(--accent-hover);
+  box-shadow: 0 5px 14px rgba(30, 30, 30, 0.15);
   transform: translateY(-2px);
 }
 
 .cv-icon-link {
-  background: var(--blue-700);
+  background: var(--accent);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
@@ -501,7 +501,7 @@ h1 {
 
 .cv-icon-link:hover,
 .cv-icon-link:focus {
-  background: var(--blue-600);
+  background: var(--accent-hover);
   color: #fff;
 }
 
@@ -512,7 +512,7 @@ h1 {
   height: auto;
   margin: 0 auto;
   border-radius: 10px;
-  box-shadow: 0 10px 28px rgba(8, 121, 249, 0.18);
+  box-shadow: 0 10px 28px rgba(30, 30, 30, 0.16);
   transform: translateY(-40px);
 }
 
@@ -526,14 +526,14 @@ h1 {
 .experience-section > tbody > tr > td {
   padding: 2.5%;
   vertical-align: top;
-  background: var(--blue-50);
+  background: var(--surface);
   font-size: 15px;
 }
 
 .experience-section h2 {
   display: block;
   margin-bottom: 14px;
-  color: var(--blue-950);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 20px;
   font-weight: 700;
@@ -542,7 +542,7 @@ h1 {
 .experience-entry {
   margin-bottom: 16px;
   padding: 21px 23px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--border);
   border-radius: 18px;
   background: #fff;
   line-height: 1.5;
@@ -560,14 +560,14 @@ h1 {
 }
 
 .experience-heading strong {
-  color: var(--blue-950);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 19px;
 }
 
 .experience-heading span {
   flex: 0 0 auto;
-  color: var(--blue-800);
+  color: var(--text-muted);
   font-size: 13px;
 }
 
@@ -687,7 +687,7 @@ h1 {
 }
 
 span.highlight {
-  background-color: var(--blue-100);
+  background-color: var(--tint);
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

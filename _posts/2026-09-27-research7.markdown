@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Teach Yourself Where to Look: On-Policy Attention Self-Distillation for Reasoning"
-image: images/Fig1_OPSD_VS_OASD.png
+image: images/Fig2_OASD_Method_Overview_Update.png
 categories: research-completed
 venue: "arXiv preprint, 2026"
 author: "Safaeid Hossain Arib"

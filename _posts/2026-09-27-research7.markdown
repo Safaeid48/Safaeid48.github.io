@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Teach Yourself Where to Look: On-Policy Attention Self-Distillation for Reasoning"
+image: images/Fig1_OPSD_VS_OASD.png
+image_wide: true
+image_alt: "Comparison of OPSD token alignment and OPASD token plus attention alignment"
+categories: research-completed
+venue: "arXiv preprint, 2026"
+author: "Safaeid Hossain Arib"
+authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Ismam Nur Swapnil, Md. Faiyaz Abdullah Sayeedi, Tasnim Mohiuddin, Md Mofijul Islam"
+arxiv: https://arxiv.org/abs/2609.33200
+---
+OPASD adds solution-conditioned attention guidance to on-policy self-distillation. It projects the privileged teacher's attention onto context visible to the student, improving reasoning accuracy across three model sizes and four mathematics benchmarks while reducing rollout tokens and training compute.

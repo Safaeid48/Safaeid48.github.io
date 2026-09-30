@@ -15,7 +15,7 @@
     <p class="publication-card__authors">{{ publication.authors }}</p>
     <div class="publication-card__summary">{{ publication.excerpt }}</div>
     <div class="publication-card__links">
-      <a class="publication-card__primary" href="{{ publication.url | prepend: site.baseurl }}">Project page <span aria-hidden="true">→</span></a>
+      <a href="{{ publication.url | prepend: site.baseurl }}">Project page</a>
       {% if paper_url %}<a href="{{ paper_url }}">Paper</a>{% endif %}
       {% if publication.arxiv %}<a href="{{ publication.arxiv | replace: '/pdf/', '/abs/' }}">arXiv</a>{% endif %}
       {% if publication.code %}<a href="{{ publication.code }}">Code</a>{% endif %}

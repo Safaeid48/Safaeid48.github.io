@@ -9,7 +9,6 @@
     {% if project.course %}<p class="publication-card__authors">{{ project.course }}</p>{% endif %}
     <div class="publication-card__summary">{{ project.excerpt }}</div>
     <div class="publication-card__links">
-      <a class="publication-card__primary" href="{{ project.url | prepend: site.baseurl }}">Project page <span aria-hidden="true">→</span></a>
       {% if project.website %}<a href="{{ project.website }}">Website</a>{% endif %}
       {% if project.code %}<a href="{{ project.code }}">Code</a>{% endif %}
       {% if project.paper %}<a href="{{ project.paper }}">Paper</a>{% endif %}

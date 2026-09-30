@@ -46,3 +46,19 @@
     </td>
   </tr>
 </table>
+<script>
+  (function () {
+    const list = document.querySelector('.news-list');
+    if (!list) return;
+
+    function showThreeNewsItems() {
+      const rows = Array.from(list.querySelectorAll('.news-entry')).slice(0, 3);
+      const height = rows.reduce((total, row) => total + row.getBoundingClientRect().height, 0);
+      list.style.height = Math.ceil(height) + 'px';
+    }
+
+    showThreeNewsItems();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(showThreeNewsItems);
+    window.addEventListener('resize', showThreeNewsItems);
+  })();
+</script>

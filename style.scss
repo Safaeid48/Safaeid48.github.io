@@ -74,77 +74,6 @@ h1 {
 
 }
 
-.news-section {
-  background: #faf9f6;
-  padding: 18px 20px 6px;
-}
-
-.news-section h1 {
-  margin: 0;
-  padding: 0 0 16px;
-  border-bottom: 1px solid #e7e4de;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 28px;
-  font-weight: 700;
-  text-align: left;
-}
-
-.news-list {
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 12px;
-  scrollbar-color: #b7b5b1 transparent;
-  scrollbar-width: thin;
-}
-
-.news-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.news-list::-webkit-scrollbar-thumb {
-  background: #b7b5b1;
-  border-radius: 8px;
-}
-
-.news-list:focus-visible {
-  outline: 2px solid #1772d0;
-  outline-offset: 2px;
-}
-
-.news-entry {
-  display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid #e7e4de;
-}
-
-.news-entry:last-child {
-  border-bottom: 0;
-}
-
-.news-entry time {
-  padding-top: 3px;
-  color: #77736e;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.news-entry p {
-  margin: 0;
-  color: #292929;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.news-entry a {
-  color: #42669f;
-  text-decoration: underline;
-  text-decoration-color: #aabbd4;
-  text-underline-offset: 2px;
-}
-
 .publication-list {
   display: grid;
   gap: 18px;
@@ -522,19 +451,6 @@ h1 {
 
   .publication-page__article h1 {
     font-size: 26px;
-  }
-
-  .news-section {
-    padding: 14px 8px 4px;
-  }
-
-  .news-entry {
-    grid-template-columns: 76px minmax(0, 1fr);
-    gap: 10px;
-  }
-
-  .news-entry p {
-    font-size: 14px;
   }
 
   .about-content,

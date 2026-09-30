@@ -2,8 +2,6 @@
 layout: post
 title: "Teach Yourself Where to Look: On-Policy Attention Self-Distillation for Reasoning"
 image: images/Fig1_OPSD_VS_OASD.png
-image_wide: true
-image_alt: "Comparison of OPSD token alignment and OPASD token plus attention alignment"
 categories: research-completed
 venue: "arXiv preprint, 2026"
 author: "Safaeid Hossain Arib"

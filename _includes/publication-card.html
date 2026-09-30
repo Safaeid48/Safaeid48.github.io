@@ -17,7 +17,6 @@
     <div class="publication-card__links">
       <a href="{{ publication.url | prepend: site.baseurl }}">Project page</a>
       {% if paper_url %}<a href="{{ paper_url }}">Paper</a>{% endif %}
-      {% if publication.arxiv %}<a href="{{ publication.arxiv | replace: '/pdf/', '/abs/' }}">arXiv</a>{% endif %}
       {% if publication.code %}<a href="{{ publication.code }}">Code</a>{% endif %}
       {% if publication.video %}<a href="{{ publication.video }}">Video</a>{% endif %}
       {% if publication.poster %}<a href="{{ publication.poster }}">Poster</a>{% endif %}

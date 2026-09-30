@@ -23,7 +23,7 @@
 
   <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2" type="image/jpeg">
   <link rel="apple-touch-icon" href="{{ site.baseurl }}/images/safaeid.jpeg?v=2">
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930-3" />
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css?v=20260930-4" />
 
   <meta property="og:image" content="https://safaeid48.github.io/images/safaeid.jpeg">
 
@@ -213,7 +213,6 @@
       <a href="#about">About</a>
       <a href="#research">Research</a>
       <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
       <a href="#work">Experience</a>
       <a href="#awards">Awards</a>
       <a href="#leadership">Leadership</a>
@@ -333,7 +332,7 @@
             </tr>
           </table>
 
-          <div class="publication-list">
+          <div class="publication-list research-publication-list">
             {% for post in site.posts %}
             {% if post.categories contains 'research-completed' %}
             {% include publication-card.html publication=post %}
@@ -342,9 +341,6 @@
           </div>
 
           {% include projects.html %}
-
-
-          {% include education.html %}
 
 
           <!-- Experience Header -->
@@ -461,9 +457,6 @@
 
 
 
-
-
-          {% include academic-service.html %}
 
 
           {% include awards.html %}

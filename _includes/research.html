@@ -3,22 +3,22 @@
   <div class="section__head">
     <h2 class="section__title" id="research-heading">Research</h2>
   </div>
-  <p class="research-intro">Most models are trained on outcomes: a reward at the end of a rollout, a single similarity score, one view of the data. Outcomes say <em>whether</em> a model succeeded, but not <em>where</em> its reasoning went wrong or <em>what</em> it failed to see. I want to give models richer signals to learn from, and my work so far follows three threads.</p>
+  <p class="research-intro">Most models learn from outcomes, which tell them <em>whether</em> they succeeded but not <em>why</em>. My work gives models richer signals across the three abilities an intelligent agent needs. To <strong>reason</strong>, a language model learns where to look, not just which answer is right. To <strong>perceive</strong>, it fuses modalities so that one view fills in what another misses. To <strong>act</strong>, a robot learns why it failed, as a vision–language model turns its mistakes into rewards.</p>
 
   <div class="threads">
     <article class="thread thread--1">
-      <p class="thread__num">01</p>
+      <p class="thread__num">01 · Reason</p>
       <h3 class="thread__title">Reinforcement Learning &amp; Post-Training</h3>
-      <p class="thread__body">Language models now learn from their own rollouts, but an outcome reward only says whether the final answer was right. I study denser on-policy signals: distilling a solution-aware teacher's attention so the student learns <em>where to look</em>, and reasons more accurately with far shorter rollouts.</p>
+      <p class="thread__body">Outcome rewards only say whether an answer was right. I distill a solution-aware teacher's attention into the student, so it learns <em>where to look</em> and reasons more accurately with far shorter rollouts.</p>
       <div class="thread__links">
         <a target="_blank" rel="noopener" href="{{ base }}/projects/opasd/">OPASD →</a>
       </div>
     </article>
 
     <article class="thread thread--2">
-      <p class="thread__num">02</p>
+      <p class="thread__num">02 · Perceive</p>
       <h3 class="thread__title">Multimodal Learning</h3>
-      <p class="thread__body">Each modality sees part of the picture. I fuse complementary views (appearance and skeleton for sign language; time, frequency and text for forecasting; visible context and language priors for occluded objects) into representations that hold up where any single view fails.</p>
+      <p class="thread__body">Each modality sees part of the picture. I fuse complementary views, from video and skeletons to spectra, text and occluded scenes, into representations that hold up when a single view fails.</p>
       <div class="thread__links">
         <a target="_blank" rel="noopener" href="{{ base }}/projects/countocc/">CountOCC →</a>
         <a target="_blank" rel="noopener" href="{{ base }}/projects/signformer-gcn/">SignFormer-GCN →</a>
@@ -27,9 +27,9 @@
     </article>
 
     <article class="thread thread--3">
-      <p class="thread__num">03</p>
+      <p class="thread__num">03 · Act</p>
       <h3 class="thread__title">Embodied AI</h3>
-      <p class="thread__body">Where the first two threads meet. A vision–language model watches a robot's failed episode, diagnoses <em>why</em> it failed, and grounds that feedback in the decisive moments. The diagnosis then becomes reward shaping for reinforcement learning, fading as the policy becomes competent.</p>
+      <p class="thread__body">A vision–language model explains <em>why</em> a robot failed, grounds that feedback in the decisive moments, and turns it into rewards that fade as the policy improves.</p>
       <div class="thread__links">
         <a target="_blank" rel="noopener" href="{{ base }}/projects/lagea/">LAGEA →</a>
       </div>

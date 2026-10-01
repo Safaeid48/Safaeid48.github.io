@@ -365,13 +365,12 @@ p { margin: 0 0 1em; }
    Research threads
    ========================================================================== */
 .research-intro {
-  max-width: 760px;
   margin-bottom: 28px;
   color: var(--ink-2);
   font-size: 16.5px;
   line-height: 1.7;
 }
-.research-intro em { color: var(--ink); }
+.research-intro em, .research-intro strong { color: var(--ink); }
 
 .threads {
   display: grid;
@@ -397,6 +396,8 @@ p { margin: 0 0 1em; }
   font-family: var(--mono);
   font-size: 12.5px;
   font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 .thread__title { margin-bottom: 10px; font-size: 20px; font-weight: 500; }
 .thread__body { flex: 1; margin: 0 0 18px; font-size: 15px; line-height: 1.65; }

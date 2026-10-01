@@ -12,8 +12,8 @@ topics: ["Activity Recognition", "Ubiquitous Computing"]
 authors: '<span class="me">Safaeid Hossain Arib</span>, Rabeya Akter, Omar Shahid, Md Atiqur Rahman Ahad'
 paper: https://dl.acm.org/doi/10.1145/3460418.3479376
 code: https://github.com/rabeya-akter/Sussex-Huawei-Locomotion-Challenge-2021
-thumb: images/papers/shl/pipeline.svg
-image: images/papers/shl/pipeline.svg
+thumb: images/papers/shl/pipeline.png
+image: images/papers/shl/pipeline.png
 summary: "Our entry to the Sussex-Huawei Locomotion Challenge 2021 recognizes eight locomotion and transportation activities from smartphone location data using statistical features and a random forest, reaching 78.14% validation accuracy and a 78.28% weighted F1 score."
 tldr: "Can a phone tell whether you are walking, cycling, or on a train from location data alone? A carefully engineered classical pipeline gets close to 80%."
 stats:
@@ -23,8 +23,9 @@ stats:
     label: "weighted F1 score"
   - value: "8"
     label: "locomotion and transportation modes"
-teaser: images/papers/shl/pipeline.svg
-teaser_caption: "<b>Pipeline.</b> Location data is cleaned, label-matched, and windowed; statistical features train a random forest. At test time, missing location data is interpolated before prediction."
+teaser: images/papers/shl/pipeline.png
+teaser_class: narrow
+teaser_caption: "<b>Pipeline overview from the paper.</b> Location data is cleaned, label-matched, and windowed; extracted features train a classifier. At test time, missing location data is interpolated before prediction."
 bibtex: |
   @inproceedings{arib2021classical,
     title     = {Classical Machine Learning Approach for Human Activity Recognition Using Location Data},

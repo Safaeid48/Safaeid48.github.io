@@ -90,7 +90,7 @@ bibtex: |
 <h3>More accurate <em>and</em> cheaper</h3>
 <p>The extra attention objective does not add cost; it removes it. Because OPASD avoids response-length inflation, rollouts are far shorter, so the whole run is faster and lighter.</p>
 
-<figure class="figure">
+<figure class="figure figure--narrow">
   <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/pareto.webp" alt="Accuracy versus wall-clock: OPASD reaches higher Avg@12 in 5.27 hours versus 8.04 hours for OPSD" loading="lazy"></div>
   <figcaption><b>OPASD Pareto-dominates OPSD on Qwen3-4B.</b> Higher Avg@12 with lower wall-clock time, estimated compute, generated tokens (bubble area), and peak GPU memory (−11.9%).</figcaption>
 </figure>

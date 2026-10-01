@@ -44,7 +44,7 @@
     --accent: #e09a85;
     --accent-hover: #f0b6a4;
     --accent-soft: #2c211d;
-    --figure-bg: #f7f5f0;
+    --figure-bg: #ffffff;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .5);
     color-scheme: dark;
   }
@@ -258,13 +258,6 @@ p { margin: 0 0 1em; }
   margin-bottom: 22px;
 }
 
-.hero__lede {
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(19px, 2.2vw, 22px);
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
 
 .hero__bio p { font-size: 16px; }
 
@@ -373,9 +366,21 @@ p { margin: 0 0 1em; }
    ========================================================================== */
 .news {
   margin: 0;
-  padding: 0;
+  padding: 0 14px 0 0;
   list-style: none;
 }
+.news-scroll {
+  max-height: 290px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+  -webkit-mask-image: linear-gradient(180deg, #000 85%, transparent);
+  mask-image: linear-gradient(180deg, #000 85%, transparent);
+}
+.news-scroll::-webkit-scrollbar { width: 6px; }
+.news-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 6px; }
+.news-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.news li:last-child { padding-bottom: 36px; }
 .news li {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
@@ -394,22 +399,6 @@ p { margin: 0 0 1em; }
 .news p { margin: 0; font-size: 15.5px; }
 .news .badge { margin-right: 6px; vertical-align: 1px; }
 
-.news-more summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  list-style: none;
-}
-.news-more summary::-webkit-details-marker { display: none; }
-.news-more summary::after { content: "↓"; transition: transform .2s ease; }
-.news-more[open] summary::after { transform: rotate(180deg); }
-.news-more[open] summary .when-closed,
-.news-more:not([open]) summary .when-open { display: none; }
 
 /* ==========================================================================
    Badges & buttons
@@ -483,20 +472,20 @@ p { margin: 0 0 1em; }
 }
 
 .pub__media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: start;
-  aspect-ratio: 4 / 3;
+  position: relative;
+  display: block;
+  align-self: center;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-  padding: 6px;
   border: 1px solid var(--rule);
   border-radius: 10px;
   background: var(--figure-bg);
 }
 .pub__media img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
   object-fit: contain;
   transition: transform .4s ease;
 }
@@ -561,13 +550,23 @@ p { margin: 0 0 1em; }
 }
 .proj:hover { border-color: var(--rule-strong); box-shadow: var(--shadow); transform: translateY(-2px); color: inherit; }
 .proj__media {
+  position: relative;
   aspect-ratio: 16 / 10;
-  padding: 10px;
+  overflow: hidden;
   border-bottom: 1px solid var(--rule);
   background: var(--figure-bg);
 }
-.proj__media img { width: 100%; height: 100%; object-fit: contain; }
-.proj__body { padding: 14px 16px 16px; }
+.proj__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .4s ease;
+}
+.proj:hover .proj__media img { transform: scale(1.04); }
+.proj__body { flex: 1; padding: 14px 16px 16px; }
 .proj__kicker { margin: 0 0 4px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .proj__title { font-size: 17px; line-height: 1.3; }
 
@@ -708,21 +707,24 @@ p { margin: 0 0 1em; }
 .figure {
   margin: 40px 0;
 }
-.figure--wide {
-  width: 1100px;
-  max-width: calc(100vw - 2 * var(--gutter));
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
+.figure--wide { width: 100%; }
 .figure__frame {
   display: block;
-  padding: clamp(10px, 2vw, 22px);
+  padding: clamp(10px, 1.6vw, 16px);
   border: 1px solid var(--rule);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--figure-bg);
 }
-.figure__frame img { margin: 0 auto; cursor: zoom-in; }
-.figure--narrow .figure__frame img { max-width: 560px; width: 100%; }
+.figure__frame img {
+  width: auto;
+  max-width: 100%;
+  max-height: 420px;
+  margin: 0 auto;
+  object-fit: contain;
+  cursor: zoom-in;
+}
+.figure--narrow { max-width: 600px; margin-inline: auto; }
+.figure--narrow .figure__frame img { max-height: 460px; }
 .figure figcaption {
   max-width: 760px;
   margin: 12px auto 0;

@@ -41,7 +41,7 @@ layout: default
     {% endif %}
 
     {% if page.teaser %}
-    <figure class="figure figure--wide">
+    <figure class="figure figure--{{ page.teaser_class | default: 'wide' }}">
       <div class="figure__frame"><img src="{{ site.baseurl }}/{{ page.teaser }}" alt="Overview figure for {{ page.title | strip_html | escape }}"></div>
       {% if page.teaser_caption %}<figcaption>{{ page.teaser_caption }}</figcaption>{% endif %}
     </figure>

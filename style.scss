@@ -362,6 +362,62 @@ p { margin: 0 0 1em; }
 
 
 /* ==========================================================================
+   Research threads
+   ========================================================================== */
+.research-intro {
+  max-width: 760px;
+  margin-bottom: 28px;
+  color: var(--ink-2);
+  font-size: 16.5px;
+  line-height: 1.7;
+}
+.research-intro em { color: var(--ink); }
+
+.threads {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.thread {
+  --c: var(--accent);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 20px;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--c);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.thread--1 { --c: #8a2b1f; }
+.thread--2 { --c: #2f5d62; }
+.thread--3 { --c: #3d4f8a; }
+.thread__num {
+  margin: 0 0 8px;
+  color: var(--c);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.thread__title { margin-bottom: 10px; font-size: 20px; font-weight: 500; }
+.thread__body { flex: 1; margin: 0 0 18px; font-size: 15px; line-height: 1.65; }
+.thread__links { display: flex; flex-wrap: wrap; gap: 8px; }
+.thread__links a {
+  padding: 3px 11px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 10%, var(--surface));
+  color: var(--c);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.thread__links a:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); }
+@media (prefers-color-scheme: dark) {
+  .thread--1 { --c: #e09a85; }
+  .thread--2 { --c: #7fb7b0; }
+  .thread--3 { --c: #9fb0e8; }
+}
+
+/* ==========================================================================
    News
    ========================================================================== */
 .news {
@@ -889,6 +945,7 @@ p { margin: 0 0 1em; }
   .portrait { margin: 0; }
   .portrait::after { display: none; }
   .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .threads { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {
@@ -897,7 +954,8 @@ p { margin: 0 0 1em; }
   .site-nav__inner { justify-content: center; }
   .site-nav__links { gap: 0; }
   .site-nav__links a { padding: 6px 7px; font-size: 13px; }
-  .site-nav__links li:first-child { display: none; }
+  .site-nav__links li:first-child,
+  .site-nav__links li:nth-child(3) { display: none; }
   .section { padding-block: 48px 4px; }
   .pub { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
   .pub__media { aspect-ratio: 2 / 1; }

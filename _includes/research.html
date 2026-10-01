@@ -1,0 +1,38 @@
+{% assign base = site.baseurl %}
+<section class="section" id="research" aria-labelledby="research-heading">
+  <div class="section__head">
+    <h2 class="section__title" id="research-heading">Research</h2>
+  </div>
+  <p class="research-intro">Most models are trained on outcomes: a reward at the end of a rollout, a single similarity score, one view of the data. Outcomes say <em>whether</em> a model succeeded, but not <em>where</em> its reasoning went wrong or <em>what</em> it failed to see. I want to give models richer signals to learn from, and my work so far follows three threads.</p>
+
+  <div class="threads">
+    <article class="thread thread--1">
+      <p class="thread__num">01</p>
+      <h3 class="thread__title">Reinforcement Learning &amp; Post-Training</h3>
+      <p class="thread__body">Language models now learn from their own rollouts, but an outcome reward only says whether the final answer was right. I study denser on-policy signals: distilling a solution-aware teacher's attention so the student learns <em>where to look</em>, and reasons more accurately with far shorter rollouts.</p>
+      <div class="thread__links">
+        <a href="{{ base }}/projects/opasd/">OPASD →</a>
+      </div>
+    </article>
+
+    <article class="thread thread--2">
+      <p class="thread__num">02</p>
+      <h3 class="thread__title">Multimodal Learning</h3>
+      <p class="thread__body">Each modality sees part of the picture. I fuse complementary views (appearance and skeleton for sign language; time, frequency and text for forecasting; visible context and language priors for occluded objects) into representations that hold up where any single view fails.</p>
+      <div class="thread__links">
+        <a href="{{ base }}/projects/countocc/">CountOCC →</a>
+        <a href="{{ base }}/projects/signformer-gcn/">SignFormer-GCN →</a>
+        <a href="{{ base }}/projects/t3time/">T3Time →</a>
+      </div>
+    </article>
+
+    <article class="thread thread--3">
+      <p class="thread__num">03</p>
+      <h3 class="thread__title">Embodied AI</h3>
+      <p class="thread__body">Where the first two threads meet. A vision–language model watches a robot's failed episode, diagnoses <em>why</em> it failed, and grounds that feedback in the decisive moments. The diagnosis then becomes reward shaping for reinforcement learning, fading as the policy becomes competent.</p>
+      <div class="thread__links">
+        <a href="{{ base }}/projects/lagea/">LAGEA →</a>
+      </div>
+    </article>
+  </div>
+</section>

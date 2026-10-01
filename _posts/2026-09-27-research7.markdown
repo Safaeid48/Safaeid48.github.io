@@ -29,7 +29,7 @@ stats:
   - value: "1.53×"
     label: "faster wall-clock training"
 teaser: images/papers/opasd/teaser.webp
-teaser_caption: "<b>OPSD vs. OPASD.</b> (a) OPSD aligns teacher and student next-token distributions: <i>what to predict</i>. (b) OPASD additionally aligns projected attention distributions: <i>where to look</i>."
+teaser_caption: "<b>OPSD vs. OPASD.</b> (a) OPSD aligns teacher and student next-token distributions, telling the student <i>what to predict</i>. (b) OPASD additionally aligns projected attention distributions, telling it <i>where to look</i>."
 bibtex: |
   @article{arib2026opasd,
     title   = {Teach Yourself Where to Look: On-Policy Attention Self-Distillation for Reasoning},
@@ -43,29 +43,53 @@ bibtex: |
 <h2>Abstract</h2>
 <p class="abstract">On-policy self-distillation trains reasoning models on their own trajectories using dense token distribution guidance from a privileged teacher with access to a verified solution. This supervision transfers what the teacher predicts without directly transferring where it attends within the preceding context. We introduce On-Policy Attention Self-Distillation (OPASD), which complements token-level supervision with solution-conditioned attention distillation. Because the privileged teacher can attend to verified solution tokens unavailable to the student, OPASD projects teacher attention onto student-visible positions and renormalizes the resulting distribution before alignment. Across three model sizes and four competition-level mathematics benchmarks, OPASD consistently outperforms token-only OPSD, improving average accuracy by 4.98 to 8.40 percentage points. OPASD also avoids the response-length inflation and performance degradation observed with token-only distillation, reducing generated rollout tokens by 73.9% and estimated model compute by 72.6% while training 1.53× faster. These results show that solution-conditioned attention provides a complementary supervision signal that makes on-policy self-distillation more accurate, stable, and compute-efficient.</p>
 
-<h2>The missing signal</h2>
+<h2>What to predict is not where to look</h2>
 <p class="kicker">Motivation</p>
-<p>In on-policy self-distillation (OPSD), the same model plays two roles. As a <em>student</em> it sees only the problem and its own partial answer; as a <em>privileged teacher</em> it also sees a verified solution. The teacher's next-token distribution is dense, per-token feedback on the student's own trajectory.</p>
-<p>But next-token distributions say <em>what</em> to predict, not <em>where</em> to look. In multi-step reasoning, later steps hinge on constraints and intermediate results established much earlier, and the teacher's attention over that context is a solution-conditioned signal that OPSD leaves unused. Distilling it is not trivial: teacher and student attend over different contexts, because only the teacher can attend to solution tokens.</p>
+<p>Reinforcement learning with verifiable rewards gives a reasoning model one number per response. On-policy distillation is denser: a teacher scores every prefix of the student's own trajectory with a full next-token distribution. On-policy <em>self</em>-distillation (OPSD) goes further and needs no separate teacher. The same model plays both roles, and the "teacher" copy is simply shown the verified solution.</p>
+<p>That privileged teacher knows more than the next token. Multi-step reasoning hinges on constraints and intermediate results established much earlier, and the teacher's attention shows which of them matter at each step. OPSD discards this signal. OPASD distills it.</p>
+
+<h3>The catch is a support mismatch</h3>
+<p>Next-token distributions are directly comparable because teacher and student share one vocabulary. Attention distributions are not. They live over context <em>positions</em>, and the teacher's context contains solution tokens that the student never sees. Some of the teacher's attention mass sits on positions that do not exist for the student, so the two distributions cannot be aligned as they are.</p>
 
 <h2>Method</h2>
-<p class="kicker">Four steps per training iteration</p>
+<p class="kicker">On-policy sampling, two views, projection, joint distillation</p>
 
 <figure class="figure figure--wide">
-  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/method.webp" alt="OPASD method overview: on-policy sampling, teacher-student distributions, student-support projection, and joint distillation" loading="lazy"></div>
-  <figcaption><b>OPASD overview.</b> The student samples a rollout; teacher and student produce token and attention distributions over the same trajectory; the teacher's attention is projected onto student-visible positions and renormalized; and both signals are distilled jointly.</figcaption>
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/method.webp" alt="OPASD method overview with on-policy sampling, teacher-student distributions, student-support projection, and joint distillation" loading="lazy"></div>
+  <figcaption><b>OPASD overview.</b> (1) The student samples a trajectory from the problem alone. (2) Student and privileged teacher evaluate the same trajectory, producing token and attention distributions. (3) Teacher attention on solution-only positions is removed and the rest renormalized. (4) Token and projected attention distributions are distilled jointly.</figcaption>
 </figure>
 
-<ol class="steps">
-  <li><strong>On-policy sampling</strong>The student generates its own reasoning trajectory for a problem <i>x</i>, so supervision is always about states the student actually visits.</li>
-  <li><strong>Two views, one trajectory</strong>The teacher re-reads the same prefix with the verified solution <i>y*</i> in context. Both models emit next-token and final-layer attention distributions.</li>
-  <li><strong>Student-support projection</strong>Attention mass on solution-only positions is removed and the remainder renormalized, giving a target defined entirely over context the student can see.</li>
-  <li><strong>Joint distillation</strong>The student minimizes <i>L</i> = <i>L</i><sub>tok</sub> + λ<sub>attn</sub> <i>L</i><sub>attn</sub>, using JSD for attention, so it learns what to predict and where to look.</li>
-</ol>
+<h3>1. On-policy self-distillation</h3>
+<p>One language model defines two policies. The teacher is the frozen initial checkpoint conditioned on the problem and its verified solution, and the student conditions on the problem alone, exactly as at inference time.</p>
+<div class="eq">\[ p_T(\cdot \mid x, y^\star) \triangleq p_{\theta_0}(\cdot \mid x, y^\star), \qquad p_S(\cdot \mid x) \triangleq p_\theta(\cdot \mid x) \]</div>
+<p>The student samples its own trajectory \(\hat{y} \sim p_S(\cdot \mid x)\), and the teacher scores that same trajectory token by token rather than generating its own. The token-level objective matches their next-token distributions at every step.</p>
+<div class="eq">\[ \mathcal{L}_{\mathrm{tok}} = \frac{1}{T} \sum_{t=1}^{T} D_{\mathrm{tok}}\big(p_t^T, p_t^S\big), \qquad p_t^S = p_S(\cdot \mid x, \hat{y}_{&lt;t}), \;\; p_t^T = p_T(\cdot \mid x, y^\star, \hat{y}_{&lt;t}) \]</div>
+
+<h3>2. Attention from both views</h3>
+<p>For each generated token, OPASD reads the head-averaged final-layer attention of both models. The student attends over its visible support \(V_t^S\) (problem and prefix). The teacher attends over \(V_t^T = V_t^S \cup \mathcal{P}\), where \(\mathcal{P}\) are the solution positions only the teacher has.</p>
+
+<h3>3. Student-support projection</h3>
+<p>OPASD restricts teacher attention to the student-visible positions and renormalizes the remaining mass.</p>
+<div class="eq">\[ \widetilde{A}_t^T(i) = \frac{A_t^T(i)}{\sum_{j \in V_t^S} A_t^T(j)}, \qquad i \in V_t^S \]</div>
+<p>The target now lives on the student's support, but it is still solution-conditioned, because it was computed with the solution in context. The projection also preserves the teacher's relative preferences over every pair of visible positions.</p>
+<div class="eq">\[ \frac{\widetilde{A}_t^T(i)}{\widetilde{A}_t^T(j)} = \frac{A_t^T(i)}{A_t^T(j)} \qquad \forall\, i, j \in V_t^S \]</div>
+
+<h3>4. Joint distillation</h3>
+<p>The projected teacher attention is distilled with a generalized Jensen–Shannon divergence and added to the token objective. Only the student receives gradients, and the solution is never needed at inference.</p>
+<div class="eq">\[ \ell_{\mathrm{attn}}(t) = \beta\, D_{\mathrm{KL}}\big(\widetilde{A}_t^T \,\Vert\, M_t\big) + (1-\beta)\, D_{\mathrm{KL}}\big(A_t^S \,\Vert\, M_t\big), \qquad M_t = \beta \widetilde{A}_t^T + (1-\beta) A_t^S \]</div>
+<div class="eq">\[ \mathcal{L} = \mathcal{L}_{\mathrm{tok}} + \lambda_{\mathrm{attn}}\, \mathcal{L}_{\mathrm{attn}} \]</div>
+
+<h2>Experimental setup</h2>
+<ul>
+  <li><strong>Models.</strong> Instruction-tuned Qwen3-1.7B, Qwen3-4B and Qwen3-8B, trained with LoRA on H100/H200 GPUs.</li>
+  <li><strong>Data.</strong> Up to 30K problem–solution pairs from the mathematical reasoning subset of OpenThoughts.</li>
+  <li><strong>Benchmarks.</strong> AIME 2024, AIME 2025, AIME 2026 and HMMT 2025, reported as Avg@12 accuracy.</li>
+  <li><strong>Baselines.</strong> The base instruction-tuned model, and token-only OPSD trained with the same data, initialization and budget.</li>
+</ul>
 
 <h2>Results</h2>
-<p class="kicker">Qwen3 1.7B / 4B / 8B · Avg@12 accuracy (%)</p>
-<p>OPASD is the best method at every model size on all four competition-level benchmarks. Token-only OPSD is unstable at this scale: on Qwen3-4B it falls <em>below</em> the base model, while OPASD improves on it by 8.40 points.</p>
+<p class="kicker">Avg@12 accuracy (%) · higher is better</p>
+<p>OPASD is the best method at every model size and beats OPSD on every benchmark. Token-only OPSD is fragile at this scale. On Qwen3-4B it falls <em>below</em> the base model, while OPASD improves on it by 8.40 points.</p>
 
 <div class="table-wrap">
 <table>
@@ -86,25 +110,75 @@ bibtex: |
   </tbody>
 </table>
 </div>
+<p class="table-caption">Gains over OPSD are +5.97 (8B), +8.40 (4B) and +4.98 (1.7B) points. Across three training seeds on Qwen3-4B, the average is 50.88 ± 0.14.</p>
 
-<h3>More accurate <em>and</em> cheaper</h3>
-<p>The extra attention objective does not add cost; it removes it. Because OPASD avoids response-length inflation, rollouts are far shorter, so the whole run is faster and lighter.</p>
+<h3>More accurate and cheaper</h3>
+<p>The extra objective does not add cost. It removes cost. Because OPASD avoids response-length inflation, rollouts are far shorter, so the whole run is faster and lighter.</p>
 
 <figure class="figure figure--narrow">
-  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/pareto.webp" alt="Accuracy versus wall-clock: OPASD reaches higher Avg@12 in 5.27 hours versus 8.04 hours for OPSD" loading="lazy"></div>
-  <figcaption><b>OPASD Pareto-dominates OPSD on Qwen3-4B.</b> Higher Avg@12 with lower wall-clock time, estimated compute, generated tokens (bubble area), and peak GPU memory (−11.9%).</figcaption>
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/pareto.webp" alt="Accuracy versus wall-clock time for OPASD and OPSD" loading="lazy"></div>
+  <figcaption><b>OPASD Pareto-dominates OPSD on Qwen3-4B.</b> Higher Avg@12 in 5.27 h instead of 8.04 h, with 15.58M instead of 59.73M generated tokens, 0.67 instead of 2.43 EFLOPs, and 11.9% less peak GPU memory.</figcaption>
 </figure>
 
-<h3>Stable training dynamics</h3>
+<h3>Stable training, shorter reasoning</h3>
 <figure class="figure figure--wide">
-  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/dynamics.webp" alt="Training and validation accuracy, response length, and epistemic token usage over training for OPSD and OPASD" loading="lazy"></div>
-  <figcaption><b>Training dynamics on Qwen3-4B.</b> OPASD keeps training and validation accuracy stable with concise responses. OPSD shows declining accuracy, response-length inflation, and much heavier use of uncertainty and reconsideration markers.</figcaption>
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/dynamics.webp" alt="Training and validation accuracy, response length, and epistemic token usage for OPSD and OPASD" loading="lazy"></div>
+  <figcaption><b>Training dynamics on Qwen3-4B.</b> OPSD's accuracy drops while its responses balloon and it leans heavily on "wait", "maybe" and "alternatively". OPASD stays stable with concise responses and small shifts in epistemic-token usage.</figcaption>
+</figure>
+
+<h3>The gain holds across budgets and sampling</h3>
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/budget.webp" alt="Avg@12 across 16K, 28K and 38K test-time generation budgets" loading="lazy"></div>
+  <figcaption><b>Test-time generation budget.</b> Trained with an 8K response cap and evaluated at 16K, 28K and 38K tokens, OPASD beats OPSD on every benchmark at every budget, by 8.40, 6.25 and 5.81 points on average.</figcaption>
+</figure>
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/passk.webp" alt="Pass@1 and Pass@12 over training steps for OPSD and OPASD" loading="lazy"></div>
+  <figcaption><b>Pass@1 and Pass@12 over training on Qwen3-4B.</b> OPASD achieves higher Pass@1 on all four benchmarks and keeps an overall advantage at Pass@12.</figcaption>
+</figure>
+
+<h3>A worked example</h3>
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/opasd/qualitative.webp" alt="Reasoning traces of the base model, OPSD and OPASD on an AIME24 number theory problem" loading="lazy"></div>
+  <figcaption><b>AIME24 number theory.</b> The base model overlooks valid alternatives. OPSD considers more candidates but evaluates one incorrectly. OPASD carries the intermediate result through and finds the correct minimum, 110.</figcaption>
 </figure>
 
 <h2>What matters</h2>
 <p class="kicker">Ablations on Qwen3-1.7B · average Avg@12</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Ablation</th><th>Variant</th><th>Average</th></tr></thead>
+  <tbody>
+    <tr class="group"><td colspan="3">Training objective</td></tr>
+    <tr><td></td><td>Token only (OPSD)</td><td>29.04</td></tr>
+    <tr><td></td><td>Attention only</td><td>30.97</td></tr>
+    <tr class="ours"><td></td><td>Token + attention (OPASD)</td><td>34.02</td></tr>
+    <tr class="group"><td colspan="3">Handling teacher-only attention</td></tr>
+    <tr><td></td><td>Redistribute to shared prompt positions</td><td>31.39</td></tr>
+    <tr><td></td><td>Shuffled redistribution</td><td>32.15</td></tr>
+    <tr class="ours"><td></td><td>Student-support projection</td><td>34.02</td></tr>
+    <tr class="group"><td colspan="3">Attention divergence</td></tr>
+    <tr><td></td><td>Forward KL</td><td>31.73</td></tr>
+    <tr><td></td><td>Reverse KL</td><td>32.36</td></tr>
+    <tr class="ours"><td></td><td>Jensen–Shannon</td><td>32.85</td></tr>
+    <tr class="group"><td colspan="3">Attention loss weight \(\lambda_{\mathrm{attn}}\)</td></tr>
+    <tr class="ours"><td></td><td>0.5</td><td>34.02</td></tr>
+    <tr><td></td><td>1.0</td><td>32.85</td></tr>
+    <tr><td></td><td>2.0</td><td>31.82</td></tr>
+    <tr class="group"><td colspan="3">Layers distilled</td></tr>
+    <tr class="ours"><td></td><td>Final layer only</td><td>34.02</td></tr>
+    <tr><td></td><td>Final two layers</td><td>32.54</td></tr>
+    <tr><td></td><td>Final three layers</td><td>31.04</td></tr>
+  </tbody>
+</table>
+</div>
 <ul>
-  <li><strong>Divergence:</strong> JSD (32.85) &gt; reverse KL (32.36) &gt; forward KL (31.73). A symmetric, bounded objective balances mode-covering and mode-seeking behaviour.</li>
-  <li><strong>Attention weight:</strong> λ<sub>attn</sub> = 0.5 is best (34.02), ahead of 1.0 (32.85) and 2.0 (31.82).</li>
-  <li><strong>Depth:</strong> distilling only the final layer (34.02) beats the final two (32.54) or three (31.04) layers.</li>
+  <li><strong>The two signals are complementary.</strong> Attention alone already beats token-only OPSD, and combining them adds another 3 points.</li>
+  <li><strong>Projection is the right fix.</strong> Moving the teacher-only mass elsewhere, even randomly, is worse than simply removing it and renormalizing.</li>
+  <li><strong>Light, late supervision works best.</strong> A moderate weight on the final layer only gives the highest accuracy.</li>
 </ul>
+
+<h2>Limitations</h2>
+<div class="note">
+  <p>OPASD is evaluated on three Qwen3 model sizes, and testing other model families would give a more complete picture. The privileged teacher is kept fixed at the initial checkpoint, and whether attention supervision helps as much under other teacher-update strategies remains open.</p>
+</div>

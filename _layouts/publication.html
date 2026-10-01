@@ -19,8 +19,8 @@ layout: default
     {% if page.venue %}<p class="paper-hero__notes">{{ page.venue }}</p>{% endif %}
     {% if page.notes %}<p class="paper-hero__notes">{{ page.notes }}</p>{% endif %}
     <div class="btn-row">
-      {% if page.paper %}<a class="btn btn--primary btn--lg" href="{{ page.paper }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% elsif page.arxiv %}<a class="btn btn--primary btn--lg" href="{{ page.arxiv | replace: '/abs/', '/pdf/' }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
-      {% if page.arxiv %}<a class="btn btn--lg" href="{{ page.arxiv }}" target="_blank" rel="noopener">{% include icon.html name='arxiv' %}arXiv</a>{% endif %}
+      {% assign paper_link = page.paper | default: page.arxiv %}
+      {% if paper_link %}<a class="btn btn--primary btn--lg" href="{{ paper_link }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
       {% if page.code %}<a class="btn btn--lg" href="{{ page.code }}" target="_blank" rel="noopener">{% include icon.html name='code' %}Code</a>{% endif %}
       {% if page.bibtex %}<a class="btn btn--lg" href="#citation">{% include icon.html name='quote' %}BibTeX</a>{% endif %}
     </div>
@@ -66,6 +66,10 @@ layout: default
   </div>
 </article>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+  onload="renderMathInElement(document.querySelector('.prose'), {delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}], throwOnError: false});"></script>
 <script>
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {

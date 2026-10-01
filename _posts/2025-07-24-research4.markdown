@@ -27,7 +27,7 @@ stats:
   - value: "−11.3%"
     label: "MSE on ILI, the largest single gain"
   - value: "−4.13%"
-    label: "MSE in the 5% few-shot setting"
+    label: "MSE with only 5% of the training data"
 teaser: images/papers/t3time/teaser.webp
 teaser_caption: "<b>Bimodal vs. trimodal.</b> (a) Prior work fuses a time-series encoder with an LLM statically. (b) T3Time adds a frequency encoder, horizon-aware gating, and cross-modal alignment with adaptive head fusion."
 bibtex: |
@@ -47,53 +47,124 @@ bibtex: |
 <h2>Abstract</h2>
 <p class="abstract">Multivariate time series forecasting (MTSF) seeks to model temporal dynamics among variables to predict future trends. Transformer-based models and large language models (LLMs) have shown promise due to their ability to capture long-range dependencies and patterns. However, current methods often rely on rigid inductive biases, ignore inter-variable interactions, or apply static fusion strategies that limit adaptability across forecast horizons. These limitations create bottlenecks in capturing nuanced, horizon-specific relationships in time-series data. To solve this problem, we propose T3Time, a novel trimodal framework consisting of time, spectral, and prompt branches, where the dedicated frequency encoding branch captures the periodic structures along with a gating mechanism that learns prioritization between temporal and spectral features based on the prediction horizon. We also proposed a mechanism which adaptively aggregates multiple cross-modal alignment heads by dynamically weighting the importance of each head based on the features. Extensive experiments on benchmark datasets demonstrate that our model consistently outperforms state-of-the-art baselines, achieving an average reduction of 3.28% in MSE and 2.29% in MAE. Furthermore, it shows strong generalization in few-shot learning settings: with 5% training data, we see a reduction in MSE and MAE by 4.13% and 1.91%, respectively; and with 10% data, by 3.62% and 1.98% on average.</p>
 
+<h2>Three ways to read one series</h2>
+<p class="kicker">Motivation</p>
+<p>Forecasting models usually commit to one view of the data. Time-domain Transformers such as PatchTST and iTransformer model local dynamics. Frequency models such as FEDformer capture periodicity. LLM-based models such as Time-LLM and TimeCMA describe the series in a text prompt and borrow a language model's priors. Each view sees something the others miss.</p>
+<ul>
+  <li><strong>Isolated modalities.</strong> Prompt-based models pair time with language but ignore the spectral view that summarizes global periodicity.</li>
+  <li><strong>Narrow alignment.</strong> A single cross-attention head limits how modalities interact.</li>
+  <li><strong>Horizon rigidity.</strong> The same fusion is used for every forecast length, although short horizons lean on local detail and long horizons on periodic structure.</li>
+</ul>
+
 <h2>Method</h2>
 <p class="kicker">Encode three views, gate by horizon, align, keep a residual path</p>
 
 <figure class="figure figure--wide">
   <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/t3time/method.webp" alt="T3Time architecture with frequency, time-series, and LLM encoding branches, horizon-aware gating, multi-head cross-modal attention, adaptive head fusion, and a channel-wise residual connection" loading="lazy"></div>
-  <figcaption><b>T3Time architecture.</b> Frequency, time-series, and LLM-prompt branches feed horizon-aware gating, multi-head cross-modal attention with adaptive head fusion, and a channel-wise residual connection before a Transformer decoder.</figcaption>
+  <figcaption><b>T3Time architecture.</b> Frequency, time-series and LLM-prompt branches feed horizon-aware gating, multi-head cross-modal attention with adaptive head fusion, and a channel-wise residual connection before a Transformer decoder.</figcaption>
 </figure>
 
-<ol class="steps">
-  <li><strong>Tri-modal encoding</strong>A frequency branch encodes FFT magnitudes, a time branch encodes each variable's window, and a frozen GPT-2 encodes a per-variable text prompt describing the series.</li>
-  <li><strong>Horizon-aware gating</strong>A small MLP looks at the temporal encoding and the prediction length and decides, per channel, how much to rely on temporal versus spectral features.</li>
-  <li><strong>Adaptive multi-head alignment</strong>Several independent cross-modal attention heads align the series with the prompt embedding; a gating network weights the heads per variable.</li>
-  <li><strong>Channel-wise residual fusion</strong>Learned per-channel coefficients balance aligned features against the raw temporal–spectral path before decoding.</li>
-</ol>
+<h3>1. Tri-modal encoding</h3>
+<p><strong>Frequency.</strong> The input is transformed with a real FFT and each magnitude bin becomes a token. After a one-layer Transformer, an attention-weighted pooling summarizes the spectrum per variable.</p>
+<div class="eq">\[ \widehat{\mathbf{X}} = \mathcal{F}_r(\mathbf{X}) \in \mathbb{C}^{B \times N \times L_f}, \quad L_f = \lfloor L/2 \rfloor + 1, \qquad \mathbf{F}_{\mathrm{pooled}} = \sum_{l=1}^{L_f} \alpha_l\, \widetilde{\mathbf{Z}}_{f,l} \]</div>
+<p><strong>Time.</strong> Each variable's window is linearly embedded and encoded by a Transformer.</p>
+<p><strong>Language.</strong> Each variable gets a prompt such as <em>"From [t1] to [t2], the values were [v1, …, vn] every [hour]. The total trend value was [T]."</em> A frozen GPT-2 encodes it, and the last-token embedding is kept.</p>
+
+<h3>2. Horizon-aware gating</h3>
+<p>A small MLP reads the pooled time encoding together with the normalized prediction length and outputs per-channel gates. Each forecast horizon gets its own mix of spectral and temporal evidence.</p>
+<div class="eq">\[ \mathbf{g} = \sigma\big(\mathbf{W}_4\, \phi(\mathbf{W}_3\, \mathbf{g}_{\mathrm{in}})\big), \qquad \mathbf{Z}_g = \mathbf{g} \odot \widetilde{\mathbf{F}} + (1 - \mathbf{g}) \odot \widetilde{\mathbf{Z}}_t \]</div>
+
+<h3>3. Adaptive multi-head cross-modal alignment</h3>
+<p>Instead of one cross-attention head, \(H\) independent heads align the gated series features (queries) with the prompt embeddings (keys and values). A gating network then scores the heads separately for every variable, so different variables can rely on different alignments.</p>
+<div class="eq">\[ \pi_{b,n}^{(h)} = \mathrm{softmax}_h\big(\mathbf{W}_6\, \phi(\mathrm{LN}(\mathbf{W}_5\, \mathbf{U}_{b,n}))\big), \qquad \mathbf{\Lambda}_{b,:,n} = \sum_{h=1}^{H} \pi_{b,n}^{(h)}\, \mathbf{H}^{(h)}_{b,:,n} \]</div>
+
+<h3>4. Channel-wise residual fusion</h3>
+<p>Learned per-channel coefficients decide how much each latent channel takes from the aligned features versus the raw temporal–spectral path, before a Transformer decoder and a linear forecasting head.</p>
+<div class="eq">\[ \mathbf{\Theta}_{b,c,n} = \gamma_c\, \mathbf{\Lambda}_{b,c,n} + (1 - \gamma_c)\, \mathbf{Z}_{g,b,c,n}, \qquad \gamma_c \in [0, 1] \]</div>
 
 <h2>Results</h2>
-<p class="kicker">Long-term forecasting · MSE averaged over four horizons · lower is better</p>
+<p class="kicker">Long-term forecasting · averaged over four horizons · lower is better</p>
+<p>Following TimeCMA, inputs are 96 steps and horizons are {96, 192, 336, 720} (36 steps and {24, 36, 48, 60} for ILI), averaged over three seeds.</p>
 
+<h3>MSE</h3>
 <div class="table-wrap">
 <table>
-  <thead><tr><th>Dataset</th><th>T3Time</th><th>TimeCMA</th><th>Time-LLM</th><th>UniTime</th><th>iTransformer</th><th>PatchTST</th><th>DLinear</th></tr></thead>
+  <thead><tr><th>Dataset</th><th>T3Time</th><th>TimeCMA</th><th>Time-LLM</th><th>UniTime</th><th>TimesNet</th><th>DLinear</th><th>iTransformer</th><th>PatchTST</th><th>OFA</th></tr></thead>
   <tbody>
-    <tr><td>ETTm1</td><td class="best">0.372</td><td>0.380</td><td>0.410</td><td>0.385</td><td>0.407</td><td>0.392</td><td>0.403</td></tr>
-    <tr><td>ETTm2</td><td>0.279</td><td class="best">0.275</td><td>0.296</td><td>0.293</td><td>0.288</td><td>0.285</td><td>0.350</td></tr>
-    <tr><td>ETTh1</td><td class="best">0.418</td><td>0.423</td><td>0.448</td><td>0.442</td><td>0.454</td><td>0.463</td><td>0.456</td></tr>
-    <tr><td>ETTh2</td><td class="best">0.348</td><td>0.372</td><td>0.381</td><td>0.378</td><td>0.383</td><td>0.395</td><td>0.559</td></tr>
-    <tr><td>ECL</td><td class="best">0.170</td><td>0.174</td><td>0.195</td><td>0.216</td><td>0.178</td><td>0.207</td><td>0.212</td></tr>
-    <tr><td>Weather</td><td class="best">0.244</td><td>0.250</td><td>0.275</td><td>0.253</td><td>0.258</td><td>0.257</td><td>0.265</td></tr>
-    <tr><td>ILI</td><td class="best">1.705</td><td>1.922</td><td>2.432</td><td>2.108</td><td>2.444</td><td>2.388</td><td>2.616</td></tr>
-    <tr><td>Exchange</td><td class="best">0.353</td><td>0.395</td><td>0.372</td><td>0.364</td><td>0.360</td><td>0.390</td><td>0.354</td></tr>
+    <tr><td>ETTm1</td><td class="best">0.372</td><td>0.380</td><td>0.410</td><td>0.385</td><td>0.400</td><td>0.403</td><td>0.407</td><td>0.392</td><td>0.396</td></tr>
+    <tr><td>ETTm2</td><td>0.279</td><td class="best">0.275</td><td>0.296</td><td>0.293</td><td>0.291</td><td>0.350</td><td>0.288</td><td>0.285</td><td>0.294</td></tr>
+    <tr><td>ETTh1</td><td class="best">0.418</td><td>0.423</td><td>0.448</td><td>0.442</td><td>0.458</td><td>0.456</td><td>0.454</td><td>0.463</td><td>0.457</td></tr>
+    <tr><td>ETTh2</td><td class="best">0.348</td><td>0.372</td><td>0.381</td><td>0.378</td><td>0.414</td><td>0.559</td><td>0.383</td><td>0.395</td><td>0.389</td></tr>
+    <tr><td>ECL</td><td class="best">0.170</td><td>0.174</td><td>0.195</td><td>0.216</td><td>0.192</td><td>0.212</td><td>0.178</td><td>0.207</td><td>0.217</td></tr>
+    <tr><td>Weather</td><td class="best">0.244</td><td>0.250</td><td>0.275</td><td>0.253</td><td>0.259</td><td>0.265</td><td>0.258</td><td>0.257</td><td>0.279</td></tr>
+    <tr><td>ILI</td><td class="best">1.705</td><td>1.922</td><td>2.432</td><td>2.108</td><td>2.139</td><td>2.616</td><td>2.444</td><td>2.388</td><td>2.623</td></tr>
+    <tr><td>Exchange</td><td class="best">0.353</td><td>0.395</td><td>0.372</td><td>0.364</td><td>0.416</td><td>0.354</td><td>0.360</td><td>0.390</td><td>0.519</td></tr>
   </tbody>
 </table>
 </div>
-<p class="table-caption">96-step input windows (36 for ILI), averaged over three seeds. Full MAE results and more baselines are in the paper.</p>
+
+<h3>MAE</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Dataset</th><th>T3Time</th><th>TimeCMA</th><th>Time-LLM</th><th>UniTime</th><th>TimesNet</th><th>DLinear</th><th>iTransformer</th><th>PatchTST</th><th>OFA</th></tr></thead>
+  <tbody>
+    <tr><td>ETTm1</td><td>0.393</td><td class="best">0.392</td><td>0.409</td><td>0.399</td><td>0.406</td><td>0.407</td><td>0.410</td><td>0.402</td><td>0.401</td></tr>
+    <tr><td>ETTm2</td><td class="best">0.322</td><td>0.323</td><td>0.340</td><td>0.334</td><td>0.333</td><td>0.401</td><td>0.332</td><td>0.328</td><td>0.339</td></tr>
+    <tr><td>ETTh1</td><td class="best">0.430</td><td>0.431</td><td>0.443</td><td>0.448</td><td>0.450</td><td>0.452</td><td>0.447</td><td>0.449</td><td>0.450</td></tr>
+    <tr><td>ETTh2</td><td class="best">0.390</td><td>0.397</td><td>0.404</td><td>0.403</td><td>0.427</td><td>0.515</td><td>0.407</td><td>0.414</td><td>0.414</td></tr>
+    <tr><td>ECL</td><td class="best">0.266</td><td>0.269</td><td>0.288</td><td>0.306</td><td>0.295</td><td>0.300</td><td>0.270</td><td>0.289</td><td>0.308</td></tr>
+    <tr><td>Weather</td><td class="best">0.275</td><td>0.276</td><td>0.291</td><td>0.276</td><td>0.287</td><td>0.317</td><td>0.278</td><td>0.280</td><td>0.297</td></tr>
+    <tr><td>ILI</td><td class="best">0.835</td><td>0.921</td><td>1.012</td><td>0.929</td><td>0.931</td><td>1.090</td><td>1.203</td><td>1.011</td><td>1.060</td></tr>
+    <tr><td>Exchange</td><td class="best">0.401</td><td>0.429</td><td>0.416</td><td>0.404</td><td>0.443</td><td>0.414</td><td>0.403</td><td>0.429</td><td>0.500</td></tr>
+  </tbody>
+</table>
+</div>
 
 <h3>Few-shot forecasting</h3>
-<p>With only 10% of the training data, T3Time beats the strongest baseline on all five evaluated datasets (−3.62% MSE on average); with 5% of the data the margin grows to −4.13% MSE.</p>
+<p>With only a tenth or a twentieth of the training data, T3Time beats the strongest baseline on all five datasets.</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Dataset</th><th>T3Time (10%)</th><th>Best baseline (10%)</th><th>T3Time (5%)</th><th>Best baseline (5%)</th></tr></thead>
+  <tbody>
+    <tr><td>ETTm1</td><td class="best">0.376</td><td>0.387 (TimeCMA)</td><td class="best">0.384</td><td>0.396 (TimeCMA)</td></tr>
+    <tr><td>ETTm2</td><td class="best">0.266</td><td>0.277 (Time-LLM)</td><td class="best">0.267</td><td>0.274 (Time-LLM)</td></tr>
+    <tr><td>ETTh1</td><td class="best">0.449</td><td>0.480 (TimeCMA)</td><td class="best">0.442</td><td>0.472 (TimeCMA)</td></tr>
+    <tr><td>ETTh2</td><td class="best">0.357</td><td>0.370 (Time-LLM)</td><td class="best">0.357</td><td>0.382 (Time-LLM)</td></tr>
+    <tr><td>Weather</td><td class="best">0.226</td><td>0.229 (TimeCMA)</td><td class="best">0.226</td><td>0.231 (TimeCMA)</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="table-caption">MSE, lower is better. Average reductions are 3.62% (10%) and 4.13% (5%).</p>
 
 <h2>What matters</h2>
-<p class="kicker">Ablations · mean MSE increase when a component is removed</p>
+<p class="kicker">Ablations · MSE</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Dataset</th><th>T3Time</th><th>w/o frequency</th><th>w/o multi-head CMA</th><th>w/o residual</th><th>w/o gating</th></tr></thead>
+  <tbody>
+    <tr><td>ETTm1</td><td class="best">0.372</td><td>0.381</td><td>0.374</td><td>0.404</td><td>0.373</td></tr>
+    <tr><td>ETTm2</td><td class="best">0.279</td><td class="best">0.279</td><td>0.283</td><td>0.288</td><td>0.280</td></tr>
+    <tr><td>ETTh1</td><td class="best">0.418</td><td>0.433</td><td>0.421</td><td>0.433</td><td>0.425</td></tr>
+    <tr><td>ETTh2</td><td class="best">0.348</td><td>0.364</td><td>0.355</td><td>0.384</td><td>0.363</td></tr>
+    <tr><td>Weather</td><td class="best">0.244</td><td>0.250</td><td>0.249</td><td>0.249</td><td>0.249</td></tr>
+    <tr><td>ILI</td><td class="best">1.705</td><td>1.786</td><td>1.813</td><td>2.176</td><td>1.724</td></tr>
+    <tr><td>Exchange</td><td class="best">0.353</td><td>0.374</td><td>0.378</td><td>0.396</td><td>0.373</td></tr>
+  </tbody>
+</table>
+</div>
 <ul>
-  <li><strong>Channel-wise residual connection:</strong> the most important part; removing it raises MSE on ILI from 1.705 to 2.176.</li>
-  <li><strong>Frequency branch:</strong> removing it hurts most on periodic data (e.g. Exchange 0.353 → 0.374, ILI 1.705 → 1.786).</li>
-  <li><strong>Multi-head alignment and horizon gating</strong> each contribute consistent smaller gains across datasets.</li>
+  <li><strong>The residual path matters most.</strong> Without it, MSE rises on every dataset, from 1.705 to 2.176 on ILI.</li>
+  <li><strong>The spectral view pays off on periodic data</strong>, such as Exchange (0.353 → 0.374) and ILI (1.705 → 1.786).</li>
+  <li><strong>Multi-head alignment and horizon gating</strong> each give consistent smaller gains.</li>
 </ul>
 
+<h3>What the three views learn</h3>
 <figure class="figure">
   <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/t3time/tsne.webp" alt="t-SNE of time-series, frequency, prompt, and forecasted embeddings coloured by dataset" loading="lazy"></div>
-  <figcaption><b>What the three views learn.</b> t-SNE of learned embeddings across six datasets. Time-series and frequency embeddings form clear dataset clusters, reflecting distinct temporal and periodic structure; prompt embeddings are more dispersed, reflecting the diversity of the prompts.</figcaption>
+  <figcaption><b>t-SNE of learned embeddings across six datasets.</b> Time-series and frequency embeddings form clear dataset clusters, reflecting distinct temporal and periodic structure. Prompt embeddings are more dispersed, reflecting the diversity of the prompts.</figcaption>
 </figure>
+
+<h2>Limitations</h2>
+<div class="note">
+  <p>Experiments use standard public benchmarks and a frozen GPT-2 for the language branch. Larger-scale pretraining and richer representations for each modality are left for future work.</p>
+</div>

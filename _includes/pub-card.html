@@ -14,8 +14,8 @@
     <div class="pub__summary"><p>{{ p.summary }}</p></div>
     <div class="btn-row">
       <a class="btn btn--primary" href="{{ page_url }}" target="_blank" rel="noopener">{% include icon.html name='page' %}Project page</a>
-      {% if p.paper %}<a class="btn" href="{{ p.paper }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
-      {% if p.arxiv %}<a class="btn" href="{{ p.arxiv }}" target="_blank" rel="noopener">{% include icon.html name='arxiv' %}arXiv</a>{% endif %}
+      {% assign paper_link = p.paper | default: p.arxiv %}
+      {% if paper_link %}<a class="btn" href="{{ paper_link }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
       {% if p.code %}<a class="btn" href="{{ p.code }}" target="_blank" rel="noopener">{% include icon.html name='code' %}Code</a>{% endif %}
     </div>
   </div>

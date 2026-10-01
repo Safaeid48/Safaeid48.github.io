@@ -147,28 +147,28 @@ bibtex: |
 
 <div class="table-wrap">
 <table>
-  <thead><tr><th>Ablation</th><th>Variant</th><th>Average</th></tr></thead>
+  <thead><tr><th>Variant</th><th>Average</th></tr></thead>
   <tbody>
-    <tr class="group"><td colspan="3">Training objective</td></tr>
-    <tr><td></td><td>Token only (OPSD)</td><td>29.04</td></tr>
-    <tr><td></td><td>Attention only</td><td>30.97</td></tr>
-    <tr class="ours"><td></td><td>Token + attention (OPASD)</td><td>34.02</td></tr>
-    <tr class="group"><td colspan="3">Handling teacher-only attention</td></tr>
-    <tr><td></td><td>Redistribute to shared prompt positions</td><td>31.39</td></tr>
-    <tr><td></td><td>Shuffled redistribution</td><td>32.15</td></tr>
-    <tr class="ours"><td></td><td>Student-support projection</td><td>34.02</td></tr>
-    <tr class="group"><td colspan="3">Attention divergence</td></tr>
-    <tr><td></td><td>Forward KL</td><td>31.73</td></tr>
-    <tr><td></td><td>Reverse KL</td><td>32.36</td></tr>
-    <tr class="ours"><td></td><td>Jensen–Shannon</td><td>32.85</td></tr>
-    <tr class="group"><td colspan="3">Attention loss weight \(\lambda_{\mathrm{attn}}\)</td></tr>
-    <tr class="ours"><td></td><td>0.5</td><td>34.02</td></tr>
-    <tr><td></td><td>1.0</td><td>32.85</td></tr>
-    <tr><td></td><td>2.0</td><td>31.82</td></tr>
-    <tr class="group"><td colspan="3">Layers distilled</td></tr>
-    <tr class="ours"><td></td><td>Final layer only</td><td>34.02</td></tr>
-    <tr><td></td><td>Final two layers</td><td>32.54</td></tr>
-    <tr><td></td><td>Final three layers</td><td>31.04</td></tr>
+    <tr class="group"><td colspan="2">Training objective</td></tr>
+    <tr><td><td>Token only (OPSD)</td><td>29.04</td></tr>
+    <tr><td><td>Attention only</td><td>30.97</td></tr>
+    <tr class="ours"><td><td>Token + attention (OPASD)</td><td>34.02</td></tr>
+    <tr class="group"><td colspan="2">Handling teacher-only attention</td></tr>
+    <tr><td><td>Redistribute to shared prompt positions</td><td>31.39</td></tr>
+    <tr><td><td>Shuffled redistribution</td><td>32.15</td></tr>
+    <tr class="ours"><td><td>Student-support projection</td><td>34.02</td></tr>
+    <tr class="group"><td colspan="2">Attention divergence</td></tr>
+    <tr><td><td>Forward KL</td><td>31.73</td></tr>
+    <tr><td><td>Reverse KL</td><td>32.36</td></tr>
+    <tr class="ours"><td><td>Jensen–Shannon</td><td>32.85</td></tr>
+    <tr class="group"><td colspan="2">Attention loss weight \(\lambda_{\mathrm{attn}}\)</td></tr>
+    <tr class="ours"><td><td>0.5</td><td>34.02</td></tr>
+    <tr><td><td>1.0</td><td>32.85</td></tr>
+    <tr><td><td>2.0</td><td>31.82</td></tr>
+    <tr class="group"><td colspan="2">Layers distilled</td></tr>
+    <tr class="ours"><td><td>Final layer only</td><td>34.02</td></tr>
+    <tr><td><td>Final two layers</td><td>32.54</td></tr>
+    <tr><td><td>Final three layers</td><td>31.04</td></tr>
   </tbody>
 </table>
 </div>

@@ -186,11 +186,11 @@ bibtex: |
 <p class="kicker">Ablations</p>
 
 <div class="figure-row">
-  <figure class="figure">
+  <figure class="figure" style="--ar: 0.98">
     <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/lagea/reward-ablation.webp" alt="Reward ablation: 79% without goal delta, 80% without feedback delta, 80% without adaptive rho, 99% full LaGEA" loading="lazy"></div>
     <figcaption><b>Every reward term matters.</b> Removing the goal delta, the feedback delta or the adaptive schedule drops success to 79–80%, versus 99% for the full model.</figcaption>
   </figure>
-  <figure class="figure">
+  <figure class="figure" style="--ar: 2.13">
     <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/lagea/keyframe-ablation.webp" alt="Feedback reward on drawer-open with and without key frames" loading="lazy"></div>
     <figcaption><b>Key frames sharpen credit.</b> On drawer-open, key-frame gating focuses the feedback reward on the decisive moments.</figcaption>
   </figure>
@@ -198,30 +198,30 @@ bibtex: |
 
 <div class="table-wrap">
 <table>
-  <thead><tr><th>Ablation</th><th>Variant</th><th>Success (%)</th></tr></thead>
+  <thead><tr><th>Variant</th><th>Success (%)</th></tr></thead>
   <tbody>
-    <tr class="group"><td colspan="3">Feedback format (6 tasks)</td></tr>
-    <tr><td></td><td>Free-form text</td><td>78.89</td></tr>
-    <tr class="ours"><td></td><td>Schema-constrained JSON</td><td>98.89</td></tr>
-    <tr class="group"><td colspan="3">Key-frame selection</td></tr>
-    <tr><td></td><td>Random frames</td><td>68.0</td></tr>
-    <tr><td></td><td>Uniform frames</td><td>67.3</td></tr>
-    <tr class="ours"><td></td><td>LAGEA key frames</td><td>80.0</td></tr>
-    <tr class="group"><td colspan="3">VLM for reflection</td></tr>
-    <tr><td></td><td>SmolVLM2</td><td>56.0</td></tr>
-    <tr><td></td><td>OpenQwen2VL</td><td>66.7</td></tr>
-    <tr><td></td><td>InternVL2</td><td>68.0</td></tr>
-    <tr class="ours"><td></td><td>Qwen2.5-VL-3B</td><td>80.0</td></tr>
-    <tr class="group"><td colspan="3">Text encoder for feedback</td></tr>
-    <tr><td></td><td>MPNet</td><td>70.7</td></tr>
-    <tr><td></td><td>BGE</td><td>71.3</td></tr>
-    <tr><td></td><td>LIV</td><td>72.7</td></tr>
-    <tr class="ours"><td></td><td>GPT-2</td><td>80.0</td></tr>
-    <tr class="group"><td colspan="3">Camera viewpoint (zero-shot)</td></tr>
-    <tr class="ours"><td></td><td>Training view</td><td>80.0</td></tr>
-    <tr><td></td><td>Directly overhead</td><td>79.3</td></tr>
-    <tr><td></td><td>Front-left diagonal</td><td>77.3</td></tr>
-    <tr><td></td><td>Behind-left diagonal</td><td>79.3</td></tr>
+    <tr class="group"><td colspan="2">Feedback format (6 tasks)</td></tr>
+    <tr><td><td>Free-form text</td><td>78.89</td></tr>
+    <tr class="ours"><td><td>Schema-constrained JSON</td><td>98.89</td></tr>
+    <tr class="group"><td colspan="2">Key-frame selection</td></tr>
+    <tr><td><td>Random frames</td><td>68.0</td></tr>
+    <tr><td><td>Uniform frames</td><td>67.3</td></tr>
+    <tr class="ours"><td><td>LAGEA key frames</td><td>80.0</td></tr>
+    <tr class="group"><td colspan="2">VLM for reflection</td></tr>
+    <tr><td><td>SmolVLM2</td><td>56.0</td></tr>
+    <tr><td><td>OpenQwen2VL</td><td>66.7</td></tr>
+    <tr><td><td>InternVL2</td><td>68.0</td></tr>
+    <tr class="ours"><td><td>Qwen2.5-VL-3B</td><td>80.0</td></tr>
+    <tr class="group"><td colspan="2">Text encoder for feedback</td></tr>
+    <tr><td><td>MPNet</td><td>70.7</td></tr>
+    <tr><td><td>BGE</td><td>71.3</td></tr>
+    <tr><td><td>LIV</td><td>72.7</td></tr>
+    <tr class="ours"><td><td>GPT-2</td><td>80.0</td></tr>
+    <tr class="group"><td colspan="2">Camera viewpoint (zero-shot)</td></tr>
+    <tr class="ours"><td><td>Training view</td><td>80.0</td></tr>
+    <tr><td><td>Directly overhead</td><td>79.3</td></tr>
+    <tr><td><td>Front-left diagonal</td><td>77.3</td></tr>
+    <tr><td><td>Behind-left diagonal</td><td>79.3</td></tr>
   </tbody>
 </table>
 </div>

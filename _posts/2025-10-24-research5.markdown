@@ -69,11 +69,11 @@ bibtex: |
 <p>A region-of-interest consistency loss \(\mathcal{L}_{\mathrm{cst}}\) rewards high, low-variance activation wherever either network is confident, which prevents the trivial solution of both maps going flat.</p>
 
 <div class="figure-row">
-  <figure class="figure">
+  <figure class="figure" style="--ar: 1.45">
     <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/countocc/frm.webp" alt="Feature Reconstruction Module diagram" loading="lazy"></div>
     <figcaption><b>FRM.</b> Occluded queries gather spatial context from visible tokens, then semantic guidance from text and exemplars.</figcaption>
   </figure>
-  <figure class="figure">
+  <figure class="figure" style="--ar: 1.36">
     <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/countocc/viseq.webp" alt="Visual Equivalence framework diagram" loading="lazy"></div>
     <figcaption><b>VisEQ.</b> Teacher and student attention maps are aligned across clean and occluded views.</figcaption>
   </figure>
@@ -81,7 +81,7 @@ bibtex: |
 
 <h3>3. New occlusion benchmarks</h3>
 <p>FSC-147-OCC and CARPK-OCC add controlled occlusion to the FSC-147 open-world counting benchmark (147 categories) and the CARPK car-counting dataset, with separate ground truth for visible and occluded objects.</p>
-<figure class="figure">
+<figure class="figure figure--narrow">
   <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/countocc/dataset.webp" alt="Sample images from FSC-147-OCC and CARPK-OCC" loading="lazy"></div>
   <figcaption><b>Benchmark samples</b> from (a) FSC-147-OCC and (b) CARPK-OCC.</figcaption>
 </figure>
@@ -134,7 +134,7 @@ bibtex: |
   <figcaption><b>CrowdHuman.</b> CountOCC assigns stronger responses to partially occluded people, such as the leftmost player, reducing undercounting in overlapping regions.</figcaption>
 </figure>
 
-<figure class="figure figure--wide">
+<figure class="figure figure--narrow">
   <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/countocc/qualitative.webp" alt="Qualitative comparison of CLIP-Count, CounTX, CounTR, LOCA, CountGD and CountOCC on occluded FSC-147 images" loading="lazy"></div>
   <figcaption><b>Qualitative comparison on FSC-147-OCC.</b> Columns show CLIP-Count, CounTX, CounTR, LOCA, CountGD and CountOCC. Prior methods undercount hidden objects, while CountOCC counts correctly across diverse scenes.</figcaption>
 </figure>

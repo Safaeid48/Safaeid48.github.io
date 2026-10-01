@@ -1,35 +1,79 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | escape }}">
-  <title>{{ page.title | escape }} | {{ site.name }}</title>
-  <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
-  <link rel="stylesheet" href="{{ site.baseurl }}/style.css?v=20260930-8">
-</head>
-<body class="publication-page paper-page">
-  <main class="publication-page__main">
-    <a class="publication-page__back" href="{{ site.baseurl }}/#research">← Back to publications</a>
-    <article class="publication-page__article">
-      {% if page.venue %}<span class="publication-card__venue">{{ page.venue_short | default: page.venue }}</span>{% endif %}
-      <h1>{{ page.title }}</h1>
-      <p class="publication-page__authors">{{ page.authors }}</p>
-      <img class="publication-page__image" src="{{ site.baseurl }}/{{ page.image }}" alt="Figure for {{ page.title | escape }}">
-      <div class="publication-page__overview">{{ content }}</div>
-      {% assign paper_url = page.paper %}
-      {% unless paper_url %}
-        {% if page.arxiv %}{% assign paper_url = page.arxiv | replace: '/abs/', '/pdf/' %}{% endif %}
-      {% endunless %}
-      <div class="publication-card__links">
-        {% if paper_url %}<a class="publication-card__primary" href="{{ paper_url }}">Paper</a>{% endif %}
-        {% if page.code %}<a href="{{ page.code }}">Code</a>{% endif %}
-        {% if page.video %}<a href="{{ page.video }}">Video</a>{% endif %}
-        {% if page.poster %}<a href="{{ page.poster }}">Poster</a>{% endif %}
-        {% if page.slides %}<a href="{{ page.slides }}">Slides</a>{% endif %}
+---
+layout: default
+---
+{% assign pubs = site.categories['research-completed'] | sort: 'order' %}
+{% for p in pubs %}{% if p.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_idx = idx | minus: 1 %}
+{% assign next_idx = idx | plus: 1 %}
+
+<article class="container">
+  <header class="paper-hero">
+    <div class="pub__meta">
+      <span class="badge{% if page.badge_style %} badge--{{ page.badge_style }}{% endif %}">{{ page.venue_short }}</span>
+      {% if page.status %}<span class="badge badge--outline">{{ page.status }}</span>{% endif %}
+      {% for t in page.topics %}<span class="badge badge--outline">{{ t }}</span>{% endfor %}
+    </div>
+    <h1 class="paper-hero__title">{{ page.title }}</h1>
+    <p class="paper-hero__authors">{{ page.authors_full | default: page.authors }}</p>
+    {% if page.affiliations %}<p class="paper-hero__affils">{{ page.affiliations }}</p>{% endif %}
+    {% if page.venue %}<p class="paper-hero__notes">{{ page.venue }}</p>{% endif %}
+    {% if page.notes %}<p class="paper-hero__notes">{{ page.notes }}</p>{% endif %}
+    <div class="btn-row">
+      {% if page.paper %}<a class="btn btn--primary btn--lg" href="{{ page.paper }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% elsif page.arxiv %}<a class="btn btn--primary btn--lg" href="{{ page.arxiv | replace: '/abs/', '/pdf/' }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
+      {% if page.arxiv %}<a class="btn btn--lg" href="{{ page.arxiv }}" target="_blank" rel="noopener">{% include icon.html name='arxiv' %}arXiv</a>{% endif %}
+      {% if page.code %}<a class="btn btn--lg" href="{{ page.code }}" target="_blank" rel="noopener">{% include icon.html name='code' %}Code</a>{% endif %}
+      {% if page.bibtex %}<a class="btn btn--lg" href="#citation">{% include icon.html name='quote' %}BibTeX</a>{% endif %}
+    </div>
+  </header>
+
+  <div class="paper-body">
+    {% if page.tldr %}
+    <section class="tldr" aria-label="TL;DR">
+      <p class="tldr__label">TL;DR</p>
+      <p>{{ page.tldr }}</p>
+    </section>
+    {% endif %}
+
+    {% if page.stats %}
+    <ul class="stats">
+      {% for s in page.stats %}<li><strong>{{ s.value }}</strong><span>{{ s.label }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.teaser %}
+    <figure class="figure figure--wide">
+      <div class="figure__frame"><img src="{{ site.baseurl }}/{{ page.teaser }}" alt="Overview figure for {{ page.title | strip_html | escape }}"></div>
+      {% if page.teaser_caption %}<figcaption>{{ page.teaser_caption }}</figcaption>{% endif %}
+    </figure>
+    {% endif %}
+
+    <div class="prose">
+      {{ content }}
+
+      {% if page.bibtex %}
+      <h2 id="citation">Citation</h2>
+      <div class="bibtex">
+        <button class="btn" type="button" data-copy>Copy</button>
+        <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
       </div>
-    </article>
-  </main>
-</body>
-</html>
+      {% endif %}
+    </div>
+
+    <nav class="paper-nav" aria-label="More publications">
+      {% if idx > 0 %}{% assign prev = pubs[prev_idx] %}<a href="{{ prev.url | prepend: site.baseurl }}"><span>← Previous</span>{{ prev.short_title | default: prev.title }}</a>{% endif %}
+      {% if next_idx < pubs.size %}{% assign next = pubs[next_idx] %}<a href="{{ next.url | prepend: site.baseurl }}"><span>Next →</span>{{ next.short_title | default: next.title }}</a>{% endif %}
+    </nav>
+  </div>
+</article>
+
+<script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.parentElement.querySelector('code').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+</script>

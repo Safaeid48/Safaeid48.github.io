@@ -1,12 +1,88 @@
 ---
 layout: publication
-title:  "LAGEA: Language Guided Embodied Agents for Robotic Manipulation"
-image: images/LAGEA.JPG
+permalink: /projects/lagea/
+order: 2
+title: "LAGEA: Language Guided Embodied Agents for Robotic Manipulation"
+short_title: "LAGEA"
 categories: research-completed
-venue: Accepted at ICML 2026
-author: "Safaeid Hossain Arib"
-authors: Abdul Monaf Chowdhury, Akm Moshiur Rahman Mazumder, <strong>Safaeid Hossain Arib</strong>, Rabeya Akter
+venue: "Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)"
+venue_short: "ICML 2026"
+badge_style: accent
+topics: ["Embodied AI", "Reinforcement Learning", "VLMs"]
+authors: 'Abdul Monaf Chowdhury, Akm Moshiur Rahman Mazumder, <span class="me">Safaeid Hossain Arib</span>, Rabeya Akter'
+authors_full: 'Abdul Monaf Chowdhury<sup>1</sup>, Akm Moshiur Rahman Mazumder<sup>2</sup>, <span class="me">Safaeid Hossain Arib</span><sup>1</sup>, Rabeya Akter<sup>1</sup>'
+affiliations: '<sup>1</sup>University of Dhaka &nbsp; <sup>2</sup>Independent University, Bangladesh'
 arxiv: https://arxiv.org/abs/2509.23155
 code: https://github.com/Safaeid48/LaGEA
+thumb: images/papers/lagea/thumb.webp
+image: images/papers/lagea/thumb.webp
+summary: "LAGEA turns structured vision-language-model reflections on a robot's own failures into temporally grounded, progress-based shaping rewards. It localizes the decisive moments of an episode, aligns feedback with visual states, and fades the guidance as the policy improves, outperforming FuRL on Meta-World MT10 and Fetch."
+tldr: "A similarity score summarizes the outcome, not the cause. LAGEA asks a VLM to diagnose why an episode failed using a fixed error schema, anchors that diagnosis to the key frames where it happened, and turns it into a shaping reward that fades as the robot gets competent."
+stats:
+  - value: "80.0%"
+    label: "MT10 fixed goals (+4.0 over FuRL)"
+  - value: "70.4%"
+    label: "MT10 random goals (+5.8 over FuRL)"
+  - value: "51.7%"
+    label: "Gymnasium-Robotics Fetch (+7.5 over FuRL)"
+teaser: images/papers/lagea/method.webp
+teaser_caption: "<b>The LAGEA loop.</b> Key frames from each trajectory are sent to a frozen VLM with an error taxonomy; the structured reflection is embedded, aligned with visual states, and fused with goal progress into a shaping reward for the policy."
+bibtex: |
+  @inproceedings{chowdhury2026lagea,
+    title     = {{LAGEA}: Language Guided Embodied Agents for Robotic Manipulation},
+    author    = {Chowdhury, Abdul Monaf and Mazumder, Akm Moshiur Rahman and
+                 Arib, Safaeid Hossain and Akter, Rabeya},
+    booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+    series    = {Proceedings of Machine Learning Research},
+    volume    = {306},
+    year      = {2026}
+  }
 ---
-LAGEA converts structured vision-language model reflections into temporally grounded reward signals for robotic manipulation. By localizing decisive moments and aligning language feedback with visual states, it improves success rates and convergence on the Meta-World MT10 benchmark.
+
+<h2>Abstract</h2>
+<p class="abstract">Robotic manipulation benefits from foundation models that describe goals, but today’s agents still lack a principled way to learn from their own mistakes. We ask whether natural language can serve as feedback, an error-reasoning signal that helps embodied agents diagnose what went wrong and correct course. We introduce LaGEA (<b>La</b>nguage <b>G</b>uided <b>E</b>mbodied <b>A</b>gents), a framework that turns episodic, schema-constrained reflections from a vision language model (VLM) into temporally grounded guidance for reinforcement learning. LaGEA summarizes each attempt in concise language, localizes the decisive moments in the trajectory, aligns feedback with visual state in a shared representation, and converts goal progress and feedback agreement into bounded, step-wise shaping rewards whose influence is modulated by an adaptive, failure-aware coefficient. This design yields dense signals early when exploration needs direction and gracefully recedes as competence grows. On the Meta-World MT10 and Robotic Fetch embodied manipulation benchmark, LaGEA improves average success over the state-of-the-art (SOTA) methods by 9.0% on random goals, 5.3% on fixed goals, and 17% on fetch tasks, while converging faster. These results support our hypothesis: language, when structured and grounded in time, is an effective mechanism for teaching robots to self-reflect on mistakes and make better choices.</p>
+
+<h2>From score to diagnosis</h2>
+<p class="kicker">Motivation</p>
+<p>Prior VLM-as-reward methods compare the current observation with a goal description and return a similarity score. That score says how far the robot is from success, but not <em>why</em> it failed: whether it grasped the wrong object, came in from the wrong direction, or pushed with too little force. LAGEA makes the VLM produce that diagnosis explicitly and uses it as a learning signal.</p>
+
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/lagea/feedback.webp" alt="Examples of structured VLM feedback with error codes and explanations" loading="lazy"></div>
+  <figcaption><b>Structured reflections.</b> The VLM answers in a fixed JSON schema with an error code (e.g. <code>bad_approach_direction</code>, <code>failed_grasp</code>, <code>insufficient_force</code>) and a short explanation, which keeps feedback consistent and machine-usable.</figcaption>
+</figure>
+
+<h2>Method</h2>
+<p class="kicker">Four ideas</p>
+<ol class="steps">
+  <li><strong>Find the moments that matter</strong>Key frames are chosen by combining goal similarity with motion cues (velocity and acceleration), so the VLM looks at the decisive part of the episode rather than at uniformly sampled frames.</li>
+  <li><strong>Put feedback and pixels in one space</strong>Small projectors, trained with a binary alignment loss and InfoNCE, embed feedback, goal, and visual states in a shared space.</li>
+  <li><strong>Reward progress, not position</strong>Potential-based shaping rewards the <em>change</em> in goal and feedback agreement, weighted by how well the instruction and the reflection agree.</li>
+  <li><strong>Let the guidance fade</strong>An adaptive schedule driven by a moving average of success reduces VLM influence as the policy becomes competent.</li>
+</ol>
+
+<h2>Results</h2>
+<p class="kicker">Average success rate (%) · higher is better</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Benchmark</th><th>SAC</th><th>Relay</th><th>FuRL</th><th>LAGEA</th></tr></thead>
+  <tbody>
+    <tr><td>Meta-World MT10 · fixed goals (5 seeds)</td><td>37.0</td><td>54.0</td><td>76.0</td><td class="best">80.0</td></tr>
+    <tr><td>Meta-World MT10 · random goals (5 seeds)</td><td>49.8</td><td>57.4</td><td>64.6</td><td class="best">70.4</td></tr>
+    <tr><td>Gymnasium-Robotics Fetch · 4 tasks (3 seeds)</td><td>34.17</td><td>37.5</td><td>44.17</td><td class="best">51.67</td></tr>
+  </tbody>
+</table>
+</div>
+
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/lagea/curves.webp" alt="Success-rate learning curves for SAC, FuRL and LAGEA on eight MT10 tasks" loading="lazy"></div>
+  <figcaption><b>Faster convergence.</b> Success over 1M environment steps on eight MT10 tasks. LAGEA solves several tasks substantially earlier than FuRL.</figcaption>
+</figure>
+
+<h2>What matters</h2>
+<p class="kicker">Ablations on MT10 (fixed goals)</p>
+<ul>
+  <li><strong>Key frames:</strong> LAGEA's key-frame selection (80.0%) outperforms random (68.0%) and uniform (67.3%) frame choices.</li>
+  <li><strong>VLM choice:</strong> Qwen2.5-VL-3B (80.0%) beats InternVL2 (68.0%), OpenQwen2VL (66.7%), and SmolVLM2 (56.0%).</li>
+  <li><strong>Viewpoint robustness:</strong> performance holds across unseen camera viewpoints (77.3–79.3% vs. 80.0% on the training view).</li>
+</ul>

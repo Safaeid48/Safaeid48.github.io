@@ -1,23 +1,10 @@
 {% assign project = include.project %}
-<article class="publication-card project-card">
-  <a class="publication-card__image" href="{{ project.url | prepend: site.baseurl }}" aria-label="Project page for {{ project.title | escape }}">
-    <img src="{{ site.baseurl }}/{{ project.image }}" alt="Illustration for {{ project.title | escape }}" loading="lazy">
-  </a>
-  <div class="publication-card__content">
-    <h3><a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }}</a></h3>
-    {% if project.course %}<p class="publication-card__authors">{{ project.course }}</p>{% endif %}
-    <div class="publication-card__summary">{{ project.excerpt }}</div>
-    <div class="publication-card__links">
-      {% if project.website %}<a href="{{ project.website }}">Website</a>{% endif %}
-      {% if project.code %}<a href="{{ project.code }}">Code</a>{% endif %}
-      {% if project.paper %}<a href="{{ project.paper }}">Paper</a>{% endif %}
-      {% if project.video %}<a href="{{ project.video }}">Video</a>{% endif %}
-      {% if project.demo1 %}<a href="{{ project.demo1 }}">Demo 1</a>{% endif %}
-      {% if project.demo2 %}<a href="{{ project.demo2 }}">Demo 2</a>{% endif %}
-      {% if project.demo3 %}<a href="{{ project.demo3 }}">Demo 3</a>{% endif %}
-      {% if project.patent %}<a href="{{ project.patent }}">Patent</a>{% endif %}
-      {% if project.poster %}<a href="{{ project.poster }}">Poster</a>{% endif %}
-      {% if project.slides %}<a href="{{ project.slides }}">Slides</a>{% endif %}
-    </div>
+<a class="proj" href="{{ project.url | prepend: site.baseurl }}">
+  <div class="proj__media">
+    <img src="{{ site.baseurl }}/{{ project.image }}" alt="" loading="lazy" decoding="async">
   </div>
-</article>
+  <div class="proj__body">
+    <p class="proj__kicker">{{ include.kicker }}</p>
+    <h3 class="proj__title">{{ project.title }}</h3>
+  </div>
+</a>

@@ -1,36 +1,36 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | escape }}">
-  <title>{{ page.title | escape }} | {{ site.name }}</title>
-  <link rel="icon" href="{{ site.baseurl }}/images/safaeid.jpeg" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
-  <link rel="stylesheet" href="{{ site.baseurl }}/style.css?v=20260930-8">
-</head>
-<body class="publication-page">
-  <main class="publication-page__main">
-    <a class="publication-page__back" href="{{ site.baseurl }}/#projects">← Back to projects</a>
-    <article class="publication-page__article">
-      {% if page.categories contains 'course-personal' %}<span class="publication-card__venue">Personal project</span>{% endif %}
-      <h1>{{ page.title }}</h1>
-      {% if page.course %}<p class="publication-page__authors">{{ page.course }}</p>{% endif %}
-      <img class="publication-page__image" src="{{ site.baseurl }}/{{ page.image }}" alt="Illustration for {{ page.title | escape }}">
-      <div class="publication-page__overview">{{ content }}</div>
-      <div class="publication-card__links">
-        {% if page.website %}<a class="publication-card__primary" href="{{ page.website }}">Website</a>{% endif %}
-        {% if page.code %}<a class="publication-card__primary" href="{{ page.code }}">Code</a>{% endif %}
-        {% if page.paper %}<a href="{{ page.paper }}">Paper</a>{% endif %}
-        {% if page.video %}<a href="{{ page.video }}">Video</a>{% endif %}
-        {% if page.demo1 %}<a href="{{ page.demo1 }}">Demo 1</a>{% endif %}
-        {% if page.demo2 %}<a href="{{ page.demo2 }}">Demo 2</a>{% endif %}
-        {% if page.demo3 %}<a href="{{ page.demo3 }}">Demo 3</a>{% endif %}
-        {% if page.patent %}<a href="{{ page.patent }}">Patent</a>{% endif %}
-        {% if page.poster %}<a href="{{ page.poster }}">Poster</a>{% endif %}
-        {% if page.slides %}<a href="{{ page.slides }}">Slides</a>{% endif %}
-      </div>
-    </article>
-  </main>
-</body>
-</html>
+---
+layout: default
+---
+<article class="container">
+  <header class="paper-hero">
+    <div class="pub__meta">
+      <span class="badge">{% if page.categories contains 'office-project' %}Industry project{% elsif page.categories contains 'course-project' %}Course project{% else %}Personal project{% endif %}</span>
+    </div>
+    <h1 class="paper-hero__title">{{ page.title }}</h1>
+    {% if page.course %}<p class="paper-hero__affils">{{ page.course }}</p>{% endif %}
+    {% if page.org %}<p class="paper-hero__affils">{{ page.org }}</p>{% endif %}
+    {% if page.code or page.website or page.paper or page.demo1 %}
+    <div class="btn-row">
+      {% if page.website %}<a class="btn btn--primary btn--lg" href="{{ page.website }}" target="_blank" rel="noopener">{% include icon.html name='page' %}Website</a>{% endif %}
+      {% if page.code %}<a class="btn btn--lg" href="{{ page.code }}" target="_blank" rel="noopener">{% include icon.html name='code' %}Code</a>{% endif %}
+      {% if page.paper %}<a class="btn btn--lg" href="{{ page.paper }}" target="_blank" rel="noopener">{% include icon.html name='paper' %}Paper</a>{% endif %}
+      {% if page.demo1 %}<a class="btn btn--lg" href="{{ page.demo1 }}" target="_blank" rel="noopener">{% include icon.html name='video' %}Demo 1</a>{% endif %}
+      {% if page.demo2 %}<a class="btn btn--lg" href="{{ page.demo2 }}" target="_blank" rel="noopener">{% include icon.html name='video' %}Demo 2</a>{% endif %}
+      {% if page.demo3 %}<a class="btn btn--lg" href="{{ page.demo3 }}" target="_blank" rel="noopener">{% include icon.html name='video' %}Demo 3</a>{% endif %}
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="paper-body">
+    <figure class="figure figure--narrow">
+      <div class="figure__frame"><img src="{{ site.baseurl }}/{{ page.image }}" alt="Illustration for {{ page.title | escape }}"></div>
+    </figure>
+    <div class="prose">
+      {{ content }}
+      {% if page.tools %}<p><strong>Tools:</strong> {{ page.tools }}</p>{% endif %}
+    </div>
+    <nav class="paper-nav" aria-label="Back">
+      <a href="{{ site.baseurl }}/#projects"><span>← Back</span>All projects</a>
+    </nav>
+  </div>
+</article>

@@ -1,13 +1,82 @@
 ---
 layout: publication
-title:  "SignFormer-GCN : Continuous Sign Language Translation Using Spatio-Temporal Graph Convolutional Networks"
-date:   2025-02-14
-image: images/sign_language.PNG
+permalink: /projects/signformer-gcn/
+order: 6
+title: "SignFormer-GCN: Continuous Sign Language Translation Using Spatio-Temporal Graph Convolutional Networks"
+short_title: "SignFormer-GCN"
+date: 2025-02-14
 categories: research-completed
-author: "Safaeid Hossain Arib"
-authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Sejuti Rahman, Shafin Rahman"
-venue: "PLOS ONE"
+venue: "PLOS ONE 20(2): e0316298, 2025 · Accepted at the WiML Workshop, NeurIPS 2025"
+venue_short: "PLOS ONE 2025"
+badge_style: accent
+topics: ["Sign Language", "Graph Networks", "Transformers"]
+authors: '<span class="me">Safaeid Hossain Arib</span>, Rabeya Akter, Sejuti Rahman, Shafin Rahman'
+authors_full: '<span class="me">Safaeid Hossain Arib</span><sup>1</sup>, Rabeya Akter<sup>1</sup>, Sejuti Rahman<sup>1</sup>, Shafin Rahman<sup>2</sup>'
+affiliations: '<sup>1</sup>Dept. of Robotics and Mechatronics Engineering, University of Dhaka &nbsp; <sup>2</sup>Dept. of Electrical and Computer Engineering, North South University'
 paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0316298
 code: https://github.com/rabeya-akter/SignLanguageTranslation
+thumb: images/papers/signformer-gcn/thumb.webp
+image: images/papers/signformer-gcn/thumb.webp
+summary: "SignFormer-GCN jointly encodes RGB video with a transformer and skeletal keypoints with an STGCN-LSTM, capturing both broad context and fine-grained body motion. It delivers competitive gloss-free translation on German, American, and Bangla sign language benchmarks with only 9.43M parameters."
+tldr: "Transformers over RGB capture context but miss the skeleton's graph structure. SignFormer-GCN adds a spatio-temporal graph stream over keypoints, so the model sees both what the scene looks like and how the body moves."
+stats:
+  - value: "19.75"
+    label: "BLEU-4 on RWTH-PHOENIX-2014T (gloss-free)"
+  - value: "8.53"
+    label: "BLEU-4 on How2Sign test, best among compared methods"
+  - value: "9.43M"
+    label: "parameters, vs. 115.41M for GFSLT-VLP"
+teaser: images/papers/signformer-gcn/method.webp
+teaser_caption: "<b>SignFormer-GCN.</b> (A) I3D features and keypoint features are encoded by a transformer encoder (B) and an STGCN-LSTM encoder (C), fused, and decoded into a spoken-language sentence."
+bibtex: |
+  @article{arib2025signformer,
+    title   = {{SignFormer-GCN}: Continuous Sign Language Translation Using
+               Spatio-Temporal Graph Convolutional Networks},
+    author  = {Arib, Safaeid Hossain and Akter, Rabeya and Rahman, Sejuti and Rahman, Shafin},
+    journal = {PLOS ONE},
+    volume  = {20},
+    number  = {2},
+    pages   = {e0316298},
+    year    = {2025},
+    doi     = {10.1371/journal.pone.0316298}
+  }
 ---
-SignFormer-GCN combines RGB video features with skeletal keypoints through a transformer and a spatio-temporal graph convolutional network. The joint representation captures complementary appearance and motion cues and achieves competitive translation performance across Bangla, American, and German sign language benchmarks.
+
+<h2>Abstract</h2>
+<p class="abstract">Sign language is a complex visual language system that uses hand gestures, facial expressions, and body movements to convey meaning. It is the primary means of communication for millions of deaf and hard-of-hearing individuals worldwide. Tracking physical actions, such as hand movements and arm orientation, alongside expressive actions, including facial expressions, mouth movements, eye movements, eyebrow gestures, head movements, and body postures, using only RGB features can be limiting due to discrepancies in backgrounds and signers across different datasets. Despite this limitation, most Sign Language Translation (SLT) research relies solely on RGB features. We used keypoint features, and RGB features to capture better the pose and configuration of body parts involved in sign language actions and complement the RGB features. Similarly, most works on SLT research have used transformers, which are good at capturing broader, high-level context and focusing on the most relevant video frames. Still, the inherent graph structure associated with sign language is neglected and fails to capture low-level details. To solve this, we used a joint encoding technique using a transformer and STGCN architecture to capture the context of sign language expressions and spatial and temporal dependencies on skeleton graphs. Our method, SignFormer-GCN, achieves competitive performance in RWTH-PHOENIX-2014T, How2Sign, and BornilDB v1.0 datasets experimentally, showcasing its effectiveness in enhancing translation accuracy through different sign languages.</p>
+
+<h2>Results</h2>
+<p class="kicker">RWTH-PHOENIX-2014T · gloss-free · higher is better</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Method</th><th>BLEU-1</th><th>BLEU-2</th><th>BLEU-3</th><th>BLEU-4</th></tr></thead>
+  <tbody>
+    <tr><td>Conv2d-RNN</td><td>27.10</td><td>15.61</td><td>10.82</td><td>8.35</td></tr>
+    <tr><td>Joint-SLT</td><td>30.88</td><td>18.57</td><td>13.12</td><td>10.19</td></tr>
+    <tr><td>Tokenization-SLT</td><td>37.22</td><td>23.88</td><td>17.08</td><td>13.25</td></tr>
+    <tr><td>TSPNet-Joint</td><td>36.10</td><td>23.12</td><td>16.88</td><td>13.41</td></tr>
+    <tr><td>GASLT</td><td>39.07</td><td>26.74</td><td>21.86</td><td>15.74</td></tr>
+    <tr><td>GFSLT-VLP (115.41M params)</td><td>43.71</td><td>33.18</td><td>26.11</td><td>21.44</td></tr>
+    <tr class="ours"><td>SignFormer-GCN (9.43M params)</td><td>41.19</td><td>30.89</td><td>24.23</td><td>19.75</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="table-caption">SignFormer-GCN is competitive with the much larger GFSLT-VLP at roughly one-twelfth of the parameters.</p>
+
+<h3>How2Sign (American Sign Language)</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Method</th><th>Val rBLEU</th><th>Val BLEU-4</th><th>Test rBLEU</th><th>Test BLEU-4</th></tr></thead>
+  <tbody>
+    <tr><td>slt_how2sign</td><td>2.79</td><td>8.89</td><td>2.21</td><td>8.03</td></tr>
+    <tr><td>asl_video2text</td><td>3.29</td><td>9.39</td><td>2.56</td><td>7.95</td></tr>
+    <tr class="ours"><td>SignFormer-GCN</td><td>3.97</td><td>9.90</td><td>2.96</td><td>8.53</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>What matters</h2>
+<ul>
+  <li><strong>The graph stream helps:</strong> adding the STGCN-LSTM encoder improves test BLEU-4 on PHOENIX-2014T from 18.80 to 19.75.</li>
+  <li><strong>Simple fusion works best:</strong> fusing the two streams by summation outperformed a linear-layer or LSTM fusion.</li>
+</ul>

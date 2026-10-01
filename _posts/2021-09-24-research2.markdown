@@ -1,14 +1,42 @@
 ---
 layout: publication
-title:  "Classical machine learning approach for human activity recognition using location data"
-date:   2021-09-24
-image: images/SHL.png
+permalink: /projects/shl-activity-recognition/
+order: 8
+title: "Classical Machine Learning Approach for Human Activity Recognition Using Location Data"
+short_title: "Activity recognition from location data"
+date: 2021-09-24
 categories: research-completed
-author: "Safaeid Hossain Arib"
-authors: "<strong>Safaeid Hossain Arib</strong>, Rabeya Akter, Omar Shahid, Md Atiqur Rahman Ahad"
-venue: "UbiComp/ISWC '21 Adjunct: Adjunct Proceedings of the 2021 ACM International Joint Conference on Pervasive and Ubiquitous Computing and Proceedings of the 2021 ACM International Symposium on Wearable Computers"
+venue: "UbiComp/ISWC '21 Adjunct: Adjunct Proceedings of the 2021 ACM International Joint Conference on Pervasive and Ubiquitous Computing and the 2021 ACM International Symposium on Wearable Computers"
 venue_short: "UbiComp/ISWC 2021"
+topics: ["Activity Recognition", "Ubiquitous Computing"]
+authors: '<span class="me">Safaeid Hossain Arib</span>, Rabeya Akter, Omar Shahid, Md Atiqur Rahman Ahad'
 paper: https://dl.acm.org/doi/10.1145/3460418.3479376
 code: https://github.com/rabeya-akter/Sussex-Huawei-Locomotion-Challenge-2021
+thumb: images/papers/shl/pipeline.svg
+image: images/papers/shl/pipeline.svg
+summary: "Our entry to the Sussex-Huawei Locomotion Challenge 2021 recognizes eight locomotion and transportation activities from smartphone location data using statistical features and a random forest, reaching 78.14% validation accuracy and a 78.28% weighted F1 score."
+tldr: "Can a phone tell whether you are walking, cycling, or on a train from location data alone? A carefully engineered classical pipeline gets close to 80%."
+stats:
+  - value: "78.14%"
+    label: "validation accuracy"
+  - value: "78.28%"
+    label: "weighted F1 score"
+  - value: "8"
+    label: "locomotion and transportation modes"
+teaser: images/papers/shl/pipeline.svg
+teaser_caption: "<b>Pipeline.</b> Location data is cleaned, label-matched, and windowed; statistical features train a random forest. At test time, missing location data is interpolated before prediction."
+bibtex: |
+  @inproceedings{arib2021classical,
+    title     = {Classical Machine Learning Approach for Human Activity Recognition Using Location Data},
+    author    = {Arib, Safaeid Hossain and Akter, Rabeya and Shahid, Omar and Ahad, Md Atiqur Rahman},
+    booktitle = {Adjunct Proceedings of the 2021 ACM International Joint Conference on Pervasive and
+                 Ubiquitous Computing and Proceedings of the 2021 ACM International Symposium on
+                 Wearable Computers},
+    year      = {2021},
+    doi       = {10.1145/3460418.3479376}
+  }
 ---
-This work uses statistical features and a random forest classifier to recognize eight locomotion and transportation activities from smartphone location data. The approach achieved 78.14% validation accuracy and a 78.28% weighted F1 score in the SHL Challenge 2021 setting.
+
+<h2>Overview</h2>
+<p>The Sussex-Huawei Locomotion (SHL) Challenge 2021 asks participants to recognize eight modes of locomotion and transportation from smartphone sensor data. Our team worked with the location modality (location, GPS, WiFi, and cellular signals) and asked how far a carefully engineered classical pipeline could go.</p>
+<p>We removed noisy data points, matched labels to location samples, segmented the stream into windows, and extracted statistical features for a random forest classifier. When location data was unavailable at test time, we interpolated the gaps before prediction. The approach reached 78.14% validation accuracy and a 78.28% weighted F1 score, placing 11th in the challenge.</p>

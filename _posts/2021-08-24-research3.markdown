@@ -1,12 +1,48 @@
 ---
 layout: publication
-title:  "Bornil : An open-source sign language data crowdsourcing platform for AI enabled dialect-agnostic communication"
-image: images/bornil.PNG
+permalink: /projects/bornil/
+order: 7
+title: "Bornil: An Open-Source Sign Language Data Crowdsourcing Platform for AI Enabled Dialect-Agnostic Communication"
+short_title: "Bornil"
 categories: research-completed
-author: "Safaeid Hossain Arib"
-authors: "Shahriar Elahi Dhruvo, Mohammad Akhlaqur Rahman, Manash Kumar Mandal, Md Istiak Hossain Shihab, A. A. Ansary, Kaneez Fatema Shithi, Sanjida Khanom, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>, M.N. Ansary, Sazia Mehnaz, Rezwana Sultana, Sejuti Rahman, Sayma Sultana Chowdhury, Sabbir Ahmed Chowdhury, Farig Sadeque, Asif Sushmit"
-venue: "arXiv preprint, 2023"
+venue: "arXiv preprint arXiv:2308.15402, 2023"
 venue_short: "arXiv 2023"
+topics: ["Datasets", "Sign Language", "Crowdsourcing"]
+authors: 'Shahriar Elahi Dhruvo, Mohammad Akhlaqur Rahman, Manash Kumar Mandal, Md. Istiak Hossain Shihab, A. A. Noman Ansary, Kaneez Fatema Shithi, Sanjida Khanom, Rabeya Akter, <span class="me">Safaeid Hossain Arib</span>, M.N. Ansary, Sazia Mehnaz, Rezwana Sultana, Sejuti Rahman, Sayma Sultana Chowdhury, Sabbir Ahmed Chowdhury, Farig Sadeque, Asif Sushmit'
 arxiv: https://arxiv.org/abs/2308.15402
+thumb: images/papers/bornil/thumb.webp
+image: images/papers/bornil/thumb.webp
+summary: "Bornil is an open-source platform for recording, annotating, and validating multilingual sign language data. It was used to build BornilDB v1.0, the largest Bangladeshi Sign Language dataset (73 hours, 21,000+ samples), with recognition benchmarks for this low-resource setting."
+tldr: "Sign language AI is bottlenecked by data. Bornil lets signers record, annotators label at sentence and gloss level, and validators check quality, all in one crowdsourcing platform."
+stats:
+  - value: "73 h"
+    label: "of Bangla Sign Language video in BornilDB v1.0"
+  - value: "21,154"
+    label: "recorded samples"
+  - value: "25,572"
+    label: "unique Bengali words (138,586 total)"
+teaser: images/papers/bornil/platform.webp
+teaser_caption: "<b>The Bornil platform.</b> Validators review recordings and metadata (top); annotators align sentence and gloss labels to the video timeline (bottom)."
+bibtex: |
+  @article{dhruvo2023bornil,
+    title   = {Bornil: An Open-Source Sign Language Data Crowdsourcing Platform for
+               {AI} Enabled Dialect-Agnostic Communication},
+    author  = {Dhruvo, Shahriar Elahi and Rahman, Mohammad Akhlaqur and Mandal, Manash Kumar and
+               Shihab, Md. Istiak Hossain and Ansary, A. A. Noman and Shithi, Kaneez Fatema and
+               Khanom, Sanjida and Akter, Rabeya and Arib, Safaeid Hossain and Ansary, M. N. and
+               Mehnaz, Sazia and Sultana, Rezwana and Rahman, Sejuti and Chowdhury, Sayma Sultana and
+               Chowdhury, Sabbir Ahmed and Sadeque, Farig and Sushmit, Asif},
+    journal = {arXiv preprint arXiv:2308.15402},
+    year    = {2023}
+  }
 ---
-Bornil is an open-source platform for crowdsourcing, annotating, and validating multilingual sign language data. The platform supported the creation of BornilDB v1.0, a large Bangladeshi Sign Language dataset, and established recognition benchmarks for this low-resource setting.
+
+<h2>Abstract</h2>
+<p class="abstract">The absence of annotated sign language datasets has hindered the development of sign language recognition and translation technologies. In this paper, we introduce Bornil; a crowdsource-friendly, multilingual sign language data collection, annotation, and validation platform. Bornil allows users to record sign language gestures and lets annotators perform sentence and gloss-level annotation. It also allows validators to make sure of the quality of both the recorded videos and the annotations through manual validation to develop high-quality datasets for deep learning-based Automatic Sign Language Recognition. To demonstrate the system's efficacy; we collected the largest sign language dataset for Bangladeshi Sign Language dialect, perform deep learning based Sign Language Recognition modeling, and report the benchmark performance. The Bornil platform, BornilDB v1.0 Dataset, and the codebases are available.</p>
+
+<h2>Platform</h2>
+<ol class="steps">
+  <li><strong>Record</strong>Signers record sentences shown on screen, with metadata such as lighting, camera distance, and viewpoint.</li>
+  <li><strong>Annotate</strong>Annotators add sentence-level and gloss-level labels aligned to the video timeline.</li>
+  <li><strong>Validate</strong>Validators check both the recordings and the annotations, keeping dataset quality high.</li>
+</ol>

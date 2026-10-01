@@ -1,12 +1,99 @@
 ---
 layout: publication
-title:  "T3Time: Tri-Modal Time Series Forecasting via Adaptive Multi-Head Alignment and Residual Fusion"
-image: images/time.JPG
+permalink: /projects/t3time/
+order: 3
+title: "T3Time: Tri-Modal Time Series Forecasting via Adaptive Multi-Head Alignment and Residual Fusion"
+short_title: "T3Time"
 categories: research-completed
-venue: Accepted at AAAI 2026
-author: "Safaeid Hossain Arib"
-authors: Abdul Monaf Chowdhury, Rabeya Akter, <strong>Safaeid Hossain Arib</strong>
-arxiv: https://www.arxiv.org/abs/2508.04251
+venue: "Proceedings of the AAAI Conference on Artificial Intelligence, 40(25), 2026 · Main Technical Track"
+venue_short: "AAAI 2026"
+badge_style: accent
+topics: ["Time Series", "Multimodal Learning", "LLMs"]
+authors: 'Abdul Monaf Chowdhury, Rabeya Akter, <span class="me">Safaeid Hossain Arib</span>'
+authors_full: 'Abdul Monaf Chowdhury<sup>1</sup>, Rabeya Akter<sup>1</sup>, <span class="me">Safaeid Hossain Arib</span><sup>1</sup>'
+affiliations: '<sup>1</sup>University of Dhaka, Bangladesh'
+paper: https://ojs.aaai.org/index.php/AAAI/article/view/39196
+arxiv: https://arxiv.org/abs/2508.04251
 code: https://github.com/Safaeid48/T3Time
+thumb: images/papers/t3time/thumb.webp
+image: images/papers/t3time/thumb.webp
+summary: "T3Time reads a time series three ways (temporal, spectral, and through an LLM prompt), gates temporal versus spectral features by forecast horizon, and fuses modalities with adaptively weighted cross-modal attention heads. It sets the best MSE on 7 of 8 long-term benchmarks and stays strong with only 5–10% of the training data."
+tldr: "Short-horizon forecasts need local detail; long-horizon forecasts need periodic structure. T3Time adds a frequency branch to time-and-language models, lets a horizon-aware gate decide how to mix them, and aligns everything with multiple adaptively weighted cross-modal heads."
+stats:
+  - value: "7 / 8"
+    label: "datasets with the lowest MSE"
+  - value: "−3.28%"
+    label: "average MSE vs. state-of-the-art baselines (−2.29% MAE)"
+  - value: "−11.3%"
+    label: "MSE on ILI, the largest single gain"
+  - value: "−4.13%"
+    label: "MSE in the 5% few-shot setting"
+teaser: images/papers/t3time/teaser.webp
+teaser_caption: "<b>Bimodal vs. trimodal.</b> (a) Prior work fuses a time-series encoder with an LLM statically. (b) T3Time adds a frequency encoder, horizon-aware gating, and cross-modal alignment with adaptive head fusion."
+bibtex: |
+  @inproceedings{chowdhury2026t3time,
+    title     = {{T3Time}: Tri-Modal Time Series Forecasting via Adaptive
+                 Multi-Head Alignment and Residual Fusion},
+    author    = {Chowdhury, Abdul Monaf and Akter, Rabeya and Arib, Safaeid Hossain},
+    booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+    volume    = {40},
+    number    = {25},
+    pages     = {20597--20605},
+    year      = {2026},
+    doi       = {10.1609/aaai.v40i25.39196}
+  }
 ---
-T3Time jointly models temporal, spectral, and semantic information for multivariate time-series forecasting. Horizon-aware gating and adaptive cross-modal alignment improve accuracy across eight benchmarks while retaining strong generalization in few-shot settings.
+
+<h2>Abstract</h2>
+<p class="abstract">Multivariate time series forecasting (MTSF) seeks to model temporal dynamics among variables to predict future trends. Transformer-based models and large language models (LLMs) have shown promise due to their ability to capture long-range dependencies and patterns. However, current methods often rely on rigid inductive biases, ignore inter-variable interactions, or apply static fusion strategies that limit adaptability across forecast horizons. These limitations create bottlenecks in capturing nuanced, horizon-specific relationships in time-series data. To solve this problem, we propose T3Time, a novel trimodal framework consisting of time, spectral, and prompt branches, where the dedicated frequency encoding branch captures the periodic structures along with a gating mechanism that learns prioritization between temporal and spectral features based on the prediction horizon. We also proposed a mechanism which adaptively aggregates multiple cross-modal alignment heads by dynamically weighting the importance of each head based on the features. Extensive experiments on benchmark datasets demonstrate that our model consistently outperforms state-of-the-art baselines, achieving an average reduction of 3.28% in MSE and 2.29% in MAE. Furthermore, it shows strong generalization in few-shot learning settings: with 5% training data, we see a reduction in MSE and MAE by 4.13% and 1.91%, respectively; and with 10% data, by 3.62% and 1.98% on average.</p>
+
+<h2>Method</h2>
+<p class="kicker">Encode three views, gate by horizon, align, keep a residual path</p>
+
+<figure class="figure figure--wide">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/t3time/method.webp" alt="T3Time architecture with frequency, time-series, and LLM encoding branches, horizon-aware gating, multi-head cross-modal attention, adaptive head fusion, and a channel-wise residual connection" loading="lazy"></div>
+  <figcaption><b>T3Time architecture.</b> Frequency, time-series, and LLM-prompt branches feed horizon-aware gating, multi-head cross-modal attention with adaptive head fusion, and a channel-wise residual connection before a Transformer decoder.</figcaption>
+</figure>
+
+<ol class="steps">
+  <li><strong>Tri-modal encoding</strong>A frequency branch encodes FFT magnitudes, a time branch encodes each variable's window, and a frozen GPT-2 encodes a per-variable text prompt describing the series.</li>
+  <li><strong>Horizon-aware gating</strong>A small MLP looks at the temporal encoding and the prediction length and decides, per channel, how much to rely on temporal versus spectral features.</li>
+  <li><strong>Adaptive multi-head alignment</strong>Several independent cross-modal attention heads align the series with the prompt embedding; a gating network weights the heads per variable.</li>
+  <li><strong>Channel-wise residual fusion</strong>Learned per-channel coefficients balance aligned features against the raw temporal–spectral path before decoding.</li>
+</ol>
+
+<h2>Results</h2>
+<p class="kicker">Long-term forecasting · MSE averaged over four horizons · lower is better</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Dataset</th><th>T3Time</th><th>TimeCMA</th><th>Time-LLM</th><th>UniTime</th><th>iTransformer</th><th>PatchTST</th><th>DLinear</th></tr></thead>
+  <tbody>
+    <tr><td>ETTm1</td><td class="best">0.372</td><td>0.380</td><td>0.410</td><td>0.385</td><td>0.407</td><td>0.392</td><td>0.403</td></tr>
+    <tr><td>ETTm2</td><td>0.279</td><td class="best">0.275</td><td>0.296</td><td>0.293</td><td>0.288</td><td>0.285</td><td>0.350</td></tr>
+    <tr><td>ETTh1</td><td class="best">0.418</td><td>0.423</td><td>0.448</td><td>0.442</td><td>0.454</td><td>0.463</td><td>0.456</td></tr>
+    <tr><td>ETTh2</td><td class="best">0.348</td><td>0.372</td><td>0.381</td><td>0.378</td><td>0.383</td><td>0.395</td><td>0.559</td></tr>
+    <tr><td>ECL</td><td class="best">0.170</td><td>0.174</td><td>0.195</td><td>0.216</td><td>0.178</td><td>0.207</td><td>0.212</td></tr>
+    <tr><td>Weather</td><td class="best">0.244</td><td>0.250</td><td>0.275</td><td>0.253</td><td>0.258</td><td>0.257</td><td>0.265</td></tr>
+    <tr><td>ILI</td><td class="best">1.705</td><td>1.922</td><td>2.432</td><td>2.108</td><td>2.444</td><td>2.388</td><td>2.616</td></tr>
+    <tr><td>Exchange</td><td class="best">0.353</td><td>0.395</td><td>0.372</td><td>0.364</td><td>0.360</td><td>0.390</td><td>0.354</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="table-caption">96-step input windows (36 for ILI), averaged over three seeds. Full MAE results and more baselines are in the paper.</p>
+
+<h3>Few-shot forecasting</h3>
+<p>With only 10% of the training data, T3Time beats the strongest baseline on all five evaluated datasets (−3.62% MSE on average); with 5% of the data the margin grows to −4.13% MSE.</p>
+
+<h2>What matters</h2>
+<p class="kicker">Ablations · mean MSE increase when a component is removed</p>
+<ul>
+  <li><strong>Channel-wise residual connection:</strong> the most important part; removing it raises MSE on ILI from 1.705 to 2.176.</li>
+  <li><strong>Frequency branch:</strong> removing it hurts most on periodic data (e.g. Exchange 0.353 → 0.374, ILI 1.705 → 1.786).</li>
+  <li><strong>Multi-head alignment and horizon gating</strong> each contribute consistent smaller gains across datasets.</li>
+</ul>
+
+<figure class="figure">
+  <div class="figure__frame"><img src="{{ site.baseurl }}/images/papers/t3time/tsne.webp" alt="t-SNE of time-series, frequency, prompt, and forecasted embeddings coloured by dataset" loading="lazy"></div>
+  <figcaption><b>What the three views learn.</b> t-SNE of learned embeddings across six datasets. Time-series and frequency embeddings form clear dataset clusters, reflecting distinct temporal and periodic structure; prompt embeddings are more dispersed, reflecting the diversity of the prompts.</figcaption>
+</figure>

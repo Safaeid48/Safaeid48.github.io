@@ -1,3 +1,161 @@
 ---
 layout: default
+show_map: true
 ---
+<div class="container">
+
+  <!-- ============================ About ============================ -->
+  <section class="hero" id="about" aria-labelledby="about-heading">
+    <div class="hero__text">
+      <p class="eyebrow">Machine Learning Engineer &amp; Researcher</p>
+      <h1 class="hero__name" id="about-heading">Safaeid Hossain Arib</h1>
+      <p class="hero__lede">I study how models can learn from richer supervision&nbsp;— where to look, what language feedback says, and how modalities align&nbsp;— across language-model reasoning, robot learning, and visual perception.</p>
+
+      <div class="hero__bio">
+        <p>I am a Machine Learning Engineer at <a href="https://www.aci-bd.com/">ACI PLC</a>, where I turn advances in machine learning into dependable systems for real-world applications. Previously, I was an AI Engineer at <a href="https://www.ontiktechnology.com/">Ontik Technology</a>, building agentic AI and applied machine learning solutions.</p>
+        <p>My most recent work, <a href="{{ site.baseurl }}/projects/opasd/">OPASD</a>, teaches reasoning language models <em>where to look</em> by distilling solution-conditioned attention during on-policy self-distillation. I conduct this research with guidance from <a href="https://mmiakashs.github.io/">Dr. Md Mofijul Islam</a> (AWS GenAI) and <a href="https://www.hbku.edu.qa/en/staff/tasnim-mohiuddin">Dr. Tasnim Mohiuddin</a> (Qatar Computing Research Institute).</p>
+        <p>I hold a B.Sc. in Robotics and Mechatronics Engineering from the <a href="https://rme.du.ac.bd/">University of Dhaka</a>. After graduating, I worked with <a href="https://scholar.google.com/citations?user=jGC1OfgAAAAJ&amp;hl=en">Dr. Md Mehedi Hasan</a> at the <a href="https://avis-res-lab.github.io/">AVIS Research Lab</a> on open-world amodal counting. As an undergraduate, I worked with <a href="https://scholar.google.com/citations?user=Pe8C-SUAAAAJ&amp;hl=en">Dr. Shafin Rahman</a> and <a href="https://scholar.google.com/citations?user=j8XhiIEAAAAJ&amp;hl=en">Dr. Sejuti Rahman</a> on continuous sign language translation.</p>
+        <p>Away from research, you will find me on the basketball court, lifting at the gym, or exploring new places. I am always happy to connect with curious people&nbsp;— feel free to reach out.</p>
+      </div>
+
+      <div class="callout" role="note">
+        <span class="callout__dot" aria-hidden="true"></span>
+        <p><strong>I am actively seeking MS/PhD opportunities for Fall 2027.</strong></p>
+      </div>
+
+      <div class="interests">
+        <p class="interests__label">Research interests</p>
+        <ul class="chips">
+          <li>Reinforcement Learning</li>
+          <li>Language Model Post-Training</li>
+          <li>Multimodal Learning</li>
+          <li>Vision-Language Models</li>
+          <li>Embodied AI</li>
+          <li>Computer Vision</li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="hero__aside" aria-label="Profile and contact">
+      <figure class="portrait">
+        <img src="{{ site.baseurl }}/images/safaeid.jpeg" alt="Portrait of Safaeid Hossain Arib" width="400" height="400">
+      </figure>
+      <ul class="contact-list">
+        <li><a href="mailto:safaeid48@gmail.com">{% include icon.html name='mail' %}safaeid48@gmail.com</a></li>
+        <li><a href="{{ site.baseurl }}/cv/Safaeid_Hossain_Arib_CV.pdf" target="_blank" rel="noopener">{% include icon.html name='cv' %}Curriculum Vitae</a></li>
+        <li><a href="https://scholar.google.com/citations?user=ETeF6sUAAAAJ&amp;hl=en" target="_blank" rel="noopener">{% include icon.html name='scholar' %}Google Scholar</a></li>
+        <li><a href="https://github.com/Safaeid48" target="_blank" rel="noopener">{% include icon.html name='github' %}GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/safaeid-hossain-arib-2a859a1b5/" target="_blank" rel="noopener">{% include icon.html name='linkedin' %}LinkedIn</a></li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================ News ============================ -->
+  {% include news.html %}
+
+  <!-- ============================ Publications ============================ -->
+  <section class="section" id="publications" aria-labelledby="pubs-heading">
+    <div class="section__head">
+      <h2 class="section__title" id="pubs-heading">Publications &amp; Preprints</h2>
+      <a class="section__aside" href="https://scholar.google.com/citations?user=ETeF6sUAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar →</a>
+    </div>
+    <div class="pubs">
+      {% assign pubs = site.categories['research-completed'] | sort: 'order' %}
+      {% for pub in pubs %}
+        {% include pub-card.html pub=pub %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ============================ Experience ============================ -->
+  <section class="section" id="experience" aria-labelledby="exp-heading">
+    <div class="section__head">
+      <h2 class="section__title" id="exp-heading">Experience</h2>
+    </div>
+
+    <h3 class="subhead">Research</h3>
+    <ol class="timeline">
+      <li>
+        <div class="timeline__date">Jun 2025 – Present</div>
+        <div>
+          <h4 class="timeline__role">Research Assistant</h4>
+          <p class="timeline__org">Dept. of Robotics and Mechatronics Engineering, University of Dhaka · with Dr. Md Mehedi Hasan and Md. Jubair Ahmed Sourov</p>
+          <ul>
+            <li>Designed and implemented <a href="{{ site.baseurl }}/projects/countocc/">CountOCC</a>, an open-world amodal counting framework, and built occlusion-augmented evaluation benchmarks for structured and unstructured scenes.</li>
+            <li>Co-authored the resulting manuscript, submitted to WACV 2027.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="timeline__date">Jan 2023 – Dec 2023</div>
+        <div>
+          <h4 class="timeline__role">Undergraduate Research Assistant</h4>
+          <p class="timeline__org">Dept. of Robotics and Mechatronics Engineering, University of Dhaka · with Dr. Shafin Rahman and Dr. Sejuti Rahman</p>
+          <ul>
+            <li>Designed and implemented a novel architecture for continuous sign language translation across Bangla, American, and German benchmarks.</li>
+            <li>Co-authored the resulting work, <a href="{{ site.baseurl }}/projects/signformer-gcn/">SignFormer-GCN</a>, published in PLOS ONE.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+
+    <h3 class="subhead">Industry</h3>
+    <ol class="timeline">
+      <li>
+        <div class="timeline__date">Sep 2025 – Present</div>
+        <div>
+          <h4 class="timeline__role">Machine Learning Engineer</h4>
+          <p class="timeline__org"><a href="https://www.aci-bd.com/">ACI PLC</a> · Dhaka, Bangladesh</p>
+          <ul>
+            <li>Developed a few-shot classification pipeline for fine-grained recognition of visually similar products.</li>
+            <li>Building a lightweight text-to-speech model for few-shot voice cloning and low-resource language adaptation.</li>
+            <li>Improving a video-based truck identification pipeline by enhancing low-resolution license plate imagery for more reliable detection and OCR.</li>
+            <li>Developing an agentic assistant for meeting scheduling, document summarization, and conversational search across company files through Drive and Calendar integration.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="timeline__date">Feb 2024 – Aug 2025</div>
+        <div>
+          <h4 class="timeline__role">AI Engineer</h4>
+          <p class="timeline__org"><a href="https://www.ontiktechnology.com/">Ontik Technology</a> · Dhaka, Bangladesh</p>
+          <ul>
+            <li>Developed agentic B2B automation systems that generated social-media insights and automated client-ready reporting, substantially reducing manual workflows.</li>
+            <li>Built agentic ETL pipelines for COBOL copybook parsing and legacy modernization, enabling AI-driven analytics and supporting demonstrations to consulting firms including Oliver Wyman.</li>
+            <li>Developed a patient-facing OCR tool for prescription scanning, medication scheduling, and alternative-medicine lookup under Dr. Javed Mostafa.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+
+    <h3 class="subhead">Teaching</h3>
+    <ol class="timeline">
+      <li>
+        <div class="timeline__date">Jun 2024 – Aug 2024</div>
+        <div>
+          <h4 class="timeline__role">Instructor</h4>
+          <p class="timeline__org">National Camp, Bangladesh Artificial Intelligence Olympiad</p>
+          <ul>
+            <li>Designed and delivered lessons on classification algorithms and evaluation metrics for high school students, and created quizzes to assess their understanding.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================ Projects ============================ -->
+  <section class="section" id="projects" aria-labelledby="proj-heading">
+    <div class="section__head">
+      <h2 class="section__title" id="proj-heading">Selected Projects</h2>
+    </div>
+    <div class="proj-grid">
+      {% for post in site.posts %}{% if post.categories contains 'office-project' %}
+        {% include project-card.html project=post kicker='Industry' %}
+      {% endif %}{% endfor %}
+      {% for post in site.posts %}{% if post.categories contains 'course-project' %}
+        {% include project-card.html project=post kicker='Course project' %}
+      {% endif %}{% endfor %}
+    </div>
+  </section>
+
+</div>
